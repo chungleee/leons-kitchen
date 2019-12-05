@@ -103,4 +103,27 @@ router.get("/", async (req, res) => {
   }
 });
 
+// @access Public - will be private
+// @desc   Fetch user by id
+// @route  GET /:userId
+router.get("/:userId", async (req, res) => {
+  try {
+    const _id = req.params.userId;
+    const user = await User.findById({ _id });
+
+    if (!user) {
+      return res.status(404).json({
+        error: "User not found"
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        data: user
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 module.exports = router;
