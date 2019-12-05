@@ -4,11 +4,13 @@ const ROLES = ["staff", "manager", "admin"];
 const userSchema = mongoose.Schema({
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   pin: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   password: {
     type: String,
