@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const securePin = require("secure-pin");
 const bcrypt = require("bcryptjs");
 const User = require("../models/userModel");
+const { authenticate, checkRole } = require("../utils/middlewares");
 
 // @access  Public - for now
 // @desc    Create user account
@@ -98,7 +99,7 @@ router.post("/login", async (req, res) => {
 // @access Public - will be private
 // @desc   Fetch all users
 // @route  GET /
-router.get("/", async (req, res) => {
+router.get("/", authenticate, checkRole("staff"), async (req, res) => {
   try {
     const users = await User.find({});
     if (!users) {
