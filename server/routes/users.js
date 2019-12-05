@@ -16,14 +16,17 @@ router.get("/test", (req, res) => {
 // @route   POST /create
 router.post("/create", async (req, res) => {
   const { email, password } = req.body;
+
   // find user
   const user = await User.findOne({ email });
+
   // if exists - return error
   if (user) {
     return res.status(409).json({
       error: "Email is already in use"
     });
   }
+
   // if false - create user
   const newUser = new User({
     email,
@@ -31,12 +34,43 @@ router.post("/create", async (req, res) => {
     pin: "12345"
   });
 
+  // save user creation
   await newUser.save();
 
+  // return data
   return res.status(201).json({
     success: true,
     data: newUser
   });
+});
+
+// @access  Public
+// @desc    Log user account
+// @route   POST /login
+router.post("/login", async (req, res) => {
+  const { pin, password } = req.body;
+  // find user by pin
+  const user = await User.findOne({ pin });
+  // if no user - return error
+  if (!user) {
+    return res.status(404).json({
+      error: "User not found"
+    });
+  } else {
+    // else - compare passwords
+    // if no match - return error
+    if (!(user.password === password)) {
+      return res.status(403).json({
+        error: "Incorrect password"
+      });
+    } else {
+      // else - login
+      return res.status(200).json({
+        success: true,
+        data: user
+      });
+    }
+  }
 });
 
 module.exports = router;
