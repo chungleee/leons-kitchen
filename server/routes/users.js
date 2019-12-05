@@ -126,4 +126,26 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
+// @access Public - will be private
+// @desc   Delete user by id
+// @route  DELETE /:userId
+router.delete("/:userId", async (req, res) => {
+  try {
+    const _id = req.params.userId;
+    const user = await User.findByIdAndDelete({ _id });
+    if (!user) {
+      return res.status(404).json({
+        error: "User not found"
+      });
+    } else {
+      return res.status(200).json({
+        deleted: true,
+        data: user
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 module.exports = router;
