@@ -3,16 +3,6 @@ const securePin = require("secure-pin");
 const bcrypt = require("bcryptjs");
 const User = require("../models/userModel");
 
-// @access  Public
-// @desc    Test route
-// @route   GET /test
-router.get("/test", (req, res) => {
-  return res.status(200).json({
-    success: true,
-    msg: "This is the users test route"
-  });
-});
-
 // @access  Public - for now
 // @desc    Create user account
 // @route   POST /create
@@ -86,6 +76,27 @@ router.post("/login", async (req, res) => {
           data: user
         });
       }
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// @access Public - will be private
+// @desc   Fetch all users
+// @route  GET /
+router.get("/", async (req, res) => {
+  try {
+    const users = await User.find({});
+    if (!users) {
+      return res.status(404).json({
+        error: "Users not found"
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        data: users
+      });
     }
   } catch (error) {
     console.error(error);
