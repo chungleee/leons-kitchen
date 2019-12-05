@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const jwt = require("jsonwebtoken");
 const securePin = require("secure-pin");
 const bcrypt = require("bcryptjs");
 const User = require("../models/userModel");
@@ -70,10 +71,22 @@ router.post("/login", async (req, res) => {
           error: "Incorrect password"
         });
       } else {
-        // else - login
+        // else - sign jwt & return user
+        const payload = {
+          _id: user._id,
+          role: user.role
+        };
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET, {
+          expiresIn: "1d"
+        });
+
         return res.status(200).json({
           success: true,
-          data: user
+          data: {
+            user,
+            token
+          }
         });
       }
     }
