@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const securePin = require("secure-pin");
 const User = require("../models/userModel");
 
 // @access  Public
@@ -27,11 +28,14 @@ router.post("/create", async (req, res) => {
     });
   }
 
+  // generate pin
+  const pin = securePin.generatePinSync(4);
+
   // if false - create user
   const newUser = new User({
     email,
     password,
-    pin: "12345"
+    pin
   });
 
   // save user creation
