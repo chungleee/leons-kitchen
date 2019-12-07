@@ -31,7 +31,7 @@ const orderSchema = mongoose.Schema(
     }
   },
   {
-    timestamps
+    timestamps: true
   }
 );
 
