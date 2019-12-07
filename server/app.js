@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 // ROUTES IMPORT
 const userRoutes = require("./routes/users");
 const foodRoutes = require("./routes/foods");
+const orderRoutes = require("./routes/orders");
 
 // INIT APP
 const app = express();
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 // USE ROUTES
 app.use("/api/users", userRoutes);
 app.use("/api/foods", foodRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.get("/", (req, res) => {
   return res.status(200).json({
