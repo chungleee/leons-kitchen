@@ -1,10 +1,18 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Login from "./components/pages/Login";
 
 function App() {
   return (
-    <div>
-      <h1>welcome to leons kitchen</h1>
-    </div>
+    <Router>
+      <Route
+        exact
+        path="/"
+        render={() => {
+          return <Login />;
+        }}
+      />
+    </Router>
   );
 }
 
