@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 });
 
 // LISTEN SERVER
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3010;
 app.listen(port, () => {
   console.log(`**** SERVER LISTENING ON http://localhost:${port} ****`);
 });
