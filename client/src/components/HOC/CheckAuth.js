@@ -1,15 +1,13 @@
 import React from "react";
 
-const CheckAuth = (WrappedComponent, rolesArray) => {
-  const WithAuth = ({ user }) => {
+const CheckAuth = (Component, rolesArray) => {
+  return ({ user }) => {
     if (rolesArray.includes(user.role)) {
-      return <WrappedComponent />;
+      return <Component />;
     }
 
     return <h1>You don't have access to this page</h1>;
   };
-
-  return WithAuth;
 };
 
 export default CheckAuth;
