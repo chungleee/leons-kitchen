@@ -1,12 +1,14 @@
 /** @jsx jsx */
 import React from "react";
 import { Formik } from "formik";
+import { useDispatch } from "react-redux";
+import { handleUserLogin } from "../../redux/actions/userActions";
 import { css, jsx } from "@emotion/core";
 import theme from "../../theme";
 import InputField from "../presentationals/InputField";
 
 const initialValues = {
-  pinCode: "",
+  pin: "",
   password: ""
 };
 
@@ -45,6 +47,7 @@ const styles = {
 };
 
 const Login = () => {
+  const dispatch = useDispatch();
   return (
     <div css={styles.container}>
       <header css={styles.header}>
@@ -53,8 +56,12 @@ const Login = () => {
       <main css={styles.main}>
         <Formik
           initialValues={initialValues}
-          onSubmit={(values, actions) => {
-            console.log(values);
+          onSubmit={({ pin, password }, actions) => {
+            const credentials = {
+              pin,
+              password
+            };
+            dispatch(handleUserLogin(credentials));
             actions.setSubmitting(false);
           }}
         >
@@ -62,12 +69,12 @@ const Login = () => {
             return (
               <form onSubmit={handleSubmit}>
                 <div css={styles.formControl}>
-                  <label htmlFor="pinCode">PIN code:</label>
+                  <label htmlFor="pin">PIN code:</label>
                   <InputField
-                    name="pinCode"
+                    name="pin"
                     onChange={handleChange}
                     type="tel"
-                    value={values.pinCode}
+                    value={values.pin}
                   />
                 </div>
                 <div css={styles.formControl}>
