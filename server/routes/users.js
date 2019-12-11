@@ -42,7 +42,7 @@ router.post("/create", async (req, res) => {
     // return data
     return res.status(201).json({
       success: true,
-      data: newUser
+      newUser
     });
   } catch (error) {
     console.error(error);
@@ -56,7 +56,7 @@ router.post("/login", async (req, res) => {
   try {
     const { pin, password } = req.body;
     // find user by pin
-    const user = await User.findOne({ pin });
+    const user = await User.findOne({ pin }).select("+password");
     // if no user - return error
     if (!user) {
       return res.status(404).json({
@@ -84,10 +84,8 @@ router.post("/login", async (req, res) => {
 
         return res.status(200).json({
           success: true,
-          data: {
-            user,
-            token
-          }
+          user,
+          token
         });
       }
     }
@@ -109,7 +107,7 @@ router.get("/", authenticate, checkRole("staff"), async (req, res) => {
     } else {
       return res.status(200).json({
         success: true,
-        data: users
+        users
       });
     }
   } catch (error) {
@@ -132,7 +130,7 @@ router.get("/:userId", async (req, res) => {
     } else {
       return res.status(200).json({
         success: true,
-        data: user
+        user
       });
     }
   } catch (error) {
@@ -154,7 +152,7 @@ router.delete("/:userId", async (req, res) => {
     } else {
       return res.status(200).json({
         deleted: true,
-        data: user
+        user
       });
     }
   } catch (error) {
