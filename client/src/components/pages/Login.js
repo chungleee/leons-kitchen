@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { handleUserLogin } from "../../redux/actions/userActions";
@@ -47,6 +48,7 @@ const styles = {
 };
 
 const Login = () => {
+  let history = useHistory();
   const dispatch = useDispatch();
   return (
     <div css={styles.container}>
@@ -56,13 +58,14 @@ const Login = () => {
       <main css={styles.main}>
         <Formik
           initialValues={initialValues}
-          onSubmit={({ pin, password }, actions) => {
+          onSubmit={async ({ pin, password }, actions) => {
             const credentials = {
               pin,
               password
             };
-            dispatch(handleUserLogin(credentials));
+            const { user } = await dispatch(handleUserLogin(credentials));
             actions.setSubmitting(false);
+            history.push(`/${user.role}`);
           }}
         >
           {({ handleChange, handleSubmit, values }) => {
