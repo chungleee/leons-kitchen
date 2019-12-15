@@ -1,4 +1,4 @@
-import { USER_LOGIN } from "./types";
+import { USER_LOGIN, CURRENT_USER } from "./types";
 import axios from "axios";
 
 export const handleUserLogin = credentials => {
@@ -18,5 +18,14 @@ export const handleUserLogin = credentials => {
     } catch (error) {
       console.error(error);
     }
+  };
+};
+
+export const handleCurrentUser = decoded => {
+  return dispatch => {
+    dispatch({
+      type: CURRENT_USER,
+      payload: decoded
+    });
   };
 };
