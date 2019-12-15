@@ -1,11 +1,17 @@
+const white = "#fffffe";
+const black = "#2d334a";
+const lightTeal = "#e3f6f5";
+const darkTeal = "#bae8e8";
+const yellow = "#ffd803";
+
 const theme = {
-  background: "#fffffe",
-  text: "#2d334a",
+  background: white,
+  text: black,
   color: {
-    primary: "#fffffe",
-    secondary: "#e3f6f5",
-    tertiary: "#bae8e8",
-    highlight: "#ffd803"
+    primary: white,
+    secondary: lightTeal,
+    tertiary: darkTeal,
+    highlight: yellow
   }
 };
 
