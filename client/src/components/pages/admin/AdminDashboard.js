@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import { jsx } from "@emotion/core";
 import theme from "../../../theme";
 import CheckAuth from "../../HOC/CheckAuth";
@@ -23,12 +24,14 @@ const styles = {
 
 const AdminDashboard = props => {
   return (
-    <div css={styles.container}>
-      <Navbar />
-      <main css={styles.main}>
-        <h1>something</h1>
-      </main>
-    </div>
+    <Router>
+      <div css={styles.container}>
+        <Navbar />
+        <main css={styles.main}>
+          <h1>something</h1>
+        </main>
+      </div>
+    </Router>
   );
 };
 
