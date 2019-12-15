@@ -1,45 +1,63 @@
-import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-  useHistory
-} from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import jwtDecode from "jwt-decode";
+import { handleCurrentUser } from "./redux/actions/userActions";
 import Login from "./components/pages/Login";
-import AdminDashboard from "./components/pages/AdminDashboard";
-import OrderMenu from "./components/pages/OrderMenu";
-import ErrorPage from "./components/pages/ErrorPage";
+import AdminDashboard from "./components/pages/admin/AdminDashboard";
+import OrderMenu from "./components/pages/staff/OrderMenu";
 
 function App() {
   const { isAuthenticated, user } = useSelector(state => {
+    console.log("state", state);
     return state.userState;
   });
+  const dispatch = useDispatch();
+
+  const checkAuthToken = async () => {
+    // if token exists
+    if (localStorage && localStorage.getItem(`leon's kitchen jwtToken`)) {
+      const token = localStorage.getItem(`leon's kitchen jwtToken`);
+      // decode
+      const decoded = jwtDecode(token);
+      // user login
+      dispatch(handleCurrentUser(decoded));
+    }
+  };
+
+  useEffect(() => {
+    checkAuthToken();
+  }, []);
 
   return (
     <Router>
-      <Switch>
-        <Route exact path="/">
-          {!isAuthenticated ? <Redirect to="/login" /> : null}
-        </Route>
+      <Route path="/">
+        {isAuthenticated ? (
+          <Redirect to={`/${user.role}`} />
+        ) : (
+          <Redirect to="/login" />
+        )}
+      </Route>
 
-        <Route
-          path="/login"
-          render={() => {
-            return <Login />;
-          }}
-        />
+      <Route
+        path="/login"
+        render={() => {
+          return <Login />;
+        }}
+      />
 
-        <Route
-          path="/admin"
-          render={() => {
-            return <AdminDashboard user={user} />;
-          }}
-        />
-
-        <Route component={ErrorPage} />
-      </Switch>
+      <Route
+        path="/admin"
+        render={() => {
+          return <AdminDashboard user={user} />;
+        }}
+      />
+      <Route
+        path="/staff"
+        render={() => {
+          return <OrderMenu user={user} />;
+        }}
+      />
     </Router>
   );
 }
