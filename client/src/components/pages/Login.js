@@ -4,9 +4,9 @@ import { useHistory } from "react-router-dom";
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { handleUserLogin } from "../../redux/actions/userActions";
-import { css, jsx } from "@emotion/core";
+import { jsx } from "@emotion/core";
 import theme from "../../theme";
-import InputField from "../presentationals/InputField";
+import InputField from "../common/InputField";
 
 const initialValues = {
   pin: "",
