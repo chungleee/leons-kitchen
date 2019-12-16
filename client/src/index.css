@@ -19,3 +19,7 @@ h5,
 h6 {
   font-family: "Sanchez", serif;
 }
+
+li {
+  list-style: none;
+}
