@@ -7,8 +7,9 @@ import { jsx } from "@emotion/core";
 const styles = {
   wrapper: {
     height: "100%",
-    width: "33%",
-    backgroundColor: theme.color.secondary
+    width: "25%",
+    backgroundColor: theme.color.secondary,
+    borderRight: `2px solid ${theme.text}`
   },
   container: {
     paddingTop: "3rem",
@@ -20,9 +21,8 @@ const styles = {
   ul: {
     display: "flex",
     flexDirection: "column",
-    listStyle: "none",
     width: "100%",
-    marginTop: "2rem"
+    marginTop: "3rem"
   },
   navlinks: {
     normal: {
@@ -31,8 +31,7 @@ const styles = {
       fontSize: "1.3rem"
     },
     active: {
-      backgroundColor: theme.background,
-      borderRight: `1px solid ${theme.text}`
+      backgroundColor: theme.background
     }
   }
 };
