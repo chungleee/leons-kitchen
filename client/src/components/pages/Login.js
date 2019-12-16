@@ -63,9 +63,7 @@ const Login = () => {
               pin,
               password
             };
-            const { user } = await dispatch(handleUserLogin(credentials));
-            actions.setSubmitting(false);
-            history.push(`/${user.role}`);
+            await dispatch(handleUserLogin(credentials, actions.setSubmitting));
           }}
         >
           {({ handleChange, handleSubmit, values }) => {
