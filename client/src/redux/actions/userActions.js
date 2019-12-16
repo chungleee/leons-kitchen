@@ -1,7 +1,7 @@
 import { USER_LOGIN, CURRENT_USER } from "./types";
 import axios from "axios";
 
-export const handleUserLogin = credentials => {
+export const handleUserLogin = (credentials, callback) => {
   return async dispatch => {
     try {
       const res = await axios.post("/api/users/login", credentials);
@@ -10,11 +10,12 @@ export const handleUserLogin = credentials => {
         localStorage.setItem("leon's kitchen jwtToken", res.data.token);
       }
 
+      callback(false);
       dispatch({
         type: USER_LOGIN,
         payload: res.data.user
       });
-      return res.data;
+      // return res.data;
     } catch (error) {
       console.error(error);
     }
