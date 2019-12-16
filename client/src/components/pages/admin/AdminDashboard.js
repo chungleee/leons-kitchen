@@ -19,8 +19,8 @@ const styles = {
   },
   main: {
     height: "100%",
-    width: "100%",
-    backgroundColor: theme.color.highlight
+    width: "100%"
+    // backgroundColor: theme.color.highlight
   }
 };
 
