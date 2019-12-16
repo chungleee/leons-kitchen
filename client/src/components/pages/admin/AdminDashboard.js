@@ -5,8 +5,8 @@ import { jsx } from "@emotion/core";
 import theme from "../../../theme";
 import CheckAuth from "../../HOC/CheckAuth";
 import Navbar from "./presentations/Navbar";
-import Employees from "./Employees";
-import FoodMenu from "./FoodMenu";
+import Employees from "./containers/Employees";
+import FoodMenu from "./containers/FoodMenu";
 
 const styles = {
   container: {
