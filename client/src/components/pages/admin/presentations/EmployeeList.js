@@ -6,7 +6,7 @@ import theme from "../../../../theme";
 
 const styles = {
   wrapper: {
-    width: "25%",
+    width: "30%",
     backgroundColor: theme.color.primary,
     borderRight: "1px solid lightgrey",
     paddingTop: "2rem"
