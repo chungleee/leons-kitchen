@@ -7,8 +7,8 @@ import InputField from "../../../common/InputField";
 
 const styles = {
   wrapper: {
+    borderRadius: "5px",
     marginTop: "1rem",
-    border: "1px solid black",
     height: "100%",
     width: "90%",
     margin: "auto",
@@ -18,7 +18,11 @@ const styles = {
     justifyContent: "space-evenly",
     backgroundColor: `${theme.color.primary}`
   },
+  container: { display: "flex" },
+  left: { marginRight: "2rem" },
+  right: { marginRight: "2rem" },
   formControl: { display: "flex", flexDirection: "column" },
+  label: { marginBottom: "0.5rem" },
   button: {
     color: `${theme.text}`,
     border: `1px solid ${theme.text}`,
@@ -29,6 +33,7 @@ const styles = {
       backgroundColor: `${theme.color.highlight}`
     },
     "&:focus": {
+      backgroundColor: `${theme.color.highlight}`,
       outline: "none"
     }
   }
@@ -55,10 +60,10 @@ const CreateEmployee = () => {
         {({ handleChange, handleSubmit, errors, values }) => {
           return (
             <form onSubmit={handleSubmit}>
-              <div className="container" css={{ display: "flex" }}>
-                <div className="left" css={{ marginRight: "2rem" }}>
+              <div css={styles.container}>
+                <div css={styles.left}>
                   <div css={styles.formControl}>
-                    <label>First name:</label>
+                    <label css={styles.label}>First name:</label>
                     <InputField
                       value={values.firstName}
                       name="firstName"
@@ -67,7 +72,7 @@ const CreateEmployee = () => {
                     />
                   </div>
                   <div css={styles.formControl}>
-                    <label>Last name:</label>
+                    <label css={styles.label}>Last name:</label>
                     <InputField
                       value={values.lastName}
                       name="lastName"
@@ -76,7 +81,7 @@ const CreateEmployee = () => {
                     />
                   </div>
                   <div css={styles.formControl}>
-                    <label>Email:</label>
+                    <label css={styles.label}>Email:</label>
                     <InputField
                       value={values.email}
                       name="email"
@@ -85,9 +90,9 @@ const CreateEmployee = () => {
                     />
                   </div>
                 </div>
-                <div className="right" css={{ marginRight: "2rem" }}>
+                <div css={styles.right}>
                   <div css={styles.formControl}>
-                    <label>Password:</label>
+                    <label css={styles.label}>Password:</label>
                     <InputField
                       value={values.password}
                       name="password"
@@ -96,7 +101,7 @@ const CreateEmployee = () => {
                     />
                   </div>
                   <div css={styles.formControl}>
-                    <label>Compare Password:</label>
+                    <label css={styles.label}>Compare Password:</label>
                     <InputField
                       value={values.compare_password}
                       name="compare_password"
