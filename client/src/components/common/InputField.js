@@ -18,6 +18,7 @@ const InputField = ({ type, name, value, onChange }) => {
           backgroundColor: `${theme.color.highlight}`
         },
         "&:focus": {
+          backgroundColor: `${theme.color.highlight}`,
           outline: "none"
         }
       }}

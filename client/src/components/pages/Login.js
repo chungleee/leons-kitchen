@@ -42,6 +42,7 @@ const styles = {
       backgroundColor: `${theme.color.highlight}`
     },
     "&:focus": {
+      backgroundColor: `${theme.color.highlight}`,
       outline: "none"
     }
   }
