@@ -30,7 +30,8 @@ const styles = {
   },
   formControl: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    marginBottom: "1rem"
   },
   button: {
     color: `${theme.text}`,
@@ -64,7 +65,7 @@ const Login = () => {
               pin,
               password
             };
-            await dispatch(handleUserLogin(credentials, actions.setSubmitting));
+            await dispatch(handleUserLogin(credentials));
           }}
         >
           {({ handleChange, handleSubmit, values }) => {
