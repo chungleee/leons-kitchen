@@ -10,7 +10,7 @@ const { authenticate, checkRole } = require("../utils/middlewares");
 // @route   POST /create
 router.post("/create", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { firstName, lastName, role, email, password } = req.body;
 
     // find user
     const user = await User.findOne({ email });
@@ -31,6 +31,9 @@ router.post("/create", async (req, res) => {
 
     // if false - create user
     const newUser = new User({
+      firstName,
+      lastName,
+      role,
       email,
       password: hash,
       pin
@@ -99,23 +102,28 @@ router.post("/login", async (req, res) => {
 // @access Public - will be private
 // @desc   Fetch all users
 // @route  GET /
-router.get("/", authenticate, checkRole("staff"), async (req, res) => {
-  try {
-    const users = await User.find({});
-    if (!users) {
-      return res.status(404).json({
-        error: "Users not found"
-      });
-    } else {
-      return res.status(200).json({
-        success: true,
-        users
-      });
+router.get(
+  "/",
+  // authenticate,
+  // checkRole,
+  async (req, res) => {
+    try {
+      const users = await User.find({});
+      if (!users) {
+        return res.status(404).json({
+          error: "Users not found"
+        });
+      } else {
+        return res.status(200).json({
+          success: true,
+          users
+        });
+      }
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error);
   }
-});
+);
 
 // @access Public - will be private
 // @desc   Fetch user by id
