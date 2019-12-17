@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import jwtDecode from "jwt-decode";
-import { handleCurrentUser } from "./redux/actions/userActions";
+import { handleCurrentUser } from "./redux/actions/authActions";
 import Login from "./components/pages/Login";
 import AdminDashboard from "./components/pages/admin/AdminDashboard";
 import OrderMenu from "./components/pages/staff/OrderMenu";
@@ -10,7 +10,7 @@ import OrderMenu from "./components/pages/staff/OrderMenu";
 function App() {
   const { isAuthenticated, user } = useSelector(state => {
     console.log("state", state);
-    return state.userState;
+    return state.authState;
   });
   const dispatch = useDispatch();
 
