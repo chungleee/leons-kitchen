@@ -3,7 +3,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
-import { handleUserLogin } from "../../redux/actions/userActions";
+import { handleUserLogin } from "../../redux/actions/authActions";
 import { jsx } from "@emotion/core";
 import theme from "../../theme";
 import InputField from "../common/InputField";
