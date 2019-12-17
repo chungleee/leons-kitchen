@@ -28,7 +28,7 @@ const styles = {
   p: { fontSize: "1.2rem" }
 };
 
-const EmployeeList = ({ dummies }) => {
+const EmployeeList = ({ employees }) => {
   return (
     <aside css={styles.wrapper}>
       <ul css={styles.ul}>
@@ -39,19 +39,19 @@ const EmployeeList = ({ dummies }) => {
         >
           Create employee
         </NavLink>
-        {dummies.map(dummy => {
+        {employees.map(employee => {
           return (
             <NavLink
               css={styles.navlinks.normal}
               activeStyle={styles.navlinks.active}
-              key={dummy.id}
+              key={employee._id}
               to={{
-                pathname: `/admin/employees/${dummy.id}`,
-                state: dummy
+                pathname: `/admin/employees/${employee._id}`,
+                state: employee
               }}
             >
-              <p css={styles.p}>{dummy.name}</p>
-              <small>{dummy.role}</small>
+              <p css={styles.p}>{employee.name}</p>
+              <small>{employee.role}</small>
             </NavLink>
           );
         })}
