@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from "react";
-import { css, jsx } from "@emotion/core";
+import { jsx } from "@emotion/core";
 import theme from "../../theme";
 
 const InputField = ({ type, name, value, onChange }) => {
@@ -13,7 +13,6 @@ const InputField = ({ type, name, value, onChange }) => {
         fontSize: "100%",
         lineHeight: 1.15,
         padding: "0.5rem",
-        marginBottom: "1rem",
         "&:hover": {
           backgroundColor: `${theme.color.highlight}`
         },
