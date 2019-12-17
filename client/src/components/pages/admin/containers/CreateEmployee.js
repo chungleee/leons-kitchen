@@ -2,6 +2,8 @@
 import { jsx } from "@emotion/core";
 import theme from "../../../../theme";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { handleCreateEmployee } from "../../../../redux/actions/employeesActions";
 import { Formik } from "formik";
 import { CreateEmployeeSchema } from "../../../../utils/validation";
 import InputField from "../../../common/InputField";
@@ -78,6 +80,7 @@ const initialValues = {
 };
 
 const CreateEmployee = () => {
+  const dispatch = useDispatch();
   return (
     <div css={styles.wrapper}>
       <h2>Create Employee</h2>
@@ -86,8 +89,9 @@ const CreateEmployee = () => {
         validationSchema={CreateEmployeeSchema}
         validateOnBlur={false}
         validateOnChange={false}
-        onSubmit={(values, actions) => {
-          console.log(values);
+        onSubmit={async ({ firstName, lastName, email, role, password }) => {
+          const data = { firstName, lastName, email, role, password };
+          await dispatch(handleCreateEmployee(data));
         }}
       >
         {({ handleChange, handleSubmit, errors, values }) => {
