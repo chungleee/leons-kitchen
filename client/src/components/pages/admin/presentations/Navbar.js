@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useRouteMatch } from "react-router-dom";
 import theme from "../../../../theme";
 import { jsx } from "@emotion/core";
 
@@ -36,12 +36,13 @@ const styles = {
   }
 };
 
-const Navbar = props => {
+const Navbar = () => {
+  let { url } = useRouteMatch("/admin");
   return (
     <aside css={styles.wrapper}>
       <div css={styles.container}>
         <div>
-          <Link to="/admin">
+          <Link to={`${url}`}>
             <h2>Leon's Kitchen</h2>
           </Link>
         </div>
@@ -49,7 +50,7 @@ const Navbar = props => {
           <NavLink
             css={styles.navlinks.normal}
             activeStyle={styles.navlinks.active}
-            to="/admin/employees"
+            to={`${url}/employees`}
           >
             Employees
           </NavLink>
@@ -57,7 +58,7 @@ const Navbar = props => {
           <NavLink
             css={styles.navlinks.normal}
             activeStyle={styles.navlinks.active}
-            to="/admin/food-menu"
+            to={`${url}/food-menu`}
           >
             Food menu
           </NavLink>
