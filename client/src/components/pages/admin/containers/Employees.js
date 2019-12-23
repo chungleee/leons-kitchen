@@ -9,7 +9,8 @@ import EmployeeList from "../presentations/EmployeeList";
 import CreateEmployee from "./CreateEmployee";
 import EmployeeDetail from "./EmployeeDetail";
 
-const Employees = () => {
+const Employees = ({ match }) => {
+  const { url } = match;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(handleFetchEmployees());
@@ -35,8 +36,8 @@ const Employees = () => {
         }}
       >
         <Switch>
-          <Route path="/admin/employees/" component={CreateEmployee} />
-          <Route path="/admin/employees/:userId" component={EmployeeDetail} />
+          <Route exact path={`${url}`} component={CreateEmployee} />
+          <Route path={`${url}/:userId`} component={EmployeeDetail} />
         </Switch>
       </main>
     </div>

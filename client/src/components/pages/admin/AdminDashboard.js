@@ -23,28 +23,27 @@ const styles = {
   }
 };
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ match }) => {
+  const { url } = match;
   return (
-    <Router>
-      <div css={styles.container}>
-        <Navbar />
-        <main css={styles.main}>
-          <Route
-            path="/admin/employees"
-            render={() => {
-              return <Employees />;
-            }}
-          />
+    <div css={styles.container}>
+      <Navbar />
+      <main css={styles.main}>
+        <Route
+          path={`${url}/employees`}
+          render={props => {
+            return <Employees {...props} />;
+          }}
+        />
 
-          <Route
-            path="/admin/food-menu"
-            render={() => {
-              return <FoodMenu />;
-            }}
-          />
-        </main>
-      </div>
-    </Router>
+        <Route
+          path={`${url}/food-menu`}
+          render={props => {
+            return <FoodMenu {...props} />;
+          }}
+        />
+      </main>
+    </div>
   );
 };
 
