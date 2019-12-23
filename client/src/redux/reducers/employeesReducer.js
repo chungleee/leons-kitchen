@@ -1,7 +1,7 @@
-import { FETCH_EMPLOYEES } from "../actions/types";
+import { FETCH_EMPLOYEES, CREATE_USER } from "../actions/types";
 
 const initialState = {
-  employees: {}
+  employees: []
 };
 
 const employeesReducer = (state = initialState, action) => {
@@ -10,6 +10,11 @@ const employeesReducer = (state = initialState, action) => {
       return {
         ...state,
         employees: action.payload
+      };
+    case CREATE_USER:
+      return {
+        ...state,
+        employees: [...state.employees, action.payload]
       };
     default:
       return state;
