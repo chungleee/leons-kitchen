@@ -40,6 +40,7 @@ const EmployeeList = ({ employees }) => {
         <NavLink
           css={styles.navlinks.normal}
           activeStyle={styles.navlinks.active}
+          exact
           to="/admin/employees/"
         >
           Create employee
