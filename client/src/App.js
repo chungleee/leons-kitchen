@@ -41,21 +41,21 @@ function App() {
 
       <Route
         path="/login"
-        render={() => {
-          return <Login />;
+        render={props => {
+          return <Login {...props} />;
         }}
       />
 
       <Route
         path="/admin"
-        render={() => {
-          return <AdminDashboard user={user} />;
+        render={props => {
+          return <AdminDashboard {...props} user={user} />;
         }}
       />
       <Route
         path="/staff"
-        render={() => {
-          return <OrderMenu user={user} />;
+        render={props => {
+          return <OrderMenu {...props} user={user} />;
         }}
       />
     </Router>
