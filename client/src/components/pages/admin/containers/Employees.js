@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React, { useEffect } from "react";
-import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { handleFetchEmployees } from "../../../../redux/actions/employeesActions";
 import { jsx } from "@emotion/core";
@@ -30,12 +30,12 @@ const Employees = () => {
       <main
         css={{
           padding: "2rem",
-          width: "100%",
+          width: "70%",
           backgroundColor: `${theme.color.secondary}`
         }}
       >
         <Switch>
-          <Route path="/admin/employees/create" component={CreateEmployee} />
+          <Route path="/admin/employees/" component={CreateEmployee} />
           <Route path="/admin/employees/:userId" component={EmployeeDetail} />
         </Switch>
       </main>
