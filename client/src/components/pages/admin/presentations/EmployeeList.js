@@ -10,7 +10,8 @@ const styles = {
     width: "30%",
     backgroundColor: theme.color.primary,
     borderRight: "1px solid lightgrey",
-    paddingTop: "2rem"
+    paddingTop: "2rem",
+    overflowY: "auto"
   },
   ul: {
     width: "70%",
@@ -30,7 +31,6 @@ const styles = {
 };
 
 const EmployeeList = ({ employees }) => {
-  console.log(employees);
   if (!employees.length) {
     return <Spinner />;
   }
@@ -40,7 +40,7 @@ const EmployeeList = ({ employees }) => {
         <NavLink
           css={styles.navlinks.normal}
           activeStyle={styles.navlinks.active}
-          to="/admin/employees/create"
+          to="/admin/employees/"
         >
           Create employee
         </NavLink>
