@@ -2,10 +2,10 @@
 import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { handleFetchEmployees } from "../../../../redux/actions/employeesActions";
+import { handleFetchEmployees } from "../../../../../redux/actions/employeesActions";
 import { jsx } from "@emotion/core";
-import theme from "../../../../theme";
-import EmployeeList from "../presentations/EmployeeList";
+import theme from "../../../../../theme";
+import EmployeeList from "../../presentations/EmployeeList";
 import CreateEmployee from "./CreateEmployee";
 import EmployeeDetail from "./EmployeeDetail";
 

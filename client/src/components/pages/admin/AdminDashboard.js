@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { jsx } from "@emotion/core";
 import theme from "../../../theme";
 import CheckAuth from "../../HOC/CheckAuth";
 import Navbar from "./presentations/Navbar";
-import Employees from "./containers/Employees";
-import FoodMenu from "./containers/FoodMenu";
+import Employees from "./containers/employees/Employees";
+import FoodMenu from "./containers/food-menu/FoodMenu";
 
 const styles = {
   container: {

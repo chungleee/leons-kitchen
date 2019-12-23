@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import theme from "../../../../theme";
+import theme from "../../../../../theme";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { handleCreateEmployee } from "../../../../redux/actions/employeesActions";
+import { handleCreateEmployee } from "../../../../../redux/actions/employeesActions";
 import { Formik } from "formik";
-import { CreateEmployeeSchema } from "../../../../utils/validation";
-import InputField from "../../../common/InputField";
+import { CreateEmployeeSchema } from "../../../../../utils/validation";
+import InputField from "../../../../common/InputField";
 
 const styles = {
   wrapper: {
