@@ -1,11 +1,15 @@
-import { FETCH_EMPLOYEES } from "./types";
+import { FETCH_EMPLOYEES, CREATE_USER } from "./types";
 import axios from "axios";
 
 export const handleCreateEmployee = data => {
   return async dispatch => {
     try {
       const res = await axios.post("/api/users/create", data);
-      console.log("user actions", res.data);
+
+      dispatch({
+        type: CREATE_USER,
+        payload: res.data.newUser
+      });
     } catch (error) {
       console.error(error);
     }
