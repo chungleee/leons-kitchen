@@ -3,6 +3,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { jsx } from "@emotion/core";
 import theme from "../../../../theme";
+import Spinner from "../../../common/Spinner/Spinner";
 
 const styles = {
   wrapper: {
@@ -29,6 +30,10 @@ const styles = {
 };
 
 const EmployeeList = ({ employees }) => {
+  console.log(employees);
+  if (!employees.length) {
+    return <Spinner />;
+  }
   return (
     <aside css={styles.wrapper}>
       <ul css={styles.ul}>
@@ -50,7 +55,9 @@ const EmployeeList = ({ employees }) => {
                 state: employee
               }}
             >
-              <p css={styles.p}>{employee.name}</p>
+              <p
+                css={styles.p}
+              >{`${employee.firstName} ${employee.lastName}`}</p>
               <small>{employee.role}</small>
             </NavLink>
           );
