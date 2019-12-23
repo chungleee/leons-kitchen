@@ -89,9 +89,13 @@ const CreateEmployee = () => {
         validationSchema={CreateEmployeeSchema}
         validateOnBlur={false}
         validateOnChange={false}
-        onSubmit={async ({ firstName, lastName, email, role, password }) => {
+        onSubmit={async (
+          { firstName, lastName, email, role, password },
+          actions
+        ) => {
           const data = { firstName, lastName, email, role, password };
           await dispatch(handleCreateEmployee(data));
+          actions.resetForm();
         }}
       >
         {({ handleChange, handleSubmit, errors, values }) => {
