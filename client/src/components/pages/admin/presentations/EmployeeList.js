@@ -34,6 +34,7 @@ const EmployeeList = ({ employees }) => {
   if (!employees.length) {
     return <Spinner />;
   }
+
   return (
     <aside css={styles.wrapper}>
       <ul css={styles.ul}>

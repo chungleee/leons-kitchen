@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+const CATEGORIES = ["starter", "platter", "beverage", "dessert", "custom"];
 const foodSchema = mongoose.Schema({
   title: {
     type: String,
@@ -7,6 +8,8 @@ const foodSchema = mongoose.Schema({
   },
   category: {
     type: String,
+    enum: CATEGORIES,
+    default: "platter",
     required: true
   },
   price: {
