@@ -9,7 +9,6 @@ import OrderMenu from "./components/pages/staff/OrderMenu";
 
 function App() {
   const { isAuthenticated, user } = useSelector(state => {
-    console.log("state", state);
     return state.authState;
   });
   const dispatch = useDispatch();
