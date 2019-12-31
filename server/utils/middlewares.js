@@ -18,8 +18,6 @@ const authenticate = async (req, res, next) => {
     } else {
       const token = req.headers.authorization.split(" ")[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-      console.log("decoded", decoded);
       const user = await User.findById({ _id: decoded._id });
       req.user = user;
       res.locals.user_role = decoded.role;
