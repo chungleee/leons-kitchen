@@ -90,10 +90,17 @@ const CreateEmployee = () => {
         validateOnBlur={false}
         validateOnChange={false}
         onSubmit={async (
-          { firstName, lastName, email, role, password },
+          { firstName, lastName, email, role, password, compare_password },
           actions
         ) => {
-          const data = { firstName, lastName, email, role, password };
+          const data = {
+            firstName,
+            lastName,
+            email,
+            role,
+            password,
+            compare_password
+          };
           await dispatch(handleCreateEmployee(data));
           actions.resetForm();
         }}
