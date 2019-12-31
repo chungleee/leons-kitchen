@@ -3,7 +3,6 @@ import axios from "axios";
 
 const tokenItem = `leon's kitchen jwtToken`;
 const token = localStorage.getItem(tokenItem);
-console.log("token", token);
 const config = {
   headers: {
     Authorization: `Bearer ${token}`
@@ -27,7 +26,7 @@ export const handleCreateEmployee = data => {
 export const handleFetchEmployees = () => {
   return async dispatch => {
     try {
-      const res = await axios.get("/api/users/");
+      const res = await axios.get("/api/users/", config);
       dispatch({
         type: FETCH_EMPLOYEES,
         payload: res.data.users
@@ -41,8 +40,7 @@ export const handleFetchEmployees = () => {
 export const handleDeleteEmployee = employeeId => {
   return async dispatch => {
     try {
-      const res = await axios.delete(`/api/users/${employeeId}`);
-      console.log("delete employee", res.data);
+      const res = await axios.delete(`/api/users/${employeeId}`, config);
       dispatch({
         type: DELETE_USER,
         payload: res.data.user
