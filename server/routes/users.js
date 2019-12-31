@@ -4,13 +4,16 @@ const securePin = require("secure-pin");
 const bcrypt = require("bcryptjs");
 const User = require("../models/userModel");
 const { authenticate, checkRole } = require("../utils/middlewares");
+const { CreateEmployeeSchema } = require("../utils/validation");
 
 // @access  Private - admin
 // @desc    Create user account
 // @route   POST /create
 router.post("/create", authenticate, checkRole("admin"), async (req, res) => {
   try {
-    const { firstName, lastName, role, email, password } = req.body;
+    const value = await CreateEmployeeSchema.validate(req.body);
+
+    const { firstName, lastName, role, email, password } = value;
 
     // find user
     const user = await User.findOne({ email });
