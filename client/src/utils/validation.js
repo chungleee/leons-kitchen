@@ -6,12 +6,12 @@ export const CreateEmployeeSchema = yup.object().shape({
     .string()
     .required(requiredMsg)
     .min(2, "Too short!")
-    .uppercase(),
+    .lowercase(),
   lastName: yup
     .string()
     .required(requiredMsg)
     .min(2, "Too short!")
-    .uppercase(),
+    .lowercase(),
   email: yup
     .string()
     .email("Please enter a valid email")
