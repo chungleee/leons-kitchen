@@ -11,6 +11,7 @@ const styles = {
     backgroundColor: theme.color.primary,
     borderRight: "1px solid lightgrey",
     paddingTop: "2rem",
+    paddingBottom: "2rem",
     overflowY: "auto"
   },
   ul: {
@@ -54,7 +55,7 @@ const EmployeeList = ({ employees }) => {
               key={employee._id}
               to={{
                 pathname: `/admin/employees/${employee._id}`,
-                state: employee
+                state: { employee }
               }}
             >
               <p
