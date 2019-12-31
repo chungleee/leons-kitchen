@@ -1,10 +1,19 @@
 import { FETCH_EMPLOYEES, CREATE_USER, DELETE_USER } from "./types";
 import axios from "axios";
 
+const tokenItem = `leon's kitchen jwtToken`;
+const token = localStorage.getItem(tokenItem);
+console.log("token", token);
+const config = {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+};
+
 export const handleCreateEmployee = data => {
   return async dispatch => {
     try {
-      const res = await axios.post("/api/users/create", data);
+      const res = await axios.post("/api/users/create", data, config);
       dispatch({
         type: CREATE_USER,
         payload: res.data.newUser
