@@ -5,10 +5,10 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/userModel");
 const { authenticate, checkRole } = require("../utils/middlewares");
 
-// @access  Public - for now
+// @access  Private - admin
 // @desc    Create user account
 // @route   POST /create
-router.post("/create", async (req, res) => {
+router.post("/create", authenticate, checkRole("admin"), async (req, res) => {
   try {
     const { firstName, lastName, role, email, password } = req.body;
 
@@ -99,36 +99,31 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// @access Public - will be private
+// @access Private - admin
 // @desc   Fetch all users
 // @route  GET /
-router.get(
-  "/",
-  // authenticate,
-  // checkRole,
-  async (req, res) => {
-    try {
-      const users = await User.find({});
-      if (!users) {
-        return res.status(404).json({
-          error: "Users not found"
-        });
-      } else {
-        return res.status(200).json({
-          success: true,
-          users
-        });
-      }
-    } catch (error) {
-      console.error(error);
+router.get("/", authenticate, checkRole("admin"), async (req, res) => {
+  try {
+    const users = await User.find({});
+    if (!users) {
+      return res.status(404).json({
+        error: "Users not found"
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        users
+      });
     }
+  } catch (error) {
+    console.error(error);
   }
-);
+});
 
-// @access Public - will be private
+// @access Private - admin
 // @desc   Fetch user by id
 // @route  GET /:userId
-router.get("/:userId", async (req, res) => {
+router.get("/:userId", authenticate, checkRole("admin"), async (req, res) => {
   try {
     const _id = req.params.userId;
     const user = await User.findById({ _id });
@@ -148,26 +143,31 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
-// @access Public - will be private
+// @access Private - admin
 // @desc   Delete user by id
 // @route  DELETE /:userId
-router.delete("/:userId", async (req, res) => {
-  try {
-    const _id = req.params.userId;
-    const user = await User.findByIdAndDelete({ _id });
-    if (!user) {
-      return res.status(404).json({
-        error: "User not found"
-      });
-    } else {
-      return res.status(200).json({
-        deleted: true,
-        user
-      });
+router.delete(
+  "/:userId",
+  authenticate,
+  checkRole("admin"),
+  async (req, res) => {
+    try {
+      const _id = req.params.userId;
+      const user = await User.findByIdAndDelete({ _id });
+      if (!user) {
+        return res.status(404).json({
+          error: "User not found"
+        });
+      } else {
+        return res.status(200).json({
+          deleted: true,
+          user
+        });
+      }
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error);
   }
-});
+);
 
 module.exports = router;
