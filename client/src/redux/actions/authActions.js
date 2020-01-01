@@ -1,5 +1,7 @@
-import { USER_LOGIN, CURRENT_USER } from "./types";
+import { USER_LOGIN, CURRENT_USER, USER_LOGOUT } from "./types";
 import axios from "axios";
+
+const JWT = "leon's kitchen jwtToken";
 
 export const handleUserLogin = credentials => {
   return async dispatch => {
@@ -7,7 +9,7 @@ export const handleUserLogin = credentials => {
       const res = await axios.post("/api/users/login", credentials);
 
       if (window.localStorage) {
-        localStorage.setItem("leon's kitchen jwtToken", res.data.token);
+        localStorage.setItem(JWT, res.data.token);
       }
 
       dispatch({
@@ -17,6 +19,17 @@ export const handleUserLogin = credentials => {
     } catch (error) {
       console.error(error);
     }
+  };
+};
+
+export const handleUserLogout = () => {
+  return dispatch => {
+    if (window.localStorage) {
+      localStorage.removeItem(JWT);
+    }
+    dispatch({
+      type: USER_LOGOUT
+    });
   };
 };
 
