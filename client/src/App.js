@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import jwtDecode from "jwt-decode";
-import { handleCurrentUser } from "./redux/actions/authActions";
+import {
+  handleCurrentUser,
+  handleUserLogout
+} from "./redux/actions/authActions";
 import Login from "./components/pages/Login";
 import AdminDashboard from "./components/pages/admin/AdminDashboard";
 import OrderMenu from "./components/pages/staff/OrderMenu";
@@ -19,8 +22,14 @@ function App() {
       const token = localStorage.getItem(`leon's kitchen jwtToken`);
       // decode
       const decoded = jwtDecode(token);
-      // user login
-      dispatch(handleCurrentUser(decoded));
+      console.log("decoded", decoded);
+      // check if token expired
+      if (Date.now() >= decoded.exp * 1000) {
+        dispatch(handleUserLogout());
+      } else {
+        // user login
+        dispatch(handleCurrentUser(decoded));
+      }
     }
   };
 
