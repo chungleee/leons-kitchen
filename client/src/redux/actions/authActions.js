@@ -10,6 +10,9 @@ export const handleUserLogin = credentials => {
 
       if (window.localStorage) {
         localStorage.setItem(JWT, res.data.token);
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${res.data.token}`;
       }
 
       dispatch({
@@ -25,6 +28,7 @@ export const handleUserLogin = credentials => {
 export const handleUserLogout = () => {
   return dispatch => {
     if (window.localStorage) {
+      axios.defaults.headers.common["Authorization"] = null;
       localStorage.removeItem(JWT);
     }
     dispatch({
