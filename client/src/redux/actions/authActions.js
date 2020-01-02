@@ -39,6 +39,10 @@ export const handleUserLogout = () => {
 
 export const handleCurrentUser = decoded => {
   return dispatch => {
+    if (window.localStorage) {
+      const token = localStorage.getItem(JWT);
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
     dispatch({
       type: CURRENT_USER,
       payload: decoded
