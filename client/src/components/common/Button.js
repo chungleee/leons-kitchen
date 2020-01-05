@@ -14,12 +14,17 @@ const Button = ({ children, type, onClick }) => {
         fontSize: "100%",
         padding: "0.5rem",
         backgroundColor: `${theme.background}`,
+        transition: "all 0.2s ease",
         "&:hover": {
-          backgroundColor: `${theme.color.highlight}`
+          backgroundColor: `${theme.color.highlight}`,
+          transform: "translateY(-3px)"
         },
         "&:focus": {
           backgroundColor: `${theme.color.highlight}`,
           outline: "none"
+        },
+        "&:active": {
+          transform: "translateY(3px)"
         }
       }}
     >
