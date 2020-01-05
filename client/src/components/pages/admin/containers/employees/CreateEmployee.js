@@ -80,6 +80,8 @@ const initialValues = {
   compare_password: ""
 };
 
+const roles = ["staff", "kitchen"];
+
 const CreateEmployee = () => {
   const dispatch = useDispatch();
   return (
@@ -147,8 +149,13 @@ const CreateEmployee = () => {
                         css={styles.select}
                       >
                         <option>Select</option>
-                        <option value="staff">Staff</option>
-                        <option value="kitchen">Kitchen</option>
+                        {roles.map((role, idx) => {
+                          return (
+                            <option key={Date.now() + idx} value={role}>
+                              {role}
+                            </option>
+                          );
+                        })}
                       </select>
                     </div>
                     {errors.role ? (
