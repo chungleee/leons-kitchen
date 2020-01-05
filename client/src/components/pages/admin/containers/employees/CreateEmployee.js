@@ -111,42 +111,30 @@ const CreateEmployee = () => {
             <form onSubmit={handleSubmit}>
               <div css={styles.container}>
                 <div css={styles.left}>
-                  <div css={styles.formControl}>
-                    <label css={styles.label}>First name:</label>
-                    <InputField
-                      value={values.firstName}
-                      name="firstName"
-                      type="text"
-                      onChange={handleChange}
-                    />
-                    {errors.firstName ? (
-                      <small css={styles.error}>{errors.firstName}</small>
-                    ) : null}
-                  </div>
-                  <div css={styles.formControl}>
-                    <label css={styles.label}>Last name:</label>
-                    <InputField
-                      value={values.lastName}
-                      name="lastName"
-                      type="text"
-                      onChange={handleChange}
-                    />
-                    {errors.lastName ? (
-                      <small css={styles.error}>{errors.lastName}</small>
-                    ) : null}
-                  </div>
-                  <div css={styles.formControl}>
-                    <label css={styles.label}>Email:</label>
-                    <InputField
-                      value={values.email}
-                      name="email"
-                      type="email"
-                      onChange={handleChange}
-                    />
-                    {errors.email ? (
-                      <small css={styles.error}>{errors.email}</small>
-                    ) : null}
-                  </div>
+                  <InputField
+                    value={values.firstName}
+                    name="firstName"
+                    type="text"
+                    onChange={handleChange}
+                    label="First name:"
+                    error={errors.firstName ? errors.firstName : null}
+                  />
+                  <InputField
+                    value={values.lastName}
+                    name="lastName"
+                    type="text"
+                    onChange={handleChange}
+                    label="Last name:"
+                    error={errors.lastName ? errors.lastName : null}
+                  />
+                  <InputField
+                    value={values.email}
+                    name="email"
+                    type="email"
+                    onChange={handleChange}
+                    label="Email:"
+                    error={errors.firstName ? errors.firstName : null}
+                  />
                 </div>
                 <div css={styles.right}>
                   <div css={styles.formControl}>
@@ -167,32 +155,25 @@ const CreateEmployee = () => {
                       <small css={styles.error}>{errors.role}</small>
                     ) : null}
                   </div>
-                  <div css={styles.formControl}>
-                    <label css={styles.label}>Password:</label>
-                    <InputField
-                      value={values.password}
-                      name="password"
-                      type="password"
-                      onChange={handleChange}
-                    />
-                    {errors.password ? (
-                      <small css={styles.error}>{errors.password}</small>
-                    ) : null}
-                  </div>
-                  <div css={styles.formControl}>
-                    <label css={styles.label}>Compare Password:</label>
-                    <InputField
-                      value={values.compare_password}
-                      name="compare_password"
-                      type="password"
-                      onChange={handleChange}
-                    />
-                    {errors.compare_password ? (
-                      <small css={styles.error}>
-                        {errors.compare_password}
-                      </small>
-                    ) : null}
-                  </div>
+
+                  <InputField
+                    value={values.password}
+                    name="password"
+                    type="password"
+                    onChange={handleChange}
+                    label="Password"
+                    error={errors.password ? errors.password : null}
+                  />
+                  <InputField
+                    value={values.compare_password}
+                    name="compare_password"
+                    type="password"
+                    onChange={handleChange}
+                    label="Confirm Password"
+                    error={
+                      errors.compare_password ? errors.compare_password : null
+                    }
+                  />
                 </div>
               </div>
               <Button type="submit">Create</Button>
