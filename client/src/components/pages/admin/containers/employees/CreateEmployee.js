@@ -61,6 +61,7 @@ const styles = {
     height: "1.5rem",
     outlineColor: "white",
     width: "100%",
+    textTransform: "capitalize",
     "&:hover, :focus": {
       backgroundColor: `${theme.color.highlight}`,
       outline: "none"
