@@ -22,7 +22,11 @@ const styles = {
     normal: {
       display: "block",
       marginTop: "0.5rem",
-      padding: "1rem"
+      padding: "1rem",
+      "&:hover": {
+        backgroundColor: `${theme.color.highlight}`,
+        transition: "all 1s ease"
+      }
     },
     active: {
       border: `1px solid ${theme.color.highlight}`
