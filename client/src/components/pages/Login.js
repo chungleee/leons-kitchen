@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import React from "react";
-import { useHistory } from "react-router-dom";
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { handleUserLogin } from "../../redux/actions/authActions";
 import { jsx } from "@emotion/core";
 import theme from "../../theme";
 import InputField from "../common/InputField";
+import Button from "../common/Button";
 
 const initialValues = {
   pin: "",
@@ -32,25 +32,10 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     marginBottom: "1rem"
-  },
-  button: {
-    color: `${theme.text}`,
-    border: `1px solid ${theme.text}`,
-    fontSize: "100%",
-    padding: "0.5rem",
-    backgroundColor: `${theme.background}`,
-    "&:hover": {
-      backgroundColor: `${theme.color.highlight}`
-    },
-    "&:focus": {
-      backgroundColor: `${theme.color.highlight}`,
-      outline: "none"
-    }
   }
 };
 
 const Login = () => {
-  let history = useHistory();
   const dispatch = useDispatch();
   return (
     <div css={styles.container}>
@@ -89,9 +74,7 @@ const Login = () => {
                     value={values.password}
                   />
                 </div>
-                <button css={styles.button} type="submit">
-                  Login
-                </button>
+                <Button type="submit">Login</Button>
               </form>
             );
           }}

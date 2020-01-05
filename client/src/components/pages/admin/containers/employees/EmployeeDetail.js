@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { handleDeleteEmployee } from "../../../../../redux/actions/employeesActions";
+import Button from "../../../../common/Button";
 
 const EmployeeDetail = ({ location, history }) => {
   const {
@@ -31,7 +32,7 @@ const EmployeeDetail = ({ location, history }) => {
         <label style={{ marginBottom: "0.5rem" }}>PIN:</label>
         <p>{pin}</p>
       </div>
-      <button
+      <Button
         onClick={() => {
           alert(
             "Are you sure you want to delete this employee from the system?"
@@ -41,7 +42,7 @@ const EmployeeDetail = ({ location, history }) => {
         }}
       >
         Delete
-      </button>
+      </Button>
     </div>
   );
 };

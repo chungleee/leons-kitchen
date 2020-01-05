@@ -7,6 +7,7 @@ import { handleCreateEmployee } from "../../../../../redux/actions/employeesActi
 import { Formik } from "formik";
 import { CreateEmployeeSchema } from "../../../../../utils/validation";
 import InputField from "../../../../common/InputField";
+import Button from "../../../../common/Button";
 
 const styles = {
   wrapper: {
@@ -194,9 +195,7 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
-              <button css={styles.button} type="submit">
-                Create
-              </button>
+              <Button type="submit">Create</Button>
             </form>
           );
         }}
