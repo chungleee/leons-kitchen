@@ -1,5 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
+import InputField from "../../../../common/InputField";
+import Button from "../../../../common/Button";
 
 const initialValues = {
   title: "",
@@ -18,8 +20,28 @@ const CreateFoodItem = props => {
           actions.setSubmitting(false);
         }}
       >
-        {({ handleSubmit, handleChange }) => {
-          return <form onSubmit={handleSubmit}></form>;
+        {({ handleSubmit, handleChange, values, errors }) => {
+          return (
+            <form onSubmit={handleSubmit}>
+              <InputField
+                name="title"
+                value={values.title}
+                type="text"
+                onChange={handleChange}
+                label="Title:"
+              />
+
+              <InputField
+                name="price"
+                value={values.title}
+                type="number"
+                onChange={handleChange}
+                label="Price:"
+              />
+
+              <Button type="submit">Create</Button>
+            </form>
+          );
         }}
       </Formik>
     </div>
