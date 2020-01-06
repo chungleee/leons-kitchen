@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Food = require("../models/foodModel");
+const { authenticate, checkRole } = require("../utils/middlewares");
 
 // @access  Public
 // @desc    Food item test route
@@ -13,7 +14,7 @@ router.get("/test", (req, res) => {
 // @access  Will be private - admin/managers
 // @desc    Create food item
 // @route   POST /create
-router.post("/create", async (req, res) => {
+router.post("/create", authenticate, checkRole("admin"), async (req, res) => {
   try {
     const { title, category, price } = req.body;
     const newFood = await new Food({
@@ -22,7 +23,7 @@ router.post("/create", async (req, res) => {
       price
     }).save();
 
-    return res.status(200).json({ success: true, data: newFood });
+    return res.status(200).json({ success: true, newFood });
   } catch (error) {
     console.error(error);
     return res.status(400).json(error);
@@ -38,7 +39,7 @@ router.get("/", async (req, res) => {
     if (!foods) {
       return res.status(404).json({ error: "Something went wrong." });
     } else {
-      return res.status(200).json({ success: true, data: foods });
+      return res.status(200).json({ success: true, foods });
     }
   } catch (error) {
     console.error(error);
@@ -56,7 +57,7 @@ router.get("/category/:category", async (req, res) => {
     if (!foods) {
       return res.status(400).json({ error: "Food items not found" });
     } else {
-      return res.status(200).json({ success: true, data: foods });
+      return res.status(200).json({ success: true, foods });
     }
   } catch (error) {
     console.error(error);
@@ -75,7 +76,7 @@ router.get("/:foodId", async (req, res) => {
     if (!food) {
       return res.status(404).json({ error: "Food item not found" });
     } else {
-      return res.status(200).json({ success: true, data: food });
+      return res.status(200).json({ success: true, food });
     }
   } catch (error) {
     console.error(error);
@@ -86,23 +87,28 @@ router.get("/:foodId", async (req, res) => {
 // @access  Will be private - admin/managers
 // @desc    Delete food by id
 // @route   DELETE /:foodId
-router.delete("/:foodId", async (req, res) => {
-  try {
-    const _id = req.params.foodId;
-    const food = await Food.findByIdAndDelete({ _id });
+router.delete(
+  "/:foodId",
+  authenticate,
+  checkRole("admin"),
+  async (req, res) => {
+    try {
+      const _id = req.params.foodId;
+      const food = await Food.findByIdAndDelete({ _id });
 
-    if (!food) {
-      return res.status(404).json({ error: "Food item not found" });
-    } else {
-      return res.status(200).json({
-        deleted: true,
-        data: food
-      });
+      if (!food) {
+        return res.status(404).json({ error: "Food item not found" });
+      } else {
+        return res.status(200).json({
+          deleted: true,
+          food
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(400).json(error);
     }
-  } catch (error) {
-    console.error(error);
-    return res.status(400).json(error);
   }
-});
+);
 
 module.exports = router;
