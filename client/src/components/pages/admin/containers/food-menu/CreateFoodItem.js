@@ -2,9 +2,11 @@
 import { jsx } from "@emotion/core";
 import theme from "../../../../../theme";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Formik } from "formik";
 import InputField from "../../../../common/InputField";
 import Button from "../../../../common/Button";
+import { handleCreateFoodItem } from "../../../../../redux/actions/foodActions";
 
 const styles = {
   formControl: {
@@ -45,16 +47,16 @@ const initialValues = {
 
 const categories = ["starter", "platter", "beverage", "dessert", "custom"];
 
-const CreateFoodItem = props => {
+const CreateFoodItem = ({ history }) => {
+  const dispatch = useDispatch();
   return (
     <div>
       <h1>Create food item</h1>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values, actions) => {
-          console.log("create food item values", values);
-          // remove set submitting when putting async action
-          actions.setSubmitting(false);
+        onSubmit={values => {
+          dispatch(handleCreateFoodItem(values));
+          history.push("/admin/food-menu");
         }}
       >
         {({ handleSubmit, handleChange, values, errors }) => {
