@@ -6,3 +6,4 @@ export const DELETE_USER = "DELETE_USER";
 export const USER_LOGOUT = "USER_LOGOUT";
 export const CREATE_FOOD_ITEM = "CREATE_FOOD_ITEM";
 export const FETCH_FOOD_ITEMS = "FETCH_FOOD_ITEMS";
+export const DELETE_FOOD_ITEM = "DELETE_FOOD_ITEM";
