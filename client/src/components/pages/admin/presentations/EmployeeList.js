@@ -23,6 +23,7 @@ const styles = {
       display: "block",
       marginTop: "0.5rem",
       padding: "1rem",
+      textTransform: "capitalize",
       "&:hover": {
         backgroundColor: `${theme.color.highlight}`,
         transition: "all 1s ease"
