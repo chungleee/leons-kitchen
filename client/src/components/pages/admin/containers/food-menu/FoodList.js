@@ -26,9 +26,9 @@ const FoodList = ({ match }) => {
       <Button>
         <Link to={`${url}/create`}>Create food item</Link>
       </Button>
-      {food_items.map(({ id, title, category, price }) => {
+      {food_items.map(({ _id, title, category, price }) => {
         return (
-          <div key={id}>
+          <div key={_id}>
             <h2>{title}</h2>
             <p>{category}</p>
             <p>${price}</p>
