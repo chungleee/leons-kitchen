@@ -6,7 +6,7 @@ import CreateFoodItem from "./CreateFoodItem";
 const FoodMenu = ({ match }) => {
   const { url } = match;
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <Route
         exact
         path={`${url}`}
