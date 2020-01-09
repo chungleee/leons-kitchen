@@ -3,7 +3,7 @@ import { jsx } from "@emotion/core";
 import React from "react";
 import theme from "../../theme";
 
-const Button = ({ children, type, onClick }) => {
+const Button = ({ children, type, onClick, ...props }) => {
   return (
     <button
       onClick={onClick}
@@ -27,6 +27,7 @@ const Button = ({ children, type, onClick }) => {
           transform: "translateY(3px)"
         }
       }}
+      {...props}
     >
       {children}
     </button>
