@@ -18,6 +18,7 @@ const styles = {
     margin: "auto",
     overflow: "auto"
   },
+  button: { marginTop: "3rem" },
   container: {
     overflow: "scroll"
   },
@@ -34,6 +35,9 @@ const styles = {
     right: "1rem",
     color: "red",
     cursor: "pointer"
+  },
+  capitalize: {
+    textTransform: "capitalize"
   }
 };
 
@@ -57,7 +61,7 @@ const FoodList = ({ match }) => {
 
   return (
     <div css={styles.wrapper}>
-      <Button>
+      <Button css={styles.button}>
         <Link to={`${url}/create`}>Create food item</Link>
       </Button>
 
@@ -72,30 +76,34 @@ const FoodList = ({ match }) => {
         <h3 css={styles.columns}>Category</h3>
         <h3 css={styles.columns}>Price</h3>
       </div>
-
-      {food_items.map(({ _id, title, category, price }) => {
-        return (
-          <div
-            css={styles.rows}
-            style={{
-              padding: "0.5rem 0"
-            }}
-            key={_id}
-          >
-            <h4 css={styles.columns}>{title}</h4>
-            <p css={styles.columns}>{category}</p>
-            <p css={styles.columns}>${price}</p>
-            <span
-              onClick={() => {
-                dispatch(handleDeleteFoodItem(_id));
+      {!food_items.length ? (
+        <div>No food items yet!</div>
+      ) : (
+        food_items.map(({ _id, title, category, price }) => {
+          return (
+            <div
+              css={styles.rows}
+              style={{
+                padding: "0.5rem 0",
+                textTransform: "capitalize"
               }}
-              css={styles.icon}
+              key={_id}
             >
-              <i className="far fa-trash-alt"></i>
-            </span>
-          </div>
-        );
-      })}
+              <h4 css={styles.columns}>{title}</h4>
+              <p css={styles.columns}>{category}</p>
+              <p css={styles.columns}>${price}</p>
+              <span
+                onClick={() => {
+                  dispatch(handleDeleteFoodItem(_id));
+                }}
+                css={styles.icon}
+              >
+                <i className="far fa-trash-alt"></i>
+              </span>
+            </div>
+          );
+        })
+      )}
     </div>
   );
 };
