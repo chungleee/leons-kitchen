@@ -1,12 +1,15 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import theme from "../../../../../theme";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Spinner from "../../../../common/Spinner/Spinner";
 import Button from "../../../../common/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { handleFetchFoodItems } from "../../../../../redux/actions/foodActions";
+import {
+  handleFetchFoodItems,
+  handleDeleteFoodItem
+} from "../../../../../redux/actions/foodActions";
 
 const styles = {
   wrapper: {
@@ -35,18 +38,20 @@ const styles = {
 };
 
 const FoodList = ({ match }) => {
+  const [loading, setLoading] = useState(true);
   const { url } = match;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(handleFetchFoodItems());
+    setLoading(false);
   }, []);
 
   const { food_items } = useSelector(state => {
     return state.foodItemsState;
   });
 
-  if (!food_items.length) {
+  if (loading === true) {
     return <Spinner />;
   }
 
@@ -80,7 +85,12 @@ const FoodList = ({ match }) => {
             <h4 css={styles.columns}>{title}</h4>
             <p css={styles.columns}>{category}</p>
             <p css={styles.columns}>${price}</p>
-            <span css={styles.icon}>
+            <span
+              onClick={() => {
+                dispatch(handleDeleteFoodItem(_id));
+              }}
+              css={styles.icon}
+            >
               <i className="far fa-trash-alt"></i>
             </span>
           </div>
