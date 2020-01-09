@@ -9,6 +9,15 @@ import Button from "../../../../common/Button";
 import { handleCreateFoodItem } from "../../../../../redux/actions/foodActions";
 
 const styles = {
+  wrapper: {
+    height: "100%",
+    width: "90%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+    margin: "auto"
+  },
+  form: { marginBottom: "3rem" },
   formControl: {
     display: "flex",
     flexDirection: "column",
@@ -50,7 +59,7 @@ const categories = ["starter", "platter", "beverage", "dessert", "custom"];
 const CreateFoodItem = ({ history }) => {
   const dispatch = useDispatch();
   return (
-    <div>
+    <div css={styles.wrapper}>
       <h1>Create food item</h1>
       <Formik
         initialValues={initialValues}
@@ -61,7 +70,7 @@ const CreateFoodItem = ({ history }) => {
       >
         {({ handleSubmit, handleChange, values, errors }) => {
           return (
-            <form onSubmit={handleSubmit}>
+            <form css={styles.form} onSubmit={handleSubmit}>
               <InputField
                 name="title"
                 value={values.title}
