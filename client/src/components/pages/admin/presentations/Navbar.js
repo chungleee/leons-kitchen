@@ -1,8 +1,11 @@
 /** @jsx jsx */
 import React from "react";
-import { Link, NavLink, useRouteMatch } from "react-router-dom";
+import { Link, NavLink, useRouteMatch, useHistory } from "react-router-dom";
 import theme from "../../../../theme";
 import { jsx } from "@emotion/core";
+import Button from "../../../common/Button";
+import { useDispatch } from "react-redux";
+import { handleUserLogout } from "../../../../redux/actions/authActions";
 
 const styles = {
   wrapper: {
@@ -38,6 +41,8 @@ const styles = {
 
 const Navbar = () => {
   let { url } = useRouteMatch("/admin");
+  let history = useHistory();
+  const dispatch = useDispatch();
   return (
     <aside css={styles.wrapper}>
       <div css={styles.container}>
@@ -70,6 +75,15 @@ const Navbar = () => {
           >
             Orders
           </NavLink>
+
+          <Button
+            onClick={() => {
+              dispatch(handleUserLogout());
+              history.push("/");
+            }}
+          >
+            Sign out
+          </Button>
         </ul>
       </div>
     </aside>
