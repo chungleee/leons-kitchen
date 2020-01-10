@@ -15,16 +15,17 @@ const styles = {
     borderRight: `2px solid ${theme.text}`
   },
   container: {
-    paddingTop: "3rem",
-    paddingBottom: "3rem",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    height: "100%"
   },
+  link: { marginTop: "3rem" },
   ul: {
     display: "flex",
     flexDirection: "column",
     width: "100%",
+    height: "100%",
     marginTop: "3rem"
   },
   navlinks: {
@@ -36,6 +37,12 @@ const styles = {
     active: {
       backgroundColor: theme.background
     }
+  },
+  button: {
+    width: "25%",
+    margin: "0 auto",
+    marginTop: "auto",
+    marginBottom: "3rem"
   }
 };
 
@@ -46,7 +53,7 @@ const Navbar = () => {
   return (
     <aside css={styles.wrapper}>
       <div css={styles.container}>
-        <div>
+        <div css={styles.link}>
           <Link to={`${url}`}>
             <h2>Leon's Kitchen</h2>
           </Link>
@@ -81,6 +88,7 @@ const Navbar = () => {
               dispatch(handleUserLogout());
               history.push("/");
             }}
+            css={styles.button}
           >
             Sign out
           </Button>
