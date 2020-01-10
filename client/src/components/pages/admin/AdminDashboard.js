@@ -7,6 +7,7 @@ import CheckAuth from "../../HOC/CheckAuth";
 import Navbar from "./presentations/Navbar";
 import Employees from "./containers/employees/Employees";
 import FoodMenu from "./containers/food-menu/FoodMenu";
+import Orders from "./containers/orders/Orders";
 
 const styles = {
   container: {
@@ -40,6 +41,13 @@ const AdminDashboard = ({ match }) => {
           path={`${url}/food-menu`}
           render={props => {
             return <FoodMenu {...props} />;
+          }}
+        />
+
+        <Route
+          path={`${url}/orders`}
+          render={props => {
+            return <Orders {...props} />;
           }}
         />
       </main>
