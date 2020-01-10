@@ -62,6 +62,14 @@ const Navbar = () => {
           >
             Food menu
           </NavLink>
+
+          <NavLink
+            css={styles.navlinks.normal}
+            activeStyle={styles.navlinks.active}
+            to={`${url}/orders`}
+          >
+            Orders
+          </NavLink>
         </ul>
       </div>
     </aside>
