@@ -2,7 +2,7 @@ import React from "react";
 
 const CheckAuth = (Component, rolesArray) => {
   return ({ user, ...props }) => {
-    if (rolesArray.includes(user.role)) {
+    if (user && rolesArray.includes(user.role)) {
       return <Component user={user} {...props} />;
     }
 
