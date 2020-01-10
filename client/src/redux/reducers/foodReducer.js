@@ -1,11 +1,13 @@
 import {
   CREATE_FOOD_ITEM,
   FETCH_FOOD_ITEMS,
-  DELETE_FOOD_ITEM
+  DELETE_FOOD_ITEM,
+  ADD_TO_CART
 } from "../actions/types";
 
 const initialState = {
-  food_items: []
+  food_items: [],
+  cart: []
 };
 
 const foodReducer = (state = initialState, action) => {
@@ -30,6 +32,11 @@ const foodReducer = (state = initialState, action) => {
       return {
         ...state,
         food_items: updated_food_items
+      };
+    case ADD_TO_CART:
+      return {
+        ...state,
+        cart: [...state.cart, action.payload]
       };
     default:
       return state;
