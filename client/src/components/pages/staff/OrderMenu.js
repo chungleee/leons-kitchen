@@ -6,6 +6,7 @@ import { handleFetchFoodItems } from "../../../redux/actions/foodActions";
 import CheckAuth from "../../HOC/CheckAuth";
 import Card from "../../common/Card";
 import Spinner from "../../common/Spinner/Spinner";
+import FoodItem from "../../common/FoodItem";
 
 const OrderMenu = props => {
   const [loading, setLoading] = useState(true);
@@ -41,17 +42,18 @@ const OrderMenu = props => {
           return <Card key={item._id} item={item} />;
         })}
       </main>
-      <aside css={{ borderLeft: "1px solid lightgrey", padding: "0 1rem" }}>
+      <aside
+        css={{
+          borderLeft: "1px solid lightgrey",
+          padding: "0 1rem",
+          width: "25%"
+        }}
+      >
         {cart.length === 0 ? (
           <p>What are you craving?</p>
         ) : (
           cart.map(i => {
-            return (
-              <div key={i._id}>
-                <p>{i.title}</p>
-                <p>${i.price}</p>
-              </div>
-            );
+            return <FoodItem key={i._id} title={i.title} price={i.price} />;
           })
         )}
       </aside>
