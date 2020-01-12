@@ -36,11 +36,11 @@ export const handleDeleteFoodItem = id => {
   };
 };
 
-export const handleAddToCard = item => {
+export const handleAddToCard = (item, count) => {
   return dispatch => {
     dispatch({
       type: ADD_TO_CART,
-      payload: item
+      payload: { ...item, count }
     });
   };
 };
