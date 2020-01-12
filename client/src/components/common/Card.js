@@ -1,11 +1,13 @@
 /**@jsx jsx */
 import { jsx } from "@emotion/core";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import theme from "../../theme";
 import { handleAddToCard } from "../../redux/actions/foodActions";
 
 const Card = ({ item }) => {
+  let [count, setCount] = useState(0);
+
   const dispatch = useDispatch();
   return (
     <div
@@ -35,6 +37,14 @@ const Card = ({ item }) => {
           <h3>{item.title}</h3>
           <small>${item.price}</small>
         </div>
+        <div role="count">
+          <input
+            type="number"
+            onChange={event => {
+              setCount(event.target.value);
+            }}
+          />
+        </div>
         <div role="action">
           <button
             css={{
@@ -49,7 +59,7 @@ const Card = ({ item }) => {
               cursor: "pointer"
             }}
             onClick={() => {
-              dispatch(handleAddToCard(item));
+              dispatch(handleAddToCard(item, count));
             }}
           >
             Add
