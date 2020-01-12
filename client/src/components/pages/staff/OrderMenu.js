@@ -53,7 +53,14 @@ const OrderMenu = props => {
           <p>What are you craving?</p>
         ) : (
           cart.map(i => {
-            return <FoodItem key={i._id} title={i.title} price={i.price} />;
+            return (
+              <FoodItem
+                key={i._id}
+                title={i.title}
+                price={i.price}
+                count={i.count}
+              />
+            );
           })
         )}
       </aside>
