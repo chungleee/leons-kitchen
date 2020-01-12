@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import React from "react";
 
-const FoodItem = ({ title, price }) => {
+const FoodItem = ({ title, price, count }) => {
   return (
     <div
       css={{
@@ -19,8 +19,10 @@ const FoodItem = ({ title, price }) => {
           sizes=""
         />
       </div>
-      <h4>{title}</h4>
-      <p>${price}</p>
+      <h4>
+        {title} x {count}
+      </h4>
+      <p>${price * count}</p>
     </div>
   );
 };
