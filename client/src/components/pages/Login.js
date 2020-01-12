@@ -53,7 +53,7 @@ const Login = () => {
             await dispatch(handleUserLogin(credentials));
           }}
         >
-          {({ handleChange, handleSubmit, values }) => {
+          {({ handleChange, handleSubmit, values, setValues }) => {
             return (
               <form onSubmit={handleSubmit}>
                 <div css={styles.formControl}>
@@ -75,6 +75,39 @@ const Login = () => {
                   />
                 </div>
                 <Button type="submit">Login</Button>
+                <Button
+                  type="button"
+                  onClick={() => {
+                    setValues({
+                      pin: "5593",
+                      password: "admin1234"
+                    });
+                  }}
+                >
+                  Admin
+                </Button>
+                <Button
+                  type="button"
+                  onClick={() => {
+                    setValues({
+                      pin: "2389",
+                      password: "staffstaff"
+                    });
+                  }}
+                >
+                  Staff
+                </Button>
+                <Button
+                  type="button"
+                  onClick={() => {
+                    setValues({
+                      pin: "1635",
+                      password: "kitchenkitchen"
+                    });
+                  }}
+                >
+                  Kitchen
+                </Button>
               </form>
             );
           }}
