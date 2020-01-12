@@ -34,6 +34,15 @@ const foodReducer = (state = initialState, action) => {
         food_items: updated_food_items
       };
     case ADD_TO_CART:
+      let updateItem = state.cart.find(item => {
+        return item._id === action.payload._id;
+      });
+      if (updateItem) {
+        updateItem.count = action.payload.count;
+        return {
+          ...state
+        };
+      }
       return {
         ...state,
         cart: [...state.cart, action.payload]
