@@ -2,8 +2,12 @@
 import { jsx } from "@emotion/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  handleIncrementItem,
+  handleDecrementItem
+} from "../../redux/actions/foodActions";
 
-const FoodItem = ({ title, price, _id }) => {
+const FoodItem = ({ title, price, _id, count }) => {
   const dispatch = useDispatch();
   return (
     <div
@@ -18,9 +22,21 @@ const FoodItem = ({ title, price, _id }) => {
         <p>${price}</p>
       </div>
       <div css={{ display: "flex" }}>
-        <button>-</button>
-        <p>1</p>
-        <button>+</button>
+        <button
+          onClick={() => {
+            dispatch(handleDecrementItem(_id));
+          }}
+        >
+          -
+        </button>
+        <p>{count}</p>
+        <button
+          onClick={() => {
+            dispatch(handleIncrementItem(_id));
+          }}
+        >
+          +
+        </button>
       </div>
     </div>
   );
