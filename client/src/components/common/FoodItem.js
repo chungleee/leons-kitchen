@@ -14,29 +14,32 @@ const FoodItem = ({ title, price, _id, count }) => {
       css={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        padding: "1rem",
+        borderBottom: "0.5px solid lightgrey"
       }}
     >
-      <div>
+      <div css={{ textTransform: "capitalize" }}>
         <h4>{title}</h4>
         <p>${price}</p>
       </div>
-      <div css={{ display: "flex" }}>
-        <button
+      <div css={{ display: "flex", alignItems: "center" }}>
+        <i
+          css={{ color: "red" }}
           onClick={() => {
             dispatch(handleDecrementItem(_id));
           }}
-        >
-          -
-        </button>
-        <p>{count}</p>
-        <button
+          className="far fa-minus-square fa-2x"
+        ></i>
+
+        <p css={{ padding: "0 0.5rem" }}>{count}</p>
+        <i
+          css={{ color: "green" }}
           onClick={() => {
             dispatch(handleIncrementItem(_id));
           }}
-        >
-          +
-        </button>
+          className="far fa-plus-square fa-2x"
+        ></i>
       </div>
     </div>
   );
