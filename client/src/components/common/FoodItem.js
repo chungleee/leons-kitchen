@@ -25,7 +25,7 @@ const FoodItem = ({ title, price, _id, count }) => {
       </div>
       <div css={{ display: "flex", alignItems: "center" }}>
         <i
-          css={{ color: "red" }}
+          css={{ color: "red", cursor: "pointer" }}
           onClick={() => {
             dispatch(handleDecrementItem(_id));
           }}
@@ -34,7 +34,7 @@ const FoodItem = ({ title, price, _id, count }) => {
 
         <p css={{ padding: "0 0.5rem" }}>{count}</p>
         <i
-          css={{ color: "green" }}
+          css={{ color: "green", cursor: "pointer" }}
           onClick={() => {
             dispatch(handleIncrementItem(_id));
           }}
