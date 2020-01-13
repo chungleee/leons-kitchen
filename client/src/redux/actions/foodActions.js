@@ -4,7 +4,9 @@ import {
   FETCH_FOOD_ITEMS,
   DELETE_FOOD_ITEM,
   ADD_TO_CART,
-  REMOVE_FROM_CART
+  REMOVE_FROM_CART,
+  INCREMENT_ITEM,
+  DECREMENT_ITEM
 } from "./types";
 
 export const handleCreateFoodItem = values => {
@@ -51,6 +53,24 @@ export const handleRemoveItem = item => {
     dispatch({
       type: REMOVE_FROM_CART,
       payload: item
+    });
+  };
+};
+
+export const handleIncrementItem = id => {
+  return dispatch => {
+    dispatch({
+      type: INCREMENT_ITEM,
+      payload: id
+    });
+  };
+};
+
+export const handleDecrementItem = id => {
+  return dispatch => {
+    dispatch({
+      type: DECREMENT_ITEM,
+      payload: id
     });
   };
 };
