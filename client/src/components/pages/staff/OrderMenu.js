@@ -45,7 +45,6 @@ const OrderMenu = props => {
       <aside
         css={{
           borderLeft: "1px solid lightgrey",
-          padding: "0 1rem",
           width: "25%"
         }}
       >
