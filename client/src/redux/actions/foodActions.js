@@ -3,7 +3,8 @@ import {
   CREATE_FOOD_ITEM,
   FETCH_FOOD_ITEMS,
   DELETE_FOOD_ITEM,
-  ADD_TO_CART
+  ADD_TO_CART,
+  REMOVE_FROM_CART
 } from "./types";
 
 export const handleCreateFoodItem = values => {
@@ -36,11 +37,20 @@ export const handleDeleteFoodItem = id => {
   };
 };
 
-export const handleAddToCard = (item, count) => {
+export const handleAddToCard = item => {
   return dispatch => {
     dispatch({
       type: ADD_TO_CART,
-      payload: { ...item, count }
+      payload: { ...item, count: 1 }
+    });
+  };
+};
+
+export const handleRemoveItem = item => {
+  return dispatch => {
+    dispatch({
+      type: REMOVE_FROM_CART,
+      payload: item
     });
   };
 };
