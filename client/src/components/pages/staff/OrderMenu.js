@@ -56,6 +56,7 @@ const OrderMenu = props => {
             return (
               <FoodItem
                 key={i._id}
+                _id={i._id}
                 title={i.title}
                 price={i.price}
                 count={i.count}
