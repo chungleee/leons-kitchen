@@ -3,7 +3,9 @@ import {
   FETCH_FOOD_ITEMS,
   DELETE_FOOD_ITEM,
   ADD_TO_CART,
-  REMOVE_FROM_CART
+  REMOVE_FROM_CART,
+  INCREMENT_ITEM,
+  DECREMENT_ITEM
 } from "../actions/types";
 
 const initialState = {
@@ -46,6 +48,24 @@ const foodReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: updatedCart
+      };
+    case INCREMENT_ITEM:
+      state.cart.find(item => {
+        if (item._id === action.payload) {
+          return (item.count = item.count + 1);
+        }
+      });
+      return {
+        ...state
+      };
+    case DECREMENT_ITEM:
+      state.cart.find(item => {
+        if (item._id === action.payload) {
+          return (item.count = item.count - 1);
+        }
+      });
+      return {
+        ...state
       };
     default:
       return state;
