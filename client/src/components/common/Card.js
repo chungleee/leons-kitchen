@@ -3,11 +3,13 @@ import { jsx } from "@emotion/core";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import theme from "../../theme";
-import { handleAddToCard } from "../../redux/actions/foodActions";
+import {
+  handleAddToCard,
+  handleRemoveItem
+} from "../../redux/actions/foodActions";
 
 const Card = ({ item }) => {
-  let [count, setCount] = useState(0);
-
+  const [selected, setSelected] = useState(false);
   const dispatch = useDispatch();
   return (
     <div
@@ -15,7 +17,18 @@ const Card = ({ item }) => {
         borderRadius: "5px",
         border: "1px solid black",
         maxWidth: "250px",
-        marginBottom: "1rem"
+        marginBottom: "1rem",
+        cursor: "pointer"
+      }}
+      onClick={() => {
+        if (selected) {
+          alert("Are you sure you want to remove this item?");
+          setSelected(false);
+          dispatch(handleRemoveItem(item));
+        } else {
+          dispatch(handleAddToCard(item));
+          setSelected(true);
+        }
       }}
     >
       <div css={{ width: "250px", height: "250px" }}>
@@ -36,34 +49,6 @@ const Card = ({ item }) => {
         <div css={{ textTransform: "capitalize" }} role="description">
           <h3>{item.title}</h3>
           <small>${item.price}</small>
-        </div>
-        <div role="count">
-          <input
-            type="number"
-            onChange={event => {
-              setCount(event.target.value);
-            }}
-          />
-        </div>
-        <div role="action">
-          <button
-            css={{
-              display: "inline-block",
-              border: "none",
-              borderRadius: "100193px",
-              backgroundColor: `${theme.color.highlight}`,
-              padding: "1rem",
-              margin: "none",
-              textDecoration: "none",
-              textAlign: "center",
-              cursor: "pointer"
-            }}
-            onClick={() => {
-              dispatch(handleAddToCard(item, count));
-            }}
-          >
-            Add
-          </button>
         </div>
       </div>
     </div>
