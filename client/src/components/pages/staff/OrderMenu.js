@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handleFetchFoodItems } from "../../../redux/actions/foodActions";
 import CheckAuth from "../../HOC/CheckAuth";
+import Button from "../../common/Button";
 import Card from "../../common/Card";
 import Spinner from "../../common/Spinner/Spinner";
 import FoodItem from "../../common/FoodItem";
@@ -32,15 +33,22 @@ const OrderMenu = props => {
     <div css={{ display: "flex", height: "100%" }}>
       <main
         css={{
-          width: "75%",
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-evenly"
+          height: "100%",
+          width: "75%"
         }}
       >
-        {food_items.map(item => {
-          return <Card key={item._id} item={item} />;
-        })}
+        <div
+          css={{
+            display: "flex",
+            flexWrap: "wrap",
+            padding: "1rem",
+            justifyContent: "space-evenly"
+          }}
+        >
+          {food_items.map(item => {
+            return <Card key={item._id} item={item} />;
+          })}
+        </div>
       </main>
       <aside
         css={{
@@ -63,6 +71,7 @@ const OrderMenu = props => {
             );
           })
         )}
+        <Button>Pay</Button>
       </aside>
     </div>
   );
