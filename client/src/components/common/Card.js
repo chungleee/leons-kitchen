@@ -15,10 +15,10 @@ const Card = ({ item }) => {
     <div
       css={{
         borderRadius: "5px",
-        border: "1px solid black",
         maxWidth: "250px",
         marginBottom: "1rem",
-        cursor: "pointer"
+        cursor: "pointer",
+        boxShadow: "2px 2px 4px 2px rgba( 0, 0, 0, 0.2 )"
       }}
       onClick={() => {
         if (selected) {
@@ -31,12 +31,29 @@ const Card = ({ item }) => {
         }
       }}
     >
-      <div css={{ width: "250px", height: "250px" }}>
+      <div css={{ width: "250px", height: "250px", position: "relative" }}>
         <img
           css={{ width: "100%", height: "100%" }}
           src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdinnerthendessert.com%2Fwp-content%2Fuploads%2F2016%2F04%2FGeneral-Tsos-Chicken-4-680x453.jpg&f=1&nofb=1"
           alt="#"
         />
+        {selected ? (
+          <div
+            css={{
+              background: "black",
+              opacity: "0.5",
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              top: "0",
+              left: "0"
+            }}
+          >
+            <p css={{ color: "white", textAlign: "center", marginTop: "50%" }}>
+              ADDED
+            </p>
+          </div>
+        ) : null}
       </div>
       <div
         css={{
