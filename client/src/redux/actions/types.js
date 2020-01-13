@@ -1,10 +1,16 @@
 export const USER_LOGIN = "USER_LOGIN";
+export const USER_LOGOUT = "USER_LOGOUT";
 export const CURRENT_USER = "CURRENT_USER";
+
 export const FETCH_EMPLOYEES = "FETCH_EMPLOYEES";
 export const CREATE_USER = "CREATE_USER";
 export const DELETE_USER = "DELETE_USER";
-export const USER_LOGOUT = "USER_LOGOUT";
+
 export const CREATE_FOOD_ITEM = "CREATE_FOOD_ITEM";
 export const FETCH_FOOD_ITEMS = "FETCH_FOOD_ITEMS";
 export const DELETE_FOOD_ITEM = "DELETE_FOOD_ITEM";
+
 export const ADD_TO_CART = "ADD_TO_CART";
+export const DECREMENT_ITEM = "DECREMENT_ITEM";
+export const INCREMENT_ITEM = "INCREMENT_ITEM";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
