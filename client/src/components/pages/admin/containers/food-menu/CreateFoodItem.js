@@ -80,7 +80,7 @@ const CreateFoodItem = ({ history }) => {
               />
 
               <div css={styles.formControl}>
-                <label css={styles.label}>Role:</label>
+                <label css={styles.label}>Category:</label>
                 <div css={styles.selectWrapper}>
                   <select
                     value={values.category}
