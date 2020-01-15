@@ -30,19 +30,21 @@ const OrderMenu = props => {
   }
 
   return (
-    <div css={{ display: "flex", height: "100%" }}>
+    <div css={{ display: "flex", height: "100vh" }}>
       <main
         css={{
+          width: "75%",
+          overflowY: "scroll",
           height: "100%",
-          width: "75%"
+          borderRight: "0.5px solid lightgrey"
         }}
       >
         <div
           css={{
             display: "flex",
             flexWrap: "wrap",
-            padding: "1rem",
-            justifyContent: "space-evenly"
+            justifyContent: "space-evenly",
+            padding: "1rem 0"
           }}
         >
           {food_items.map(item => {
@@ -52,26 +54,35 @@ const OrderMenu = props => {
       </main>
       <aside
         css={{
-          borderLeft: "1px solid lightgrey",
           width: "25%"
         }}
       >
-        {cart.length === 0 ? (
-          <p>What are you craving?</p>
-        ) : (
-          cart.map(i => {
-            return (
-              <FoodItem
-                key={i._id}
-                _id={i._id}
-                title={i.title}
-                price={i.price}
-                count={i.count}
-              />
-            );
-          })
-        )}
-        <Button>Pay</Button>
+        <div
+          css={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100%"
+          }}
+        >
+          {cart.length === 0 ? (
+            <div css={{ padding: "1rem", textAlign: "center" }}>
+              <p>What are you craving?</p>
+            </div>
+          ) : (
+            cart.map(i => {
+              return (
+                <FoodItem
+                  key={i._id}
+                  _id={i._id}
+                  title={i.title}
+                  price={i.price}
+                  count={i.count}
+                />
+              );
+            })
+          )}
+          <Button css={{ marginTop: "auto" }}>Pay</Button>
+        </div>
       </aside>
     </div>
   );
