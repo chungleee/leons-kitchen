@@ -64,23 +64,25 @@ const OrderMenu = props => {
             height: "100%"
           }}
         >
-          {cart.length === 0 ? (
-            <div css={{ padding: "1rem", textAlign: "center" }}>
-              <p>What are you craving?</p>
-            </div>
-          ) : (
-            cart.map(i => {
-              return (
-                <FoodItem
-                  key={i._id}
-                  _id={i._id}
-                  title={i.title}
-                  price={i.price}
-                  count={i.count}
-                />
-              );
-            })
-          )}
+          <div css={{ overflowY: "scroll" }}>
+            {cart.length === 0 ? (
+              <div css={{ padding: "1rem", textAlign: "center" }}>
+                <p>What are you craving?</p>
+              </div>
+            ) : (
+              cart.map(i => {
+                return (
+                  <FoodItem
+                    key={i._id}
+                    _id={i._id}
+                    title={i.title}
+                    price={i.price}
+                    count={i.count}
+                  />
+                );
+              })
+            )}
+          </div>
           <Button css={{ marginTop: "auto" }}>Pay</Button>
         </div>
       </aside>
