@@ -41,6 +41,7 @@ const styles = {
 const OrderMenu = props => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(handleFetchFoodItems());
     setLoading(false);
@@ -59,18 +60,23 @@ const OrderMenu = props => {
   }
 
   return (
-    <div css={{ display: "flex", height: "100vh" }}>
+    <div
+      css={{
+        display: "flex",
+        height: "100vh"
+      }}
+    >
       <main
         css={{
           width: "75%",
           overflowY: "scroll",
-          height: "100%",
-          borderRight: "0.5px solid lightgrey"
+          // height: "100%",
+          borderRight: "0.5px solid lightgrey",
+          scrollBehavior: "smooth"
         }}
       >
         <div css={styles.selectWrapper}>
           <select name="category" css={styles.select}>
-            <option>Select</option>
             {categories.map((category, idx) => {
               return (
                 <option key={Date.now() + idx} value={category}>
@@ -81,17 +87,36 @@ const OrderMenu = props => {
           </select>
         </div>
 
-        <div
-          css={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-evenly"
-          }}
-        >
-          {food_items.map(item => {
-            return <Card key={item._id} item={item} />;
-          })}
-        </div>
+        {categories.map(category => {
+          return (
+            <section
+              key={category}
+              css={{
+                padding: "2rem 0",
+                borderBottom: "1px solid lightgrey"
+              }}
+              id={category}
+            >
+              <h2 css={{ paddingLeft: "1rem", textTransform: "capitalize" }}>
+                {category}
+              </h2>
+              <div
+                css={{
+                  display: "flex",
+                  width: "100%",
+                  overflowX: "scroll",
+                  padding: "1rem 0"
+                }}
+              >
+                {food_items.map(item => {
+                  return item.category === category ? (
+                    <Card key={item._id} item={item} />
+                  ) : null;
+                })}
+              </div>
+            </section>
+          );
+        })}
       </main>
       <aside
         css={{
