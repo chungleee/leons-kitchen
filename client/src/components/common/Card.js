@@ -16,7 +16,7 @@ const Card = ({ item }) => {
       css={{
         borderRadius: "5px",
         maxWidth: "250px",
-        marginBottom: "1rem",
+        margin: "0 1rem",
         cursor: "pointer",
         boxShadow: "2px 2px 4px 2px rgba( 0, 0, 0, 0.2 )"
       }}
