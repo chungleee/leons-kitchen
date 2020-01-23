@@ -2,15 +2,6 @@ const router = require("express").Router();
 const customId = require("custom-id");
 const Order = require("../models/orderModel");
 
-// @access  Public
-// @desc    Test order routes
-// @route   GET /test
-router.get("/test", (req, res) => {
-  return res
-    .status(200)
-    .json({ success: true, msg: "this is the orders test route" });
-});
-
 // @access  Public - for staffs
 // @desc    Create order
 // @route   POST /create

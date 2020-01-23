@@ -22,25 +22,6 @@ const upload = multer({
   }
 });
 
-// @access  Public
-// @desc    Food item test route
-// @route   GET /test
-router.post(
-  "/test-create",
-  upload.single("photo"),
-  uploadToImagekit,
-  async (req, res) => {
-    try {
-      console.log(req.imagekit_result);
-      return res
-        .status(200)
-        .json({ success: true, msg: "this is the food item test route" });
-    } catch (error) {
-      return res.send(error);
-    }
-  }
-);
-
 // @access  Will be private - admin/managers
 // @desc    Create food item
 // @route   POST /create
