@@ -1,34 +1,74 @@
 const router = require("express").Router();
+const multer = require("multer");
 const Food = require("../models/foodModel");
-const { authenticate, checkRole } = require("../utils/middlewares");
+const {
+  authenticate,
+  checkRole,
+  uploadToImagekit
+} = require("../utils/middlewares");
+
+const upload = multer({
+  fileFilter: async function(req, file, cb) {
+    const acceptedFileTypes = ["image/jpeg", "image/png"];
+    if (!file) {
+      cb(new Error("Something is not right"));
+    } else if (!acceptedFileTypes.includes(file.mimetype)) {
+      const mimetypeError = "Only JPG and PNG file types are accepted";
+      req.mimetypeError = mimetypeError;
+      cb(null, false);
+    } else {
+      cb(null, true);
+    }
+  }
+});
 
 // @access  Public
 // @desc    Food item test route
 // @route   GET /test
-router.get("/test", (req, res) => {
-  return res
-    .status(200)
-    .json({ success: true, msg: "this is the food item test route" });
-});
+router.post(
+  "/test-create",
+  upload.single("photo"),
+  uploadToImagekit,
+  async (req, res) => {
+    try {
+      console.log(req.imagekit_result);
+      return res
+        .status(200)
+        .json({ success: true, msg: "this is the food item test route" });
+    } catch (error) {
+      return res.send(error);
+    }
+  }
+);
 
 // @access  Will be private - admin/managers
 // @desc    Create food item
 // @route   POST /create
-router.post("/create", authenticate, checkRole("admin"), async (req, res) => {
-  try {
-    const { title, category, price } = req.body;
-    const newFood = await new Food({
-      title,
-      category,
-      price
-    }).save();
+router.post(
+  "/create",
+  authenticate,
+  checkRole("admin"),
+  upload.single("photo"),
+  uploadToImagekit,
+  async (req, res) => {
+    try {
+      const { title, category, price } = req.body;
+      const imagekit_result = req.imagekit_result;
 
-    return res.status(200).json({ success: true, newFood });
-  } catch (error) {
-    console.error(error);
-    return res.status(400).json(error);
+      const newFood = await new Food({
+        title,
+        category,
+        price,
+        url: imagekit_result.url
+      }).save();
+
+      return res.status(200).json({ success: true, newFood });
+    } catch (error) {
+      console.error(error);
+      return res.status(400).json(error);
+    }
   }
-});
+);
 
 // @access  Will be private - admin/managers
 // @desc    Get all foods
