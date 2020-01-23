@@ -15,6 +15,9 @@ const foodSchema = mongoose.Schema({
   price: {
     type: String,
     required: true
+  },
+  url: {
+    type: String
   }
 });
 
