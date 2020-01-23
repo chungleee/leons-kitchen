@@ -147,7 +147,7 @@ const OrderMenu = props => {
                 })
               )}
             </div>
-            <Button css={{ marginTop: "auto" }}>Pay</Button>
+            <Button css={{ marginTop: "auto" }}>Checkout</Button>
           </div>
         </aside>
       </div>
