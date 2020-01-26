@@ -2,11 +2,14 @@
 import { jsx } from "@emotion/core";
 import theme from "../../../../../theme";
 import React from "react";
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
 import { useDispatch } from "react-redux";
 import { Formik } from "formik";
 import InputField from "../../../../common/InputField";
 import Button from "../../../../common/Button";
 import { handleCreateFoodItem } from "../../../../../redux/actions/foodActions";
+import { useState } from "react";
 
 const styles = {
   wrapper: {
@@ -14,10 +17,9 @@ const styles = {
     width: "90%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-evenly",
     margin: "auto"
   },
-  form: { marginBottom: "3rem" },
+  form: { marginBottom: "3rem", overflowY: "auto" },
   formControl: {
     display: "flex",
     flexDirection: "column",
@@ -51,16 +53,29 @@ const styles = {
 const initialValues = {
   title: "",
   category: "",
-  price: ""
+  price: "",
+  imageUpload: ""
 };
 
 const categories = ["starter", "platter", "beverage", "dessert", "custom"];
 
 const CreateFoodItem = ({ history }) => {
   const dispatch = useDispatch();
+  const [src, setSrc] = useState(null);
+
+  const handleSelectFile = e => {
+    if (e.target.files && e.target.files.length > 0) {
+      const reader = new FileReader();
+      reader.addEventListener("load", () => setSrc(reader.result));
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+
   return (
     <div css={styles.wrapper}>
-      <h1>Create food item</h1>
+      <h1 css={{ marginBottom: "3rem", marginTop: "3rem" }}>
+        Create food item
+      </h1>
       <Formik
         initialValues={initialValues}
         onSubmit={values => {
@@ -71,6 +86,33 @@ const CreateFoodItem = ({ history }) => {
         {({ handleSubmit, handleChange, values, errors }) => {
           return (
             <form css={styles.form} onSubmit={handleSubmit}>
+              <div css={styles.formControl}>
+                <label css={styles.label} htmlFor="imageUpload">
+                  Choose an image:
+                </label>
+                <input
+                  onChange={event => {
+                    handleSelectFile(event);
+                  }}
+                  type="file"
+                  name="imageUpload"
+                />
+
+                {src ? (
+                  <div
+                    css={{
+                      maxHeight: "500px",
+                      maxWidth: "500px"
+                    }}
+                  >
+                    <img
+                      src={src}
+                      alt={values.title}
+                      css={{ height: "100%", width: "100%" }}
+                    />
+                  </div>
+                ) : null}
+              </div>
               <InputField
                 name="title"
                 value={values.title}
