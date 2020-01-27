@@ -9,9 +9,9 @@ import {
   DECREMENT_ITEM
 } from "./types";
 
-export const handleCreateFoodItem = values => {
+export const handleCreateFoodItem = formData => {
   return async dispatch => {
-    const res = await axios.post("/api/foods/create", values);
+    const res = await axios.post("/api/foods/create", formData);
     dispatch({
       type: CREATE_FOOD_ITEM,
       payload: res.data.newFood
