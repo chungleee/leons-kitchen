@@ -29,7 +29,7 @@ router.post(
   "/create",
   authenticate,
   checkRole("admin"),
-  upload.single("photo"),
+  upload.single("imageUpload"),
   uploadToImagekit,
   async (req, res) => {
     try {
