@@ -15,8 +15,7 @@ const styles = {
   wrapper: {
     height: "100%",
     width: "90%",
-    margin: "auto",
-    overflow: "auto"
+    margin: "auto"
   },
   button: { marginTop: "3rem" },
   container: {
@@ -34,7 +33,9 @@ const styles = {
     position: "relative",
     right: "1rem",
     color: "red",
-    cursor: "pointer"
+    "&:hover": {
+      cursor: "pointer"
+    }
   },
   capitalize: {
     textTransform: "capitalize"
