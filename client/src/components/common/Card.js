@@ -16,7 +16,7 @@ const Card = ({ item }) => {
       css={{
         borderRadius: "5px",
         maxWidth: "250px",
-        margin: "0 1rem",
+        marginRight: "1rem",
         cursor: "pointer",
         boxShadow: "2px 2px 4px 2px rgba( 0, 0, 0, 0.2 )"
       }}
@@ -34,8 +34,9 @@ const Card = ({ item }) => {
       <div css={{ width: "250px", height: "250px", position: "relative" }}>
         <img
           css={{ width: "100%", height: "100%" }}
-          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdinnerthendessert.com%2Fwp-content%2Fuploads%2F2016%2F04%2FGeneral-Tsos-Chicken-4-680x453.jpg&f=1&nofb=1"
-          alt="#"
+          src={item.url}
+          // src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdinnerthendessert.com%2Fwp-content%2Fuploads%2F2016%2F04%2FGeneral-Tsos-Chicken-4-680x453.jpg&f=1&nofb=1"
+          alt={item.title}
         />
         {selected ? (
           <div
