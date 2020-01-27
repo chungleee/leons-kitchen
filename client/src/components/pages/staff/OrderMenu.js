@@ -90,12 +90,16 @@ const OrderMenu = props => {
               <section
                 key={category}
                 css={{
-                  padding: "2rem 0",
+                  padding: "2rem 1rem",
                   borderBottom: "1px solid lightgrey"
                 }}
                 id={category}
               >
-                <h3 css={{ paddingLeft: "1rem", textTransform: "capitalize" }}>
+                <h3
+                  css={{
+                    textTransform: "capitalize"
+                  }}
+                >
                   {category}
                 </h3>
                 <div
