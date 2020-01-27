@@ -1,15 +1,12 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import theme from "../../../../../theme";
-import React from "react";
-import ReactCrop from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Formik } from "formik";
 import InputField from "../../../../common/InputField";
 import Button from "../../../../common/Button";
 import { handleCreateFoodItem } from "../../../../../redux/actions/foodActions";
-import { useState } from "react";
 
 const styles = {
   wrapper: {
@@ -79,13 +76,25 @@ const CreateFoodItem = ({ history }) => {
       <Formik
         initialValues={initialValues}
         onSubmit={values => {
-          dispatch(handleCreateFoodItem(values));
+          let formData = new FormData();
+
+          for (const key in values) {
+            if (values.hasOwnProperty(key)) {
+              formData.append(key, values[key]);
+            }
+          }
+
+          dispatch(handleCreateFoodItem(formData));
           history.push("/admin/food-menu");
         }}
       >
-        {({ handleSubmit, handleChange, values, errors }) => {
+        {({ handleSubmit, handleChange, values, errors, setFieldValue }) => {
           return (
-            <form css={styles.form} onSubmit={handleSubmit}>
+            <form
+              css={styles.form}
+              onSubmit={handleSubmit}
+              encType="multipart/form-data"
+            >
               <div css={styles.formControl}>
                 <label css={styles.label} htmlFor="imageUpload">
                   Choose an image:
@@ -93,6 +102,7 @@ const CreateFoodItem = ({ history }) => {
                 <input
                   onChange={event => {
                     handleSelectFile(event);
+                    setFieldValue("imageUpload", event.target.files[0]);
                   }}
                   type="file"
                   name="imageUpload"
@@ -113,6 +123,7 @@ const CreateFoodItem = ({ history }) => {
                   </div>
                 ) : null}
               </div>
+
               <InputField
                 name="title"
                 value={values.title}
