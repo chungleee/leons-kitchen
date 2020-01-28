@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const ImageKit = require("imagekit");
+const sharp = require("sharp");
 
 const imagekit = new ImageKit({
   publicKey: process.env.IMAGE_KIT_PUBLIC_KEY,
@@ -51,7 +52,22 @@ const checkRole = role => async (req, res, next) => {
   }
 };
 
+const sharpenImage = async (req, res, next) => {
+  const { originalname } = req.file;
+  const buffer = await sharp(req.file.buffer)
+    .jpeg({ quality: 30 })
+    .toBuffer();
+
+  req.file = {
+    originalname,
+    buffer
+  };
+
+  next();
+};
+
 const uploadToImagekit = async (req, res, next) => {
+  console.log(req.file);
   try {
     if (req.mimetypeError && !req.file) {
       console.log(req.mimetypeError);
@@ -77,4 +93,4 @@ const uploadToImagekit = async (req, res, next) => {
   }
 };
 
-module.exports = { authenticate, checkRole, uploadToImagekit };
+module.exports = { authenticate, checkRole, uploadToImagekit, sharpenImage };
