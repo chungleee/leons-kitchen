@@ -4,6 +4,7 @@ const Food = require("../models/foodModel");
 const {
   authenticate,
   checkRole,
+  sharpenImage,
   uploadToImagekit
 } = require("../utils/middlewares");
 
@@ -30,6 +31,7 @@ router.post(
   authenticate,
   checkRole("admin"),
   upload.single("imageUpload"),
+  sharpenImage,
   uploadToImagekit,
   async (req, res) => {
     try {
