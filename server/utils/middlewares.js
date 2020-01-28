@@ -67,7 +67,6 @@ const sharpenImage = async (req, res, next) => {
 };
 
 const uploadToImagekit = async (req, res, next) => {
-  console.log(req.file);
   try {
     if (req.mimetypeError && !req.file) {
       console.log(req.mimetypeError);
