@@ -2,6 +2,7 @@
 import { jsx } from "@emotion/core";
 import React, { useEffect, useState } from "react";
 import { NavHashLink } from "react-router-hash-link";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { handleFetchFoodItems } from "../../../redux/actions/foodActions";
 import CheckAuth from "../../HOC/CheckAuth";
@@ -12,7 +13,8 @@ import FoodItem from "../../common/FoodItem";
 
 const categories = ["starter", "platter", "beverage", "dessert"];
 
-const OrderMenu = props => {
+const OrderMenu = ({ match }) => {
+  const { url } = match;
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
@@ -151,7 +153,9 @@ const OrderMenu = props => {
                 })
               )}
             </div>
-            <Button css={{ marginTop: "auto" }}>Checkout</Button>
+            <Button css={{ marginTop: "auto" }}>
+              <Link to={{ pathname: `${url}/checkout` }}>Checkout</Link>
+            </Button>
           </div>
         </aside>
       </div>
@@ -159,4 +163,4 @@ const OrderMenu = props => {
   );
 };
 
-export default CheckAuth(OrderMenu, ["admin", "manager", "staff"]);
+export default OrderMenu;
