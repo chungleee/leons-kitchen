@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import OrderMenu from "./OrderMenu";
 import CheckAuth from "../../HOC/CheckAuth";
-import Checkout from "./Checkout";
+import Preview from "./Preview";
 
 const Staff = () => {
   return (
@@ -17,9 +17,9 @@ const Staff = () => {
         />
 
         <Route
-          path="/staff/checkout"
+          path="/staff/preview"
           render={props => {
-            return <Checkout {...props} />;
+            return <Preview {...props} />;
           }}
         />
       </Switch>
