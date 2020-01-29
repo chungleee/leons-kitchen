@@ -158,7 +158,7 @@ const OrderMenu = ({ match }) => {
                 css={{ color: "black", textDecoration: "none" }}
                 to={{ pathname: `${url}/preview` }}
               >
-                Process to checkout
+                Proceed
               </Link>
             </Button>
           </div>
