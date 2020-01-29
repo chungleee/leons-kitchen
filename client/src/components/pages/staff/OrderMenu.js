@@ -154,7 +154,12 @@ const OrderMenu = ({ match }) => {
               )}
             </div>
             <Button css={{ marginTop: "auto" }}>
-              <Link to={{ pathname: `${url}/checkout` }}>Checkout</Link>
+              <Link
+                css={{ color: "black", textDecoration: "none" }}
+                to={{ pathname: `${url}/preview` }}
+              >
+                Process to checkout
+              </Link>
             </Button>
           </div>
         </aside>
