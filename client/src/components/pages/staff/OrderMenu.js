@@ -153,10 +153,12 @@ const OrderMenu = ({ match }) => {
                 })
               )}
             </div>
-            <Button css={{ marginTop: "auto" }}>
+            <Button type="button" css={{ marginTop: "auto" }}>
               <Link
                 css={{ color: "black", textDecoration: "none" }}
-                to={{ pathname: `${url}/preview` }}
+                to={{
+                  pathname: cart.length !== 0 ? `${url}/preview` : `${url}`
+                }}
               >
                 Proceed
               </Link>
