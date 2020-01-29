@@ -2,9 +2,8 @@
 import { jsx } from "@emotion/core";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import theme from "../../theme";
 import {
-  handleAddToCard,
+  handleAddToCart,
   handleRemoveItem
 } from "../../redux/actions/foodActions";
 
@@ -26,7 +25,7 @@ const Card = ({ item }) => {
           setSelected(false);
           dispatch(handleRemoveItem(item));
         } else {
-          dispatch(handleAddToCard(item));
+          dispatch(handleAddToCart(item));
           setSelected(true);
         }
       }}
@@ -35,7 +34,6 @@ const Card = ({ item }) => {
         <img
           css={{ width: "100%", height: "100%" }}
           src={item.url}
-          // src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdinnerthendessert.com%2Fwp-content%2Fuploads%2F2016%2F04%2FGeneral-Tsos-Chicken-4-680x453.jpg&f=1&nofb=1"
           alt={item.title}
         />
         {selected ? (
