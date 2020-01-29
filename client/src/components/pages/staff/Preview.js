@@ -1,6 +1,7 @@
 /**@jsx jsx */
 import { jsx } from "@emotion/core";
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import Button from "../../common/Button";
@@ -19,7 +20,29 @@ const styles = {
     }
   },
   capitalize: { textTransform: "capitalize" },
-  lowercase: { textTransform: "lowercase" }
+  lowercase: { textTransform: "lowercase" },
+  total: {
+    padding: "3rem 0",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-end"
+  },
+  totalDescription: {
+    textTransform: "uppercase",
+    textAlign: "right",
+    marginBottom: "1.5rem",
+    lineHeight: "1.7",
+    h5: { fontWeight: "300" },
+    p: { fontStyle: "italic" }
+  },
+  edit: {
+    textTransform: "uppercase"
+  },
+  checkout: {
+    textTransform: "uppercase",
+    marginLeft: "0.5rem"
+  },
+  link: { color: "black", textDecoration: "none" }
 };
 
 const Preview = props => {
@@ -57,29 +80,22 @@ const Preview = props => {
           );
         })}
       </ul>
-      <div
-        style={{
-          padding: "3rem 0",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-end"
-        }}
-      >
-        <div
-          style={{
-            textTransform: "uppercase",
-            textAlign: "right",
-            marginBottom: "1.5rem"
-          }}
-        >
+      <div css={styles.total}>
+        <div css={styles.totalDescription}>
           <h5>subtotal</h5>
           <h4>${subtotal}</h4>
           <p>Taxes are calculated at check out</p>
         </div>
         <div>
-          <Button style={{ textTransform: "uppercase" }}>edit order</Button>
-          <Button style={{ textTransform: "uppercase", marginLeft: "0.5rem" }}>
-            check out
+          <Button css={styles.edit}>
+            <Link to="/staff" css={styles.link}>
+              edit order
+            </Link>
+          </Button>
+          <Button css={styles.checkout}>
+            <Link to="/staff/checkout" css={styles.link}>
+              check out
+            </Link>
           </Button>
         </div>
       </div>
