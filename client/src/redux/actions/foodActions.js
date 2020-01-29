@@ -39,7 +39,7 @@ export const handleDeleteFoodItem = id => {
   };
 };
 
-export const handleAddToCard = item => {
+export const handleAddToCart = item => {
   return dispatch => {
     dispatch({
       type: ADD_TO_CART,
