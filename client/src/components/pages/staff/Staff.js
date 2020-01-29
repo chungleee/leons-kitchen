@@ -9,6 +9,7 @@ const Staff = () => {
     <div>
       <Switch>
         <Route
+          exact
           path="/staff"
           render={props => {
             return <OrderMenu {...props} />;
