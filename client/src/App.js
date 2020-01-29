@@ -8,7 +8,6 @@ import {
 } from "./redux/actions/authActions";
 import Login from "./components/pages/Login";
 import AdminDashboard from "./components/pages/admin/AdminDashboard";
-import OrderMenu from "./components/pages/staff/OrderMenu";
 import Staff from "./components/pages/staff/Staff";
 
 function App() {
