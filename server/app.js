@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./routes/users");
 const foodRoutes = require("./routes/foods");
 const orderRoutes = require("./routes/orders");
-
+const paymentRoutes = require("./routes/payments");
 // INIT APP
 const app = express();
 
@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 app.use("/api/users", userRoutes);
 app.use("/api/foods", foodRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/payments", paymentRoutes);
 
 app.get("/", (req, res) => {
   return res.status(200).json({
