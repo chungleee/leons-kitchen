@@ -2,9 +2,11 @@
 import { jsx } from "@emotion/core";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import Button from "../../common/Button";
+import axios from "axios";
+import { createPaymentIntent } from "../../../redux/actions/paymentActions";
 
 const styles = {
   wrapper: { width: "90%", marginLeft: "auto", marginRight: "auto" },
@@ -46,6 +48,7 @@ const styles = {
 };
 
 const Preview = props => {
+  const dispatch = useDispatch();
   const [subtotal, setSubtotal] = useState(0);
   const { cart } = useSelector(state => {
     return state.foodItemsState;
@@ -63,6 +66,7 @@ const Preview = props => {
 
   useEffect(() => {
     handleSubtotal();
+    dispatch(createPaymentIntent(subtotal));
   }, []);
 
   return (
