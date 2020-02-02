@@ -66,7 +66,7 @@ const Preview = props => {
 
   useEffect(() => {
     handleSubtotal();
-    dispatch(createPaymentIntent(subtotal));
+    // dispatch(createPaymentIntent(subtotal));
   }, []);
 
   return (
