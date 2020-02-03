@@ -10,7 +10,8 @@ import {
 
 const initialState = {
   food_items: [],
-  cart: []
+  cart: [],
+  subtotal: 0
 };
 
 const foodReducer = (state = initialState, action) => {
@@ -39,7 +40,8 @@ const foodReducer = (state = initialState, action) => {
     case ADD_TO_CART:
       return {
         ...state,
-        cart: [...state.cart, action.payload]
+        cart: [...state.cart, action.payload],
+        subtotal: state.subtotal + Number(action.payload.price)
       };
     case REMOVE_FROM_CART:
       const updatedCart = state.cart.filter(item => {
