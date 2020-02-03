@@ -3,9 +3,7 @@ import { jsx } from "@emotion/core";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 import Button from "../../common/Button";
-import axios from "axios";
 import { createPaymentIntent } from "../../../redux/actions/paymentActions";
 
 const styles = {
@@ -49,24 +47,12 @@ const styles = {
 
 const Preview = props => {
   const dispatch = useDispatch();
-  const [subtotal, setSubtotal] = useState(0);
-  const { cart } = useSelector(state => {
+  const { cart, subtotal } = useSelector(state => {
     return state.foodItemsState;
   });
 
-  const handleSubtotal = () => {
-    let sum = 0;
-    cart.forEach(item => {
-      const itemTotal = item.price * item.count;
-      sum += itemTotal;
-    });
-    console.log("sum", sum);
-    setSubtotal(sum);
-  };
-
   useEffect(() => {
-    handleSubtotal();
-    // dispatch(createPaymentIntent(subtotal));
+    dispatch(createPaymentIntent(subtotal));
   }, []);
 
   return (
