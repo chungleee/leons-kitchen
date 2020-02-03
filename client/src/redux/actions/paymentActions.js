@@ -11,7 +11,7 @@ export const createPaymentIntent = amount => {
       console.log("create payment intent action", res.data);
       dispatch({
         type: CREATE_PAYMENT_INTENT,
-        payload: res.data
+        payload: res.data.client_secret
       });
     } catch (error) {
       console.error(error);
