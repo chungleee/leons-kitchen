@@ -22,21 +22,15 @@ const Checkout = props => {
     }
   });
 
-  const handlePay = event => {
-    event.preventDefault();
-
-    stripe
-      .confirmCardPayment(client_secret, {
-        payment_method: {
-          card: card
-        }
-      })
-      .then(result => {
-        console.log("handle pay result", result);
-      })
-      .catch(error => {
-        console.error(error);
+  const handlePay = async () => {
+    try {
+      const result = await stripe.confirmCardPayment(client_secret, {
+        payment_method: { card: card }
       });
+      console.log("handle pay result", result);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -49,6 +43,7 @@ const Checkout = props => {
       <form
         className="flex flex-column"
         onSubmit={event => {
+          event.preventDefault();
           handlePay(event);
         }}
       >
