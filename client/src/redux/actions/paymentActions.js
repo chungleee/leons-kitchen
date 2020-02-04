@@ -1,12 +1,11 @@
 import { CREATE_PAYMENT_INTENT } from "./types";
 import axios from "axios";
 
-export const createPaymentIntent = amount => {
+export const createPaymentIntent = cart => {
   return async dispatch => {
     try {
-      console.log(amount);
       const res = await axios.post("/api/payments/create-payment-intent", {
-        amount
+        cart
       });
       console.log("create payment intent action", res.data);
       dispatch({
