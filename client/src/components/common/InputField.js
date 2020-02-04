@@ -5,7 +5,7 @@ const InputField = ({ type, name, value, onChange, label, error }) => {
     <div className="flex flex-column mb3">
       <label className="mb2">{label}</label>
       <input
-        className="input-reset h2 ba bg-animate hover-bg-yellow"
+        className="input-reset h2 pl2 ba bg-animate hover-bg-yellow"
         type={type}
         name={name}
         value={value}
