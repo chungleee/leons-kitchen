@@ -7,7 +7,7 @@ const elements = stripe.elements();
 const styles = {
   input: "input-reset ba br-pill pl3 h2 w-50 f5"
 };
-const Checkout = props => {
+const Checkout = ({ history }) => {
   const { client_secret } = useSelector(state => {
     return state.paymentState;
   });
@@ -24,10 +24,13 @@ const Checkout = props => {
 
   const handlePay = async () => {
     try {
-      const result = await stripe.confirmCardPayment(client_secret, {
+      const { paymentIntent } = await stripe.confirmCardPayment(client_secret, {
         payment_method: { card: card }
       });
-      console.log("handle pay result", result);
+      console.log("handle pay paymentIntent", paymentIntent);
+      if (paymentIntent.status === "succeeded") {
+        history.push("/staff/invoice");
+      }
     } catch (error) {
       console.error(error);
     }
