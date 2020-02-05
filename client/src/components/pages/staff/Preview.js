@@ -52,7 +52,7 @@ const Preview = props => {
   });
 
   useEffect(() => {
-    dispatch(createPaymentIntent(subtotal));
+    dispatch(createPaymentIntent(cart));
   }, []);
 
   return (
