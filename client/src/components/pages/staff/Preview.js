@@ -1,13 +1,17 @@
 /**@jsx jsx */
 import { jsx } from "@emotion/core";
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Button from "../../common/Button";
 import { createPaymentIntent } from "../../../redux/actions/paymentActions";
 
 const styles = {
-  wrapper: { width: "90%", marginLeft: "auto", marginRight: "auto" },
+  wrapper: {
+    width: "90%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    height: "100%",
+    overflowY: "scroll"
+  },
   h1: { marginTop: "3rem", marginBottom: "3rem" },
   li: {
     display: "flex",
@@ -47,7 +51,7 @@ const styles = {
 
 const Preview = props => {
   const dispatch = useDispatch();
-  const { cart, subtotal } = useSelector(state => {
+  const { cart } = useSelector(state => {
     return state.foodItemsState;
   });
 
@@ -70,25 +74,6 @@ const Preview = props => {
           );
         })}
       </ul>
-      <div css={styles.total}>
-        <div css={styles.totalDescription}>
-          <h5>subtotal</h5>
-          <h4>${subtotal}</h4>
-          <p>Taxes are calculated at check out</p>
-        </div>
-        <div>
-          <Button css={styles.edit}>
-            <Link to="/staff" css={styles.link}>
-              edit order
-            </Link>
-          </Button>
-          <Button css={styles.checkout}>
-            <Link to="/staff/checkout" css={styles.link}>
-              check out
-            </Link>
-          </Button>
-        </div>
-      </div>
     </div>
   );
 };
