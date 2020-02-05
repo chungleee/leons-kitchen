@@ -4,6 +4,7 @@ import OrderMenu from "./OrderMenu";
 import CheckAuth from "../../HOC/CheckAuth";
 import Preview from "./Preview";
 import Checkout from "./Checkout";
+import Invoice from "./Invoice";
 
 const Staff = () => {
   return (
@@ -28,6 +29,13 @@ const Staff = () => {
           path="/staff/checkout"
           render={props => {
             return <Checkout {...props} />;
+          }}
+        />
+
+        <Route
+          path="/staff/invoice"
+          render={props => {
+            return <Invoice {...props} />;
           }}
         />
       </Switch>
