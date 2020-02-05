@@ -22,8 +22,6 @@ router.post("/create-payment-intent", async (req, res) => {
       currency: "cad"
     });
 
-    console.log(payment_intent);
-
     return res
       .status(200)
       .json({ success: true, client_secret: payment_intent.client_secret });
