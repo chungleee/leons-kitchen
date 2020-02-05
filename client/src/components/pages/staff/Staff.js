@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import OrderMenu from "./OrderMenu";
 import CheckAuth from "../../HOC/CheckAuth";
-import Preview from "./Preview";
 import Checkout from "./Checkout";
 import Invoice from "./Invoice";
 
@@ -15,13 +14,6 @@ const Staff = () => {
           path="/staff"
           render={props => {
             return <OrderMenu {...props} />;
-          }}
-        />
-
-        <Route
-          path="/staff/preview"
-          render={props => {
-            return <Preview {...props} />;
           }}
         />
 
