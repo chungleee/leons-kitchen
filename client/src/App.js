@@ -8,7 +8,7 @@ import {
 } from "./redux/actions/authActions";
 import Login from "./components/pages/Login";
 import AdminDashboard from "./components/pages/admin/AdminDashboard";
-import Staff from "./components/pages/staff/Staff";
+import POS from "./components/pages/pos/POS";
 
 function App() {
   const { isAuthenticated, user } = useSelector(state => {
@@ -63,7 +63,7 @@ function App() {
       <Route
         path="/staff"
         render={props => {
-          return <Staff user={user} {...props} />;
+          return <POS user={user} {...props} />;
         }}
       />
     </Router>

@@ -5,7 +5,7 @@ import CheckAuth from "../../HOC/CheckAuth";
 import Checkout from "./Checkout";
 import Invoice from "./Invoice";
 
-const Staff = () => {
+const POS = () => {
   return (
     <div>
       <Switch>
@@ -35,4 +35,4 @@ const Staff = () => {
   );
 };
 
-export default CheckAuth(Staff, ["admin", "manager", "staff"]);
+export default CheckAuth(POS, ["admin", "manager", "staff"]);
