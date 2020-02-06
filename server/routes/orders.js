@@ -31,7 +31,7 @@ router.post("/create", async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      data: newOrder
+      newOrder
     });
   } catch (error) {
     console.error(error);
