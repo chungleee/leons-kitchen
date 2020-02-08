@@ -23,13 +23,13 @@ const upload = multer({
   }
 });
 
-// @access  Will be private - admin/managers
+// @access  Private - admin
 // @desc    Create food item
 // @route   POST /create
 router.post(
   "/create",
   authenticate,
-  checkRole("admin"),
+  checkRole(["admin"]),
   upload.single("imageUpload"),
   sharpenImage,
   uploadToImagekit,
@@ -56,42 +56,52 @@ router.post(
 // @access  Will be private - admin/managers
 // @desc    Get all foods
 // @route   GET /
-router.get("/", async (req, res) => {
-  try {
-    const foods = await Food.find({});
-    if (!foods) {
-      return res.status(404).json({ error: "Something went wrong." });
-    } else {
-      return res.status(200).json({ success: true, foods });
+router.get(
+  "/",
+  authenticate,
+  checkRole(["admin", "staff"]),
+  async (req, res) => {
+    try {
+      const foods = await Food.find({});
+      if (!foods) {
+        return res.status(404).json({ error: "Something went wrong." });
+      } else {
+        return res.status(200).json({ success: true, foods });
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(400).json(error);
     }
-  } catch (error) {
-    console.error(error);
-    return res.status(400).json(error);
   }
-});
+);
 
 // @access  Will be private - admin/managers
 // @desc    Get all foods by category
 // @route   GET /:category
-router.get("/category/:category", async (req, res) => {
-  try {
-    const category = req.params.category;
-    const foods = await Food.find({ category });
-    if (!foods) {
-      return res.status(400).json({ error: "Food items not found" });
-    } else {
-      return res.status(200).json({ success: true, foods });
+router.get(
+  "/category/:category",
+  authenticate,
+  checkRole(["admin"]),
+  async (req, res) => {
+    try {
+      const category = req.params.category;
+      const foods = await Food.find({ category });
+      if (!foods) {
+        return res.status(400).json({ error: "Food items not found" });
+      } else {
+        return res.status(200).json({ success: true, foods });
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(400).json(error);
     }
-  } catch (error) {
-    console.error(error);
-    return res.status(400).json(error);
   }
-});
+);
 
 // @access  Will be private - admin/managers
 // @desc    Get food by id
 // @route   GET /:foodId
-router.get("/:foodId", async (req, res) => {
+router.get("/:foodId", authenticate, checkRole(["admin"]), async (req, res) => {
   try {
     const _id = req.params.foodId;
     const food = await Food.findById({ _id });
@@ -113,7 +123,7 @@ router.get("/:foodId", async (req, res) => {
 router.delete(
   "/:foodId",
   authenticate,
-  checkRole("admin"),
+  checkRole(["admin"]),
   async (req, res) => {
     try {
       const _id = req.params.foodId;

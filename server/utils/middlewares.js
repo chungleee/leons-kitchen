@@ -37,9 +37,9 @@ const authenticate = async (req, res, next) => {
   }
 };
 
-const checkRole = role => async (req, res, next) => {
+const checkRole = roles => async (req, res, next) => {
   try {
-    if (role !== res.locals.user_role) {
+    if (!roles.includes(res.locals.user_role)) {
       return res.status(401).json({
         error: errors.unauthorized
       });

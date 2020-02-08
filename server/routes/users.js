@@ -9,7 +9,7 @@ const { CreateEmployeeSchema } = require("../utils/validation");
 // @access  Private - admin
 // @desc    Create user account
 // @route   POST /create
-router.post("/create", authenticate, checkRole("admin"), async (req, res) => {
+router.post("/create", authenticate, checkRole(["admin"]), async (req, res) => {
   try {
     const value = await CreateEmployeeSchema.validate(req.body);
 
@@ -105,7 +105,7 @@ router.post("/login", async (req, res) => {
 // @access Private - admin
 // @desc   Fetch all users
 // @route  GET /
-router.get("/", authenticate, checkRole("admin"), async (req, res) => {
+router.get("/", authenticate, checkRole(["admin"]), async (req, res) => {
   try {
     const users = await User.find({});
     if (!users) {
@@ -126,7 +126,7 @@ router.get("/", authenticate, checkRole("admin"), async (req, res) => {
 // @access Private - admin
 // @desc   Fetch user by id
 // @route  GET /:userId
-router.get("/:userId", authenticate, checkRole("admin"), async (req, res) => {
+router.get("/:userId", authenticate, checkRole(["admin"]), async (req, res) => {
   try {
     const _id = req.params.userId;
     const user = await User.findById({ _id });
@@ -152,7 +152,7 @@ router.get("/:userId", authenticate, checkRole("admin"), async (req, res) => {
 router.delete(
   "/:userId",
   authenticate,
-  checkRole("admin"),
+  checkRole(["admin"]),
   async (req, res) => {
     try {
       const _id = req.params.userId;
