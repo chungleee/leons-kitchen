@@ -12,6 +12,10 @@ router.post("/create-payment-intent", async (req, res) => {
     // get all food items by id
     const food_items = await Food.find({ _id: { $in: foodIds } });
 
+    if (!food_items) {
+      return res.status(404).json({ error: "Food items not found" });
+    }
+
     // sum up food item prices
     const subtotal = food_items.reduce((subtotal, current) => {
       return (subtotal += Number(current.price));
