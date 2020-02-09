@@ -6,17 +6,23 @@ export const CreateEmployeeSchema = yup.object().shape({
     .string()
     .required(requiredMsg)
     .min(2, "Too short!")
-    .lowercase(),
+    .lowercase()
+    .trim(),
   lastName: yup
     .string()
     .required(requiredMsg)
     .min(2, "Too short!")
-    .lowercase(),
+    .lowercase()
+    .trim(),
   email: yup
     .string()
     .email("Please enter a valid email")
-    .required(requiredMsg),
-  role: yup.string().required(requiredMsg),
+    .required(requiredMsg)
+    .trim(),
+  role: yup
+    .string()
+    .required(requiredMsg)
+    .trim(),
   password: yup
     .string()
     .required(requiredMsg)
@@ -26,4 +32,44 @@ export const CreateEmployeeSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password")], "Password needs to match")
     .required(requiredMsg)
+});
+
+export const LoginSchema = yup.object().shape({
+  pin: yup
+    .string()
+    .required(requiredMsg)
+    .trim(),
+  password: yup.string().required(requiredMsg)
+});
+
+export const CreateFoodSchema = yup.object().shape({
+  title: yup
+    .string()
+    .required(requiredMsg)
+    .trim(),
+  category: yup
+    .string()
+    .required(requiredMsg)
+    .trim(),
+  price: yup
+    .string()
+    .required(requiredMsg)
+    .trim()
+});
+
+export const CheckoutFormSchema = yup.object().shape({
+  name: yup
+    .string()
+    .required(requiredMsg)
+    .trim(),
+  email: yup
+    .string()
+    .email("Not a valid email")
+    .trim()
+    .required(requiredMsg),
+  phone: yup
+    .string()
+    .min(8, "Too short!")
+    .required(requiredMsg)
+    .trim()
 });
