@@ -4,11 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { Formik } from "formik";
 import Preview from "./Preview";
 import { handleCreateOrder } from "../../../redux/actions/orderActions";
+import { CheckoutFormSchema } from "../../../utils/validation";
 const stripe = window.Stripe("pk_test_bvyBrZbSRaMYEXOeznlkED2G00aTGv1zec");
 const elements = stripe.elements();
 
 const styles = {
-  input: "input-reset ba br-pill pl3 h2 mb2 f5"
+  input: "input-reset ba br-pill pl3 h2 f5 w-100"
 };
 
 const card = elements.create("card", {
@@ -76,40 +77,56 @@ const Checkout = ({ history }) => {
       <div className="w-30" style={{ marginTop: "auto", marginBottom: "auto" }}>
         <Formik
           initialValues={{ name: "", email: "", phone: "" }}
+          validationSchema={CheckoutFormSchema}
           onSubmit={(values, actions) => {
             handlePay(values);
             actions.setSubmitting(false);
           }}
         >
-          {({ values, handleChange, handleSubmit }) => {
+          {({ values, handleChange, handleSubmit, errors }) => {
             return (
               <form className="flex flex-column ph3" onSubmit={handleSubmit}>
-                <input
-                  onChange={handleChange}
-                  type="text"
-                  name="name"
-                  value={values.name}
-                  placeholder="Name on card"
-                  className={styles.input}
-                />
+                <div className="mb2">
+                  <input
+                    onChange={handleChange}
+                    type="text"
+                    name="name"
+                    value={values.name}
+                    placeholder="Name on card"
+                    className={styles.input}
+                  />
+                  {errors.name ? (
+                    <small className="red pl3">{errors.name}</small>
+                  ) : null}
+                </div>
 
-                <input
-                  onChange={handleChange}
-                  type="text"
-                  name="email"
-                  value={values.email}
-                  placeholder="Email"
-                  className={styles.input}
-                />
+                <div className="mb2">
+                  <input
+                    onChange={handleChange}
+                    type="text"
+                    name="email"
+                    value={values.email}
+                    placeholder="Email"
+                    className={styles.input}
+                  />
+                  {errors.email ? (
+                    <small className="red pl3">{errors.email}</small>
+                  ) : null}
+                </div>
 
-                <input
-                  onChange={handleChange}
-                  type="tel"
-                  name="phone"
-                  value={values.phone}
-                  placeholder="Phone"
-                  className={styles.input}
-                />
+                <div className="mb2">
+                  <input
+                    onChange={handleChange}
+                    type="tel"
+                    name="phone"
+                    value={values.phone}
+                    placeholder="Phone"
+                    className={styles.input}
+                  />
+                  {errors.phone ? (
+                    <small className="red pl3">{errors.phone}</small>
+                  ) : null}
+                </div>
 
                 <div
                   style={{ padding: ".5rem 1rem .5rem 1rem" }}
