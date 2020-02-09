@@ -7,6 +7,7 @@ import { jsx } from "@emotion/core";
 import theme from "../../theme";
 import InputField from "../common/InputField";
 import Button from "../common/Button";
+import { LoginSchema } from "../../utils/validation";
 
 const initialValues = {
   pin: "",
@@ -45,6 +46,7 @@ const Login = () => {
       <main css={styles.main}>
         <Formik
           initialValues={initialValues}
+          validationSchema={LoginSchema}
           onSubmit={async ({ pin, password }, actions) => {
             const credentials = {
               pin,
@@ -53,7 +55,7 @@ const Login = () => {
             await dispatch(handleUserLogin(credentials));
           }}
         >
-          {({ handleChange, handleSubmit, values, setValues }) => {
+          {({ handleChange, handleSubmit, values, setValues, errors }) => {
             return (
               <form onSubmit={handleSubmit}>
                 <div css={styles.formControl}>
@@ -63,6 +65,7 @@ const Login = () => {
                     onChange={handleChange}
                     type="tel"
                     value={values.pin}
+                    error={errors.pin ? errors.pin : null}
                   />
                 </div>
                 <div css={styles.formControl}>
@@ -72,6 +75,7 @@ const Login = () => {
                     onChange={handleChange}
                     type="password"
                     value={values.password}
+                    error={errors.password ? errors.pin : null}
                   />
                 </div>
                 <Button type="submit">Login</Button>
