@@ -47,7 +47,9 @@ const styles = {
   },
   selectWrapper: {
     border: "1px solid black",
-    padding: "0.5rem",
+    height: "2rem",
+    display: "flex",
+    alignItems: "center",
     "&:hover, :focus-within": {
       backgroundColor: `${theme.color.highlight}`,
       select: {
@@ -169,7 +171,7 @@ const CreateEmployee = () => {
                     name="password"
                     type="password"
                     onChange={handleChange}
-                    label="Password"
+                    label="Password:"
                     error={errors.password ? errors.password : null}
                   />
                   <InputField
@@ -177,7 +179,7 @@ const CreateEmployee = () => {
                     name="compare_password"
                     type="password"
                     onChange={handleChange}
-                    label="Confirm Password"
+                    label="Confirm Password:"
                     error={
                       errors.compare_password ? errors.compare_password : null
                     }

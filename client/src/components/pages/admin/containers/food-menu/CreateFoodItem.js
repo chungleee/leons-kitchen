@@ -7,6 +7,7 @@ import { Formik } from "formik";
 import InputField from "../../../../common/InputField";
 import Button from "../../../../common/Button";
 import { handleCreateFoodItem } from "../../../../../redux/actions/foodActions";
+import { CreateFoodSchema } from "../../../../../utils/validation";
 
 const styles = {
   wrapper: {
@@ -75,6 +76,7 @@ const CreateFoodItem = ({ history }) => {
       </h1>
       <Formik
         initialValues={initialValues}
+        validationSchema={CreateFoodSchema}
         onSubmit={values => {
           let formData = new FormData();
 
@@ -122,6 +124,9 @@ const CreateFoodItem = ({ history }) => {
                     />
                   </div>
                 ) : null}
+                {errors.imageUpload ? (
+                  <small>{errors.imageUpload}</small>
+                ) : null}
               </div>
 
               <InputField
@@ -130,6 +135,7 @@ const CreateFoodItem = ({ history }) => {
                 type="text"
                 onChange={handleChange}
                 label="Title:"
+                error={errors.title ? errors.title : null}
               />
 
               <div css={styles.formControl}>
@@ -151,6 +157,9 @@ const CreateFoodItem = ({ history }) => {
                     })}
                   </select>
                 </div>
+                {errors.category ? (
+                  <small className="red">{errors.category}</small>
+                ) : null}
               </div>
 
               <InputField
@@ -159,6 +168,7 @@ const CreateFoodItem = ({ history }) => {
                 type="tel"
                 onChange={handleChange}
                 label="Price:"
+                error={errors.price ? errors.price : null}
               />
 
               <Button type="submit">Create</Button>
