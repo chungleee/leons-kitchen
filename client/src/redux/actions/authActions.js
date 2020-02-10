@@ -1,4 +1,4 @@
-import { USER_LOGIN, CURRENT_USER, USER_LOGOUT } from "./types";
+import { USER_LOGIN, CURRENT_USER, USER_LOGOUT, AUTH_ERROR } from "./types";
 import axios from "axios";
 
 const JWT = "leon's kitchen jwtToken";
@@ -20,7 +20,11 @@ export const handleUserLogin = credentials => {
         payload: res.data.user
       });
     } catch (error) {
-      console.error(error);
+      dispatch({
+        type: AUTH_ERROR,
+        payload: error.response.data
+      });
+      console.log(error.response);
     }
   };
 };
