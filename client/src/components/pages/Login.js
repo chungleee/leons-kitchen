@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from "react";
 import { Formik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handleUserLogin } from "../../redux/actions/authActions";
 import { jsx } from "@emotion/core";
 import theme from "../../theme";
@@ -31,13 +31,15 @@ const styles = {
   },
   formControl: {
     display: "flex",
-    flexDirection: "column",
-    marginBottom: "1rem"
+    flexDirection: "column"
   }
 };
 
 const Login = () => {
   const dispatch = useDispatch();
+  const { error } = useSelector(state => {
+    return state.authState;
+  });
   return (
     <div css={styles.container}>
       <header css={styles.header}>
@@ -47,7 +49,8 @@ const Login = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={LoginSchema}
-          onSubmit={async ({ pin, password }, actions) => {
+          validateOnChange={false}
+          onSubmit={async ({ pin, password }) => {
             const credentials = {
               pin,
               password
@@ -77,41 +80,44 @@ const Login = () => {
                     value={values.password}
                     error={errors.password ? errors.pin : null}
                   />
+                  {error ? <small className="red mb2">{error}</small> : null}
                 </div>
-                <Button type="submit">Login</Button>
-                <Button
-                  type="button"
-                  onClick={() => {
-                    setValues({
-                      pin: "5593",
-                      password: "admin1234"
-                    });
-                  }}
-                >
-                  Admin
-                </Button>
-                <Button
-                  type="button"
-                  onClick={() => {
-                    setValues({
-                      pin: "2389",
-                      password: "staffstaff"
-                    });
-                  }}
-                >
-                  Staff
-                </Button>
-                <Button
-                  type="button"
-                  onClick={() => {
-                    setValues({
-                      pin: "1635",
-                      password: "kitchenkitchen"
-                    });
-                  }}
-                >
-                  Kitchen
-                </Button>
+                <div>
+                  <Button type="submit">Login</Button>
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      setValues({
+                        pin: "5593",
+                        password: "admin1234"
+                      });
+                    }}
+                  >
+                    Admin
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      setValues({
+                        pin: "2389",
+                        password: "staffstaff"
+                      });
+                    }}
+                  >
+                    Staff
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      setValues({
+                        pin: "1635",
+                        password: "kitchenkitchen"
+                      });
+                    }}
+                  >
+                    Kitchen
+                  </Button>
+                </div>
               </form>
             );
           }}
