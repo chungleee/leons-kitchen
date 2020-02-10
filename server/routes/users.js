@@ -66,7 +66,7 @@ router.post("/login", async (req, res) => {
     // if no user - return error
     if (!user) {
       return res.status(404).json({
-        error: "User not found"
+        error: "Pin and/or password invalid"
       });
     } else {
       // else - compare passwords
@@ -75,7 +75,7 @@ router.post("/login", async (req, res) => {
       // if no match - return error
       if (!isMatch) {
         return res.status(403).json({
-          error: "Incorrect password"
+          error: "Pin and/or password invalid"
         });
       } else {
         // else - sign jwt & return user
