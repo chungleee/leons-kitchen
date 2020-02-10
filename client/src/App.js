@@ -9,6 +9,7 @@ import {
 import Login from "./components/pages/Login";
 import AdminDashboard from "./components/pages/admin/AdminDashboard";
 import POS from "./components/pages/pos/POS";
+import Kitchen from "./components/pages/kitchen";
 
 function App() {
   const { isAuthenticated, user } = useSelector(state => {
@@ -60,10 +61,18 @@ function App() {
           return <AdminDashboard {...props} user={user} />;
         }}
       />
+
       <Route
         path="/staff"
         render={props => {
           return <POS user={user} {...props} />;
+        }}
+      />
+
+      <Route
+        path="/kitchen"
+        render={props => {
+          return <Kitchen {...props} />;
         }}
       />
     </Router>
