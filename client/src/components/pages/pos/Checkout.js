@@ -9,12 +9,12 @@ const stripe = window.Stripe("pk_test_bvyBrZbSRaMYEXOeznlkED2G00aTGv1zec");
 const elements = stripe.elements();
 
 const styles = {
-  input: "input-reset ba br-pill pl3 h2 f5 w-100"
+  input: "input-reset ba b--near-black br-pill pl3 h2 f5 w-100"
 };
 
 const card = elements.create("card", {
   classes: {
-    base: "ba br-pill mb2"
+    base: "ba b--near-black br-pill mb2"
   },
   style: {
     base: {
@@ -78,6 +78,8 @@ const Checkout = ({ history }) => {
         <Formik
           initialValues={{ name: "", email: "", phone: "" }}
           validationSchema={CheckoutFormSchema}
+          validateOnChange={false}
+          validateOnBlur={false}
           onSubmit={(values, actions) => {
             handlePay(values);
             actions.setSubmitting(false);
