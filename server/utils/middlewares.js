@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const ImageKit = require("imagekit");
 const sharp = require("sharp");
+const { io } = require("../app");
 
 const imagekit = new ImageKit({
   publicKey: process.env.IMAGE_KIT_PUBLIC_KEY,
@@ -92,4 +93,15 @@ const uploadToImagekit = async (req, res, next) => {
   }
 };
 
-module.exports = { authenticate, checkRole, uploadToImagekit, sharpenImage };
+const attachSocketsIO = (req, res, next) => {
+  req.io = io;
+  next();
+};
+
+module.exports = {
+  authenticate,
+  checkRole,
+  uploadToImagekit,
+  sharpenImage,
+  attachSocketsIO
+};
