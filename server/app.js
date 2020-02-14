@@ -12,6 +12,10 @@ const paymentRoutes = require("./routes/payments");
 // INIT APP
 const app = express();
 
+// INIT SOCKET
+const server = require("http").Server(app);
+const io = require("socket.io")(server);
+
 // USE MIDDLEWARES
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -31,7 +35,7 @@ app.get("/", (req, res) => {
 
 // LISTEN SERVER
 const port = process.env.PORT || 3010;
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`**** SERVER LISTENING ON http://localhost:${port} ****`);
 });
 
@@ -47,3 +51,9 @@ mongoose
   .catch(error => {
     console.error(error);
   });
+
+io.of("/kitchen").on("connection", socket => {
+  console.log("this should only connect if client path is /kitchen");
+});
+
+module.exports = { io };
