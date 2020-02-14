@@ -28,6 +28,10 @@ const orderSchema = mongoose.Schema(
     order_owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"
+    },
+    status: {
+      type: Boolean,
+      default: false
     }
   },
   {
