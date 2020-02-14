@@ -27,6 +27,7 @@ const styles = {
 
 const AdminDashboard = ({ match }) => {
   const { url } = match;
+
   return (
     <div css={styles.container}>
       <Navbar />
