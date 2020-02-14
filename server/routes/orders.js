@@ -1,7 +1,11 @@
 const router = require("express").Router();
 const customId = require("custom-id");
 const Order = require("../models/orderModel");
-const { authenticate, checkRole } = require("../utils/middlewares");
+const {
+  authenticate,
+  checkRole,
+  attachSocketsIO
+} = require("../utils/middlewares");
 
 // @access  Public - for staffs
 // @desc    Create order
@@ -10,9 +14,12 @@ router.post(
   "/create",
   authenticate,
   checkRole(["staff", "user"]),
+  // attachSocketsIO,
   async (req, res) => {
     try {
       console.log(req.body);
+      // const { io } = req;
+
       const {
         food_items,
         price_total,
@@ -33,6 +40,8 @@ router.post(
       });
 
       await newOrder.save();
+
+      // io.emit("test", { test: "this is test emission" });
 
       return res.status(200).json({
         success: true,
