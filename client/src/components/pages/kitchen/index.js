@@ -1,15 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import io from "socket.io-client";
-// const socket = io.connect("http://localhost/kitchen");
 
 const Kitchen = props => {
-  useEffect(() => {
-    const socket = io("/kitchen");
-
-    socket.on("test", data => {
-      console.log(data);
-    });
-  }, []);
+  const socket = io("/kitchen");
+  socket.on("createOrder", data => {
+    console.log(data);
+  });
 
   return (
     <div style={{ width: "90%", margin: "auto" }}>
