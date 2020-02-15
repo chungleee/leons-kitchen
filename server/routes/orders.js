@@ -7,7 +7,7 @@ const {
   attachSocketsIO
 } = require("../utils/middlewares");
 
-// @access  Public - for staffs
+// @access  Private - for staffs
 // @desc    Create order
 // @route   POST /create
 router.post(
@@ -39,7 +39,7 @@ router.post(
 
       await newOrder.save();
 
-      const new_order = await newOrder.populate("food_items").execPopulate();
+      const new_order = await newOrder.populate("food_items");
       await socket.emit("new_order", new_order);
 
       return res.status(200).json({
