@@ -24,10 +24,14 @@ const Kitchen = props => {
         {order_list.map(order => {
           return (
             <ul
-              className="ba b--near-black  w-25 ma2"
+              key={order._id}
+              className="ba b--near-black"
               style={{ minHeight: "50vh" }}
             >
-              some content
+              <h1>#{order.order_id}</h1>
+              {order.food_items.map(food => {
+                return <li key={food._id}>{food.title}</li>;
+              })}
             </ul>
           );
         })}
