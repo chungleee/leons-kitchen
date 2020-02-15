@@ -7,6 +7,16 @@ const {
   attachSocketsIO
 } = require("../utils/middlewares");
 
+router.get("/test", attachSocketsIO, async (req, res) => {
+  const io = req.io;
+  const socket = req.socket;
+  socket.emit("test", { msg: "this is from /test" });
+  // io.socket.emit("test", { test: "this is test emission from /orders/create" });
+  return res.json({
+    msg: "this is a test route"
+  });
+});
+
 // @access  Public - for staffs
 // @desc    Create order
 // @route   POST /create
@@ -14,12 +24,10 @@ router.post(
   "/create",
   authenticate,
   checkRole(["staff", "user"]),
-  // attachSocketsIO,
+  attachSocketsIO,
   async (req, res) => {
     try {
-      console.log(req.body);
-      // const { io } = req;
-
+      const { socket } = req;
       const {
         food_items,
         price_total,
@@ -41,7 +49,9 @@ router.post(
 
       await newOrder.save();
 
-      // io.emit("test", { test: "this is test emission" });
+      socket.emit("createOrder", {
+        test: "this is test emission from /orders/create"
+      });
 
       return res.status(200).json({
         success: true,
