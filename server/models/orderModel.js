@@ -29,7 +29,7 @@ const orderSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"
     },
-    status: {
+    order_completed: {
       type: Boolean,
       default: false
     }
