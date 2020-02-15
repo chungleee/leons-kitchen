@@ -39,7 +39,7 @@ router.post(
 
       await newOrder.save();
 
-      const new_order = await newOrder.populate("food_items");
+      const new_order = await newOrder.populate("food_items").execPopulate();
       await socket.emit("new_order", new_order);
 
       return res.status(200).json({
