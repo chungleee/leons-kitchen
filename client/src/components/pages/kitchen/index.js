@@ -1,10 +1,14 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
+import { handleOrderReceived } from "../../../redux/actions/kitchenActions";
 
 const Kitchen = props => {
+  const dispatch = useDispatch();
   const socket = io("/kitchen");
-  socket.on("createOrder", data => {
-    console.log(data);
+
+  socket.on("new_order", order => {
+    dispatch(handleOrderReceived(order));
   });
 
   return (
