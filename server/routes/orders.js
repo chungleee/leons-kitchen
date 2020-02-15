@@ -7,16 +7,6 @@ const {
   attachSocketsIO
 } = require("../utils/middlewares");
 
-router.get("/test", attachSocketsIO, async (req, res) => {
-  const io = req.io;
-  const socket = req.socket;
-  socket.emit("test", { msg: "this is from /test" });
-  // io.socket.emit("test", { test: "this is test emission from /orders/create" });
-  return res.json({
-    msg: "this is a test route"
-  });
-});
-
 // @access  Public - for staffs
 // @desc    Create order
 // @route   POST /create
@@ -49,9 +39,8 @@ router.post(
 
       await newOrder.save();
 
-      socket.emit("createOrder", {
-        test: "this is test emission from /orders/create"
-      });
+      const new_order = await newOrder.populate("food_items").execPopulate();
+      await socket.emit("new_order", new_order);
 
       return res.status(200).json({
         success: true,
