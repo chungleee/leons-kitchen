@@ -23,15 +23,21 @@ const Kitchen = props => {
       <div className="flex flex-wrap justify-center">
         {order_list.map(order => {
           return (
-            <ul
-              key={order._id}
-              className="ba b--near-black"
-              style={{ minHeight: "50vh" }}
-            >
+            <ul key={order._id} className="ba b--near-black">
               <h1>#{order.order_id}</h1>
               {order.food_items.map(food => {
-                return <li key={food._id}>{food.title}</li>;
+                return (
+                  <li className="pa3 bt" key={food._id}>
+                    <p>{food.title}</p>
+                  </li>
+                );
               })}
+              <button
+                className=" w-100 bg-white  pa3 bn bg-animate hover-bg-light-green dim"
+                style={{ borderTop: "1px solid black" }}
+              >
+                Complete
+              </button>
             </ul>
           );
         })}
