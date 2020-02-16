@@ -72,7 +72,7 @@ function App() {
       <Route
         path="/kitchen"
         render={props => {
-          return <Kitchen {...props} />;
+          return <Kitchen user={user} {...props} />;
         }}
       />
     </Router>
