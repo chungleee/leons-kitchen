@@ -25,6 +25,7 @@ const Kitchen = props => {
 
   return (
     <div style={{ width: "90%", margin: "auto" }}>
+      <h2 className="tc">Orders list</h2>
       <div className="flex flex-wrap justify-center">
         {order_list.map(order => {
           return (
