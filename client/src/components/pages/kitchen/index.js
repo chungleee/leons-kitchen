@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
 import { handleOrderReceived } from "../../../redux/actions/kitchenActions";
 import { useEffect } from "react";
+import checkAuth from "../../HOC/CheckAuth";
 
 const Kitchen = props => {
   const dispatch = useDispatch();
@@ -50,4 +51,4 @@ const Kitchen = props => {
   );
 };
 
-export default Kitchen;
+export default checkAuth(Kitchen, ["kitchen"]);
