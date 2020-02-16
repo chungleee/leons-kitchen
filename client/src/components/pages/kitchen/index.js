@@ -12,6 +12,10 @@ const Kitchen = props => {
     socket.on("new_order", order => {
       dispatch(handleOrderReceived(order));
     });
+
+    return () => {
+      socket.close();
+    };
   }, []);
 
   const { order_list } = useSelector(state => {
