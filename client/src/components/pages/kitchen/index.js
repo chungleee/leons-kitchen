@@ -4,6 +4,7 @@ import io from "socket.io-client";
 import { handleOrderReceived } from "../../../redux/actions/kitchenActions";
 import { useEffect } from "react";
 import checkAuth from "../../HOC/CheckAuth";
+import axios from "axios";
 
 const Kitchen = props => {
   const dispatch = useDispatch();
@@ -23,6 +24,11 @@ const Kitchen = props => {
     return state.kitchenState;
   });
 
+  const handleOrderComplete = async orderId => {
+    const res = await axios.post(`/api/orders/${orderId}/complete`);
+    console.log("order complete handler", res);
+  };
+
   return (
     <div style={{ width: "90%", margin: "auto" }}>
       <h2 className="tc mb4 mt4">
@@ -40,9 +46,12 @@ const Kitchen = props => {
                   </li>
                 );
               })}
-              <a className="f4 db tc link dim pv3 black bg-washed-green bt pointer">
+              <button
+                onClick={() => handleOrderComplete(order._id)}
+                className="f4 w-100 db tc link dim pv3 black bg-washed-green bn pointer"
+              >
                 Complete
-              </a>
+              </button>
             </ul>
           );
         })}
