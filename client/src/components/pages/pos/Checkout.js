@@ -52,13 +52,20 @@ const Checkout = ({ history }) => {
         const data = {
           food_items: food_items_ids,
           price_total: subtotal.toString(),
-          order_for: values.name,
+          order_for: {
+            name: values.name,
+            number: values.number,
+            email: values.email
+          },
+          // order_for: values.name,
           payment_type: paymentIntent.payment_method_types[0],
           order_owner: _id
         };
 
-        dispatch(handleCreateOrder(data));
-        history.push("/staff/invoice");
+        const result = await dispatch(handleCreateOrder(data));
+        if (result.data.success) {
+          history.push("/staff/invoice");
+        }
       }
     } catch (error) {
       console.error(error);
@@ -76,7 +83,7 @@ const Checkout = ({ history }) => {
       </aside>
       <div className="w-30" style={{ marginTop: "auto", marginBottom: "auto" }}>
         <Formik
-          initialValues={{ name: "", email: "", phone: "" }}
+          initialValues={{ name: "", email: "", number: "" }}
           validationSchema={CheckoutFormSchema}
           validateOnChange={false}
           validateOnBlur={false}
@@ -120,13 +127,13 @@ const Checkout = ({ history }) => {
                   <input
                     onChange={handleChange}
                     type="tel"
-                    name="phone"
-                    value={values.phone}
+                    name="number"
+                    value={values.number}
                     placeholder="Phone"
                     className={styles.input}
                   />
-                  {errors.phone ? (
-                    <small className="red pl3">{errors.phone}</small>
+                  {errors.number ? (
+                    <small className="red pl3">{errors.number}</small>
                   ) : null}
                 </div>
 
