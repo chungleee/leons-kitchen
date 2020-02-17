@@ -6,6 +6,7 @@ const {
   checkRole,
   attachSocketsIO
 } = require("../utils/middlewares");
+const { client } = require("../utils/twilio");
 
 // @access  Private - for staffs
 // @desc    Create order
@@ -32,7 +33,11 @@ router.post(
         order_id: customId({
           randomLength: 3
         }),
-        order_for,
+        order_for: {
+          name: order_for.name,
+          number: order_for.number,
+          email: order_for.email
+        },
         payment_type,
         order_owner
       });
@@ -115,6 +120,29 @@ router.delete(
         return res.status(404).json({ error: "Order not found." });
       } else {
         return res.status(200).json({ deleted: true, data: orderToDelete });
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(400).json(error);
+    }
+  }
+);
+
+// @access  Private
+// @desc    Send sms to customer when order is complete
+// @route   POST /complete/:orderId
+router.post(
+  "/:orderId/complete",
+  authenticate,
+  checkRole(["kitchen"]),
+  async (req, res) => {
+    try {
+      const _id = req.params.orderId;
+      const order = await Order.findById(_id);
+      if (!order) {
+        return res.status(404).json({ error: "Order not found" });
+      } else {
+        console.log("order doc", order);
       }
     } catch (error) {
       console.error(error);
