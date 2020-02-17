@@ -25,7 +25,9 @@ const Kitchen = props => {
 
   return (
     <div style={{ width: "90%", margin: "auto" }}>
-      <h2 className="tc">Orders list</h2>
+      <h2 className="tc mb4 mt4">
+        {!order_list.length ? "No orders placed yet" : "Orders list"}
+      </h2>
       <div className="flex flex-wrap justify-center">
         {order_list.map(order => {
           return (
@@ -38,12 +40,9 @@ const Kitchen = props => {
                   </li>
                 );
               })}
-              <button
-                className=" w-100 bg-white  pa3 bn bg-animate hover-bg-light-green dim"
-                style={{ borderTop: "1px solid black" }}
-              >
+              <a className="f4 db tc link dim pv3 black bg-washed-green bt pointer">
                 Complete
-              </button>
+              </a>
             </ul>
           );
         })}
