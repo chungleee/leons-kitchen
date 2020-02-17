@@ -142,7 +142,22 @@ router.post(
       if (!order) {
         return res.status(404).json({ error: "Order not found" });
       } else {
-        console.log("order doc", order);
+        order.order_completed = true;
+        await order.save();
+        const msg = await client.messages.create({
+          body: `Hi ${order.order_for.name}, this is Leon's Kitchen!
+          We would like to let you know your order #${order.order_id} is ready for pick up.`,
+          from: process.env.TWILIO_NUMBER,
+          to: `+1${order.order_for.number}`
+        });
+
+        if (msg.errorCode === null && order.order_completed) {
+          return res.status(200).json({
+            success: true,
+            sms_sent: true,
+            order
+          });
+        }
       }
     } catch (error) {
       console.error(error);
