@@ -67,7 +67,7 @@ export const CheckoutFormSchema = yup.object().shape({
     .email("Not a valid email")
     .trim()
     .required(requiredMsg),
-  phone: yup
+  number: yup
     .string()
     .min(8, "Too short!")
     .required(requiredMsg)
