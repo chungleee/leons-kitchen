@@ -10,7 +10,7 @@ const Invoice = props => {
       <div className="tc mb6">
         <i className="far fa-check-circle fa-7x green"></i>
         <p className="mt3 mb3">
-          Hey <span className="capitalize">{order.order_for}</span>,
+          Hey <span className="capitalize">{order.order_for.name}</span>,
         </p>
         <p className="b f3">Your order #{order.order_id} has been confirmed!</p>
       </div>
