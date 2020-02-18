@@ -22,3 +22,5 @@ export const CREATE_ORDER = "CREATE_ORDER";
 
 export const ORDER_RECEIVED = "ORDER_RECEIVED";
 export const ORDER_COMPLETE = "ORDER_COMPLETE";
+
+export const FETCH_ORDERS = "FETCH_ORDERS";
