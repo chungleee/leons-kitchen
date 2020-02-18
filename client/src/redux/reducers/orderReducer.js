@@ -1,7 +1,8 @@
-import { CREATE_ORDER } from "../actions/types";
+import { CREATE_ORDER, FETCH_ORDERS } from "../actions/types";
 
 const initialState = {
-  order: {}
+  order: {},
+  completed_orders: []
 };
 
 const orderReducer = (state = initialState, action) => {
@@ -10,6 +11,12 @@ const orderReducer = (state = initialState, action) => {
       return {
         ...state,
         order: action.payload.newOrder
+      };
+    case FETCH_ORDERS:
+      console.log(action.payload);
+      return {
+        ...state,
+        completed_orders: action.payload
       };
     default:
       return state;
