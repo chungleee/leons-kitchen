@@ -18,10 +18,24 @@ const Orders = props => {
   }
 
   return (
-    <div>
+    <div className="w-90 center">
+      <div className="flex justify-between pv3 ba br3 mv3">
+        <div className="tc w-25">
+          <p>Order number</p>
+        </div>
+        <div className="tc w-25">
+          <p className="ttc">Customer name</p>
+        </div>
+        <div className="tc w-25">
+          <p>Payment type</p>
+        </div>
+        <div className="tc w-25">
+          <p>Price total</p>
+        </div>
+      </div>
       {completed_orders.map(order => {
         return (
-          <div key={order._id} className="flex justify-between pv3">
+          <div key={order._id} className="flex justify-between pv3 ba br3 mv3">
             <div className="tc w-25">
               <p>{order.order_id}</p>
             </div>
