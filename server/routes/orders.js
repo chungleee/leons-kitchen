@@ -67,7 +67,8 @@ router.get(
   checkRole(["admin", "user"]),
   async (req, res) => {
     try {
-      const orders = await Order.find({});
+      const orders = await Order.find();
+
       if (!orders) {
         return res.status(404).json({ error: "Orders not found" });
       } else {
