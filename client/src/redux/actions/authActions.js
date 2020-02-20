@@ -6,7 +6,11 @@ const JWT = "leon's kitchen jwtToken";
 export const handleUserLogin = credentials => {
   return async dispatch => {
     try {
-      const res = await axios.post("/api/users/login", credentials);
+      const res = await axios.post(
+        "https://leons-kitchen.appspot.com/api/users/login",
+        credentials
+      );
+      // const res = await axios.post("/api/users/login", credentials);
 
       if (window.localStorage) {
         localStorage.setItem(JWT, res.data.token);

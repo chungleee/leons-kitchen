@@ -4,9 +4,15 @@ import axios from "axios";
 export const createPaymentIntent = cart => {
   return async dispatch => {
     try {
-      const res = await axios.post("/api/payments/create-payment-intent", {
-        cart
-      });
+      const res = await axios.post(
+        "https://leons-kitchen.appspot.com/api/payments/create-payment-intent",
+        {
+          cart
+        }
+      );
+      // const res = await axios.post("/api/payments/create-payment-intent", {
+      //   cart
+      // });
       console.log("create payment intent action", res.data);
       dispatch({
         type: CREATE_PAYMENT_INTENT,

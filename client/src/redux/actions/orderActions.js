@@ -4,7 +4,11 @@ import { CREATE_ORDER, FETCH_ORDERS } from "./types";
 export const handleCreateOrder = data => {
   return async dispatch => {
     try {
-      const result = await axios.post("/api/orders/create", data);
+      const result = await axios.post(
+        "https://leons-kitchen.appspot.com/api/orders/create",
+        data
+      );
+      // const result = await axios.post("/api/orders/create", data);
       if (result.data.success) {
         dispatch({
           type: CREATE_ORDER,
@@ -21,7 +25,10 @@ export const handleCreateOrder = data => {
 export const handleFetchOrders = () => {
   return async dispatch => {
     try {
-      const result = await axios.get("/api/orders");
+      const result = await axios.get(
+        "https://leons-kitchen.appspot.com/api/orders"
+      );
+      // const result = await axios.get("/api/orders");
       console.log("fetch orders", result);
       if (result.data.success) {
         dispatch({
