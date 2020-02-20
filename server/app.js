@@ -3,6 +3,8 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const helmet = require("helmet");
+const cors = require("cors");
 
 // ROUTES IMPORT
 const userRoutes = require("./routes/users");
@@ -17,17 +19,21 @@ const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
 
-const socket = io.of("/kitchen").on("connection", socket => {
-  console.log("Kitchen successfully connected");
-  socket.on("disconnect", () => {
-    console.log("Kitchen disconnected");
+const socket = io
+  .of("http://localhost:3000/kitchen")
+  .on("connection", socket => {
+    console.log("Kitchen successfully connected");
+    socket.on("disconnect", () => {
+      console.log("Kitchen disconnected");
+    });
+    return socket;
   });
-  return socket;
-});
 
 app.set("socket", socket);
 
 // USE MIDDLEWARES
+app.use(helmet());
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
