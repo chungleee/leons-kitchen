@@ -12,8 +12,8 @@ const Kitchen = props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const socket = io("https://happy-swanson-24cf45.netlify.com/kitchen");
-    // const socket = io("/kitchen");
+    // const socket = io("https://happy-swanson-24cf45.netlify.com/kitchen");
+    const socket = io("/kitchen");
     socket.on("new_order", order => {
       dispatch(handleOrderReceived(order));
     });
