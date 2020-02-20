@@ -4,7 +4,6 @@ import axios from "axios";
 export const handleCreateEmployee = data => {
   return async dispatch => {
     try {
-      // const res = await axios.post("/api/users/create", data);
       const res = await axios.post(
         "https://leons-kitchen.appspot.com/api/users/create",
         data
@@ -22,7 +21,6 @@ export const handleCreateEmployee = data => {
 export const handleFetchEmployees = () => {
   return async dispatch => {
     try {
-      // const res = await axios.get("/api/users/");
       const res = await axios.get(
         "https://leons-kitchen.appspot.com/api/users/"
       );
@@ -39,7 +37,6 @@ export const handleFetchEmployees = () => {
 export const handleDeleteEmployee = employeeId => {
   return async dispatch => {
     try {
-      // const res = await axios.delete(`/api/users/${employeeId}`);
       const res = await axios.delete(
         `https://leons-kitchen.appspot.com/api/users/${employeeId}`
       );

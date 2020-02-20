@@ -8,7 +8,7 @@ export const handleCreateOrder = data => {
         "https://leons-kitchen.appspot.com/api/orders/create",
         data
       );
-      // const result = await axios.post("/api/orders/create", data);
+
       if (result.data.success) {
         dispatch({
           type: CREATE_ORDER,
@@ -28,8 +28,7 @@ export const handleFetchOrders = () => {
       const result = await axios.get(
         "https://leons-kitchen.appspot.com/api/orders"
       );
-      // const result = await axios.get("/api/orders");
-      console.log("fetch orders", result);
+
       if (result.data.success) {
         dispatch({
           type: FETCH_ORDERS,

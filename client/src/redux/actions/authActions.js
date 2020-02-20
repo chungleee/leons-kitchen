@@ -10,7 +10,6 @@ export const handleUserLogin = credentials => {
         "https://leons-kitchen.appspot.com/api/users/login",
         credentials
       );
-      // const res = await axios.post("/api/users/login", credentials);
 
       if (window.localStorage) {
         localStorage.setItem(JWT, res.data.token);

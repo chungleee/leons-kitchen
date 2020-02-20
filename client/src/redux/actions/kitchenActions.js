@@ -15,8 +15,7 @@ export const handleOrderComplete = orderId => {
     const res = await axios.post(
       `https://leons-kitchen.appspot.com/api/orders/${orderId}/complete`
     );
-    // const res = await axios.post(`/api/orders/${orderId}/complete`);
-    console.log("order complete handler", res.data);
+
     dispatch({
       type: ORDER_COMPLETE,
       payload: res.data

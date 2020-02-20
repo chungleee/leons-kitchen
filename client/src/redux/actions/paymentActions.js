@@ -10,10 +10,7 @@ export const createPaymentIntent = cart => {
           cart
         }
       );
-      // const res = await axios.post("/api/payments/create-payment-intent", {
-      //   cart
-      // });
-      console.log("create payment intent action", res.data);
+
       dispatch({
         type: CREATE_PAYMENT_INTENT,
         payload: res.data.client_secret

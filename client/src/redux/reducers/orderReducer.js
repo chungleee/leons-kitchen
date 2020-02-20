@@ -13,7 +13,6 @@ const orderReducer = (state = initialState, action) => {
         order: action.payload.newOrder
       };
     case FETCH_ORDERS:
-      console.log(action.payload);
       return {
         ...state,
         completed_orders: action.payload
