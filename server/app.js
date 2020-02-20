@@ -20,7 +20,7 @@ const server = require("http").Server(app);
 const io = require("socket.io")(server);
 
 const socket = io
-  .of("http://localhost:3000/kitchen")
+  .of("https://happy-swanson-24cf45.netlify.com/kitchen")
   .on("connection", socket => {
     console.log("Kitchen successfully connected");
     socket.on("disconnect", () => {
