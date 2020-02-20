@@ -19,15 +19,13 @@ const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
 
-const socket = io
-  .of("https://happy-swanson-24cf45.netlify.com/kitchen")
-  .on("connection", socket => {
-    console.log("Kitchen successfully connected");
-    socket.on("disconnect", () => {
-      console.log("Kitchen disconnected");
-    });
-    return socket;
+const socket = io.of("/kitchen").on("connection", socket => {
+  console.log("Kitchen successfully connected");
+  socket.on("disconnect", () => {
+    console.log("Kitchen disconnected");
   });
+  return socket;
+});
 
 app.set("socket", socket);
 
