@@ -44,7 +44,7 @@ app.use("/api/payments", paymentRoutes);
 // LISTEN SERVER
 const port = process.env.PORT || 3010;
 server.listen(port, () => {
-  console.log(`**** SERVER LISTENING ON http://localhost:${port} ****`);
+  console.log(`**** SERVER LISTENING ON PORT: ${port} ****`);
 });
 
 mongoose
