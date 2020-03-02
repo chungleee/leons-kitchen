@@ -20,7 +20,6 @@
     "react-stripe-elements": "^6.0.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "socket.io-client": "^2.3.0",
     "tachyons": "^4.11.1",
     "yup": "^0.28.0"
   },
