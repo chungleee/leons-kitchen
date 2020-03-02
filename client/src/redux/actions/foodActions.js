@@ -12,6 +12,7 @@ import {
 export const handleCreateFoodItem = formData => {
   return async dispatch => {
     const res = await axios.post(
+      // "/api/foods/create",
       "https://leons-kitchen.appspot.com/api/foods/create",
       formData
     );
@@ -24,6 +25,7 @@ export const handleCreateFoodItem = formData => {
 
 export const handleFetchFoodItems = () => {
   return async dispatch => {
+    // const res = await axios.get("/api/foods/");
     const res = await axios.get("https://leons-kitchen.appspot.com/api/foods/");
     dispatch({
       type: FETCH_FOOD_ITEMS,
@@ -35,6 +37,7 @@ export const handleFetchFoodItems = () => {
 export const handleDeleteFoodItem = id => {
   return async dispatch => {
     const res = await axios.delete(
+      // `/api/foods/${id}`
       `https://leons-kitchen.appspot.com/api/foods/${id}`
     );
     dispatch({

@@ -5,6 +5,7 @@ export const handleCreateOrder = data => {
   return async dispatch => {
     try {
       const result = await axios.post(
+        // "/api/orders/create",
         "https://leons-kitchen.appspot.com/api/orders/create",
         data
       );
@@ -26,6 +27,7 @@ export const handleFetchOrders = () => {
   return async dispatch => {
     try {
       const result = await axios.get(
+        // "/api/orders"
         "https://leons-kitchen.appspot.com/api/orders"
       );
 

@@ -5,6 +5,7 @@ export const createPaymentIntent = cart => {
   return async dispatch => {
     try {
       const res = await axios.post(
+        // "/api/payments/create-payment-intent",
         "https://leons-kitchen.appspot.com/api/payments/create-payment-intent",
         {
           cart
