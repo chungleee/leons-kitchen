@@ -97,10 +97,16 @@ const attachSocketsIO = (req, res, next) => {
   next();
 };
 
+const getPusher = (req, res, next) => {
+  req.pusher = req.app.get("pusher");
+  next();
+};
+
 module.exports = {
   authenticate,
   checkRole,
   uploadToImagekit,
   sharpenImage,
-  attachSocketsIO
+  attachSocketsIO,
+  getPusher
 };
