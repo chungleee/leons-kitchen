@@ -14,20 +14,7 @@ const paymentRoutes = require("./routes/payments");
 
 // INIT APP
 const app = express();
-
-// INIT SOCKET
 const server = require("http").Server(app);
-// const io = require("socket.io")(server);
-
-// const socket = io.of("/kitchen").on("connection", socket => {
-//   console.log("Kitchen successfully connected");
-//   socket.on("disconnect", () => {
-//     console.log("Kitchen disconnected");
-//   });
-//   return socket;
-// });
-
-// app.set("socket", socket);
 
 // PUSHER INIT
 const Pusher = require("pusher");
