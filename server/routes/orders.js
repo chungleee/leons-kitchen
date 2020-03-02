@@ -1,12 +1,7 @@
 const router = require("express").Router();
 const customId = require("custom-id");
 const Order = require("../models/orderModel");
-const {
-  authenticate,
-  checkRole,
-  getPusher
-  // attachSocketsIO
-} = require("../utils/middlewares");
+const { authenticate, checkRole, getPusher } = require("../utils/middlewares");
 const { client } = require("../utils/twilio");
 
 // @access  Private - kitchen
@@ -39,11 +34,9 @@ router.post(
   authenticate,
   checkRole(["staff", "user"]),
   getPusher,
-  // attachSocketsIO,
   async (req, res) => {
     try {
       const { pusher } = req;
-      // const { socket } = req;
       const {
         food_items,
         price_total,
@@ -71,7 +64,6 @@ router.post(
 
       const new_order = await newOrder.populate("food_items").execPopulate();
       pusher.trigger("private-kitchen_channel", "new_order", new_order);
-      // await socket.emit("new_order", new_order);
 
       return res.status(200).json({
         success: true,
@@ -172,8 +164,7 @@ router.post(
         order.order_completed = true;
         await order.save();
         const msg = await client.messages.create({
-          body: `Hi ${order.order_for.name}, this is Leon's Kitchen!
-          We would like to let you know your order #${order.order_id} is ready for pick up.`,
+          body: `Hi ${order.order_for.name}, this is Leon's Kitchen! We would like to let you know your order #${order.order_id} is ready for pick up.`,
           from: process.env.TWILIO_NUMBER,
           to: `+1${order.order_for.number}`
         });
