@@ -23,7 +23,7 @@ function App() {
       const token = localStorage.getItem(`leon's kitchen jwtToken`);
       // decode
       const decoded = jwtDecode(token);
-      console.log("decoded", decoded);
+
       // check if token expired
       if (Date.now() >= decoded.exp * 1000) {
         dispatch(handleUserLogout());
