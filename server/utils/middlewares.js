@@ -92,11 +92,6 @@ const uploadToImagekit = async (req, res, next) => {
   }
 };
 
-const attachSocketsIO = (req, res, next) => {
-  req.socket = req.app.get("socket");
-  next();
-};
-
 const getPusher = (req, res, next) => {
   req.pusher = req.app.get("pusher");
   next();
@@ -107,6 +102,5 @@ module.exports = {
   checkRole,
   uploadToImagekit,
   sharpenImage,
-  attachSocketsIO,
   getPusher
 };
