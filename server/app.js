@@ -17,17 +17,29 @@ const app = express();
 
 // INIT SOCKET
 const server = require("http").Server(app);
-const io = require("socket.io")(server);
+// const io = require("socket.io")(server);
 
-const socket = io.of("/kitchen").on("connection", socket => {
-  console.log("Kitchen successfully connected");
-  socket.on("disconnect", () => {
-    console.log("Kitchen disconnected");
-  });
-  return socket;
+// const socket = io.of("/kitchen").on("connection", socket => {
+//   console.log("Kitchen successfully connected");
+//   socket.on("disconnect", () => {
+//     console.log("Kitchen disconnected");
+//   });
+//   return socket;
+// });
+
+// app.set("socket", socket);
+
+// PUSHER INIT
+const Pusher = require("pusher");
+const pusher = new Pusher({
+  appId: process.env.PUSHER_APP_ID,
+  key: process.env.PUSHER_APP_KEY,
+  secret: process.env.PUSHER_SECRET,
+  cluster: process.env.PUSHER_CLUSTER,
+  useTLS: true
 });
 
-app.set("socket", socket);
+app.set("pusher", pusher);
 
 // USE MIDDLEWARES
 app.use(helmet());
