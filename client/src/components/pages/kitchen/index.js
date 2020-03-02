@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import io from "socket.io-client";
 import Pusher from "pusher-js";
 import {
   handleOrderReceived,
@@ -8,7 +7,7 @@ import {
 } from "../../../redux/actions/kitchenActions";
 import { useEffect, useState } from "react";
 import checkAuth from "../../HOC/CheckAuth";
-import { JWT } from "../../../redux/actions/authActions";
+import { JWT } from "../../../redux/actions/types";
 
 const Kitchen = props => {
   const [connected, setConnected] = useState("");
@@ -28,7 +27,6 @@ const Kitchen = props => {
     const kitchen_channel = pusher.subscribe("private-kitchen_channel");
 
     pusher.connection.bind("state_change", states => {
-      console.log(states);
       setConnected(states.current);
     });
 
@@ -39,15 +37,6 @@ const Kitchen = props => {
     return () => {
       pusher.disconnect();
     };
-
-    // const socket = io("https://happy-swanson-24cf45.netlify.com/kitchen");
-    // const socket = io("/kitchen");
-    // socket.on("new_order", order => {
-    //   dispatch(handleOrderReceived(order));
-    // });
-    // return () => {
-    //   socket.close();
-    // };
   }, []);
 
   const { order_list } = useSelector(state => {
