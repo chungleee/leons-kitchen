@@ -1,13 +1,16 @@
-import { USER_LOGIN, CURRENT_USER, USER_LOGOUT, AUTH_ERROR } from "./types";
+import {
+  USER_LOGIN,
+  CURRENT_USER,
+  USER_LOGOUT,
+  AUTH_ERROR,
+  JWT
+} from "./types";
 import axios from "axios";
-
-export const JWT = "leon's kitchen jwtToken";
 
 export const handleUserLogin = credentials => {
   return async dispatch => {
     try {
       const res = await axios.post(
-        // "/api/users/login",
         "https://leons-kitchen.appspot.com/api/users/login",
         credentials
       );

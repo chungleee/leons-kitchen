@@ -13,7 +13,6 @@ export const handleOrderReceived = order => {
 export const handleOrderComplete = orderId => {
   return async dispatch => {
     const res = await axios.post(
-      // `/api/orders/${orderId}/complete`
       `https://leons-kitchen.appspot.com/api/orders/${orderId}/complete`
     );
 

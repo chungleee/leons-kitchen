@@ -5,7 +5,6 @@ export const handleCreateEmployee = data => {
   return async dispatch => {
     try {
       const res = await axios.post(
-        // "/api/users/create",
         "https://leons-kitchen.appspot.com/api/users/create",
         data
       );
@@ -23,7 +22,6 @@ export const handleFetchEmployees = () => {
   return async dispatch => {
     try {
       const res = await axios.get(
-        // "/api/users/"
         "https://leons-kitchen.appspot.com/api/users/"
       );
       dispatch({
@@ -40,7 +38,6 @@ export const handleDeleteEmployee = employeeId => {
   return async dispatch => {
     try {
       const res = await axios.delete(
-        // `/api/users/${employeeId}`
         `https://leons-kitchen.appspot.com/api/users/${employeeId}`
       );
       dispatch({
