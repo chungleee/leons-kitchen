@@ -4,9 +4,32 @@ const Order = require("../models/orderModel");
 const {
   authenticate,
   checkRole,
-  attachSocketsIO
+  getPusher
+  // attachSocketsIO
 } = require("../utils/middlewares");
 const { client } = require("../utils/twilio");
+
+// @access  Private - kitchen
+// @desc    Authenticate channel connection
+// @route   POST /pusher/auth
+router.post(
+  "/pusher/auth",
+  authenticate,
+  checkRole(["kitchen"]),
+  getPusher,
+  async (req, res) => {
+    try {
+      const { pusher } = req;
+      const { socket_id, channel_name } = req.body;
+      const auth = await pusher.authenticate(socket_id, channel_name);
+
+      return res.status(200).json(auth);
+    } catch (error) {
+      console.error(error);
+      res.status(400).json(error);
+    }
+  }
+);
 
 // @access  Private - for staffs
 // @desc    Create order
@@ -15,10 +38,12 @@ router.post(
   "/create",
   authenticate,
   checkRole(["staff", "user"]),
-  attachSocketsIO,
+  getPusher,
+  // attachSocketsIO,
   async (req, res) => {
     try {
-      const { socket } = req;
+      const { pusher } = req;
+      // const { socket } = req;
       const {
         food_items,
         price_total,
@@ -45,7 +70,8 @@ router.post(
       await newOrder.save();
 
       const new_order = await newOrder.populate("food_items").execPopulate();
-      await socket.emit("new_order", new_order);
+      pusher.trigger("private-kitchen_channel", "new_order", new_order);
+      // await socket.emit("new_order", new_order);
 
       return res.status(200).json({
         success: true,
