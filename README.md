@@ -1,5 +1,5 @@
 # Leon's Kitchen
-Role based restaurant application
+Role based restaurant application (not mobile friendly - yet)
 
 ## Description
 This app has 3 roles, each role has their own internal app:
