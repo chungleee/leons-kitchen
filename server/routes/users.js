@@ -156,15 +156,20 @@ router.delete(
   async (req, res) => {
     try {
       const _id = req.params.userId;
-      const user = await User.findByIdAndDelete({ _id });
+      const user = await User.findById({ _id });
       if (!user) {
         return res.status(404).json({
           error: "User not found"
         });
+      } else if (user.role === "admin") {
+        return res
+          .status(403)
+          .json({ error: "Admins cannot be deleted, nice try though ;)" });
       } else {
+        const deletedUser = await User.findByIdAndDelete({ _id });
         return res.status(200).json({
           deleted: true,
-          user
+          deletedUser
         });
       }
     } catch (error) {
