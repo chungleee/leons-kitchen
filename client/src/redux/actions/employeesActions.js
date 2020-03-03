@@ -42,7 +42,7 @@ export const handleDeleteEmployee = employeeId => {
       );
       dispatch({
         type: DELETE_USER,
-        payload: res.data.user
+        payload: res.data.deletedUser
       });
     } catch (error) {
       console.error(error);
