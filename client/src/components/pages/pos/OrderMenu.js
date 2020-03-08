@@ -35,138 +35,196 @@ const OrderMenu = ({ match }) => {
   }
 
   return (
-    <div>
-      <div
+    <div className="w-90 center vh-100">
+      <h2 className="mt3">Menu</h2>
+      <nav className="mt3 flex justify-between">
+        {categories.map(category => {
+          return (
+            <NavHashLink smooth key={category} to={`#${category}`}>
+              <p className="link black">{category}</p>
+            </NavHashLink>
+          );
+        })}
+      </nav>
+      <main
         css={{
-          display: "flex",
-          height: "100vh"
+          overflowY: "scroll",
+          height: "100%"
         }}
       >
-        <main
-          css={{
-            width: "75%",
-            overflowY: "scroll",
-            height: "100%",
-            borderRight: "0.5px solid lightgrey"
-          }}
-        >
-          <nav
-            css={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "1rem"
-            }}
-          >
-            {categories.map(category => {
-              return (
-                <NavHashLink
-                  smooth
-                  css={{
-                    textTransform: "capitalize",
-                    margin: "0 1rem",
-                    color: "black",
-                    textDecoration: "none",
-                    "&:focus": {
-                      color: "red",
-                      textDecoration: "underline"
-                    },
-                    "&:hover": {
-                      color: "red",
-                      textDecoration: "underline",
-                      transform: "scale(1.2)",
-                      transition: "all .3s ease-in-out"
-                    }
-                  }}
-                  key={category}
-                  to={`#${category}`}
-                >
-                  <h2>{category}</h2>
-                </NavHashLink>
-              );
-            })}
-          </nav>
-
-          {categories.map(category => {
-            return (
-              <section
-                key={category}
+        {categories.map(category => {
+          return (
+            <section
+              key={category}
+              css={{
+                // padding: "2rem 1rem",
+                paddingTop: "2rem",
+                paddingBottom: "2rem",
+                borderBottom: "1px solid lightgrey"
+              }}
+              id={category}
+            >
+              <h3
                 css={{
-                  padding: "2rem 1rem",
-                  borderBottom: "1px solid lightgrey"
-                }}
-                id={category}
-              >
-                <h3
-                  css={{
-                    textTransform: "capitalize"
-                  }}
-                >
-                  {category}
-                </h3>
-                <div
-                  css={{
-                    display: "flex",
-                    width: "100%",
-                    overflowX: "scroll",
-                    padding: "1rem 0"
-                  }}
-                >
-                  {food_items.map(item => {
-                    return item.category === category ? (
-                      <Card key={item._id} item={item} />
-                    ) : null;
-                  })}
-                </div>
-              </section>
-            );
-          })}
-        </main>
-        <aside
-          css={{
-            width: "25%"
-          }}
-        >
-          <div
-            css={{
-              display: "flex",
-              flexDirection: "column",
-              height: "100%"
-            }}
-          >
-            <div css={{ overflowY: "scroll" }}>
-              {cart.length === 0 ? (
-                <div css={{ padding: "1rem", textAlign: "center" }}>
-                  <p>What are you craving?</p>
-                </div>
-              ) : (
-                cart.map(i => {
-                  return (
-                    <FoodItem
-                      key={i._id}
-                      _id={i._id}
-                      title={i.title}
-                      price={i.price}
-                      count={i.count}
-                    />
-                  );
-                })
-              )}
-            </div>
-            <Button type="button" css={{ marginTop: "auto" }}>
-              <Link
-                css={{ color: "black", textDecoration: "none" }}
-                to={{
-                  pathname: cart.length !== 0 ? `${url}/checkout` : `${url}`
+                  textTransform: "capitalize"
                 }}
               >
-                Confirm & Checkout
-              </Link>
-            </Button>
-          </div>
-        </aside>
-      </div>
+                {category}
+              </h3>
+              <div
+                css={{
+                  display: "flex",
+                  width: "100%",
+                  overflowX: "scroll",
+                  padding: "1rem 0"
+                }}
+              >
+                {food_items.map(item => {
+                  return item.category === category ? (
+                    <Card key={item._id} item={item} />
+                  ) : null;
+                })}
+              </div>
+            </section>
+          );
+        })}
+      </main>
     </div>
   );
+
+  // return (
+  //   <div>
+  //     <div
+  //       css={{
+  //         display: "flex",
+  //         height: "100vh"
+  //       }}
+  //     >
+  //       <main
+  //         css={{
+  //           width: "75%",
+  //           overflowY: "scroll",
+  //           height: "100%",
+  //           borderRight: "0.5px solid lightgrey"
+  //         }}
+  //       >
+  //         <nav
+  //           css={{
+  //             display: "flex",
+  //             justifyContent: "center",
+  //             marginTop: "1rem"
+  //           }}
+  //         >
+  //           {categories.map(category => {
+  //             return (
+  //               <NavHashLink
+  //                 smooth
+  //                 css={{
+  //                   textTransform: "capitalize",
+  //                   margin: "0 1rem",
+  //                   color: "black",
+  //                   textDecoration: "none",
+  //                   "&:focus": {
+  //                     color: "red",
+  //                     textDecoration: "underline"
+  //                   },
+  //                   "&:hover": {
+  //                     color: "red",
+  //                     textDecoration: "underline",
+  //                     transform: "scale(1.2)",
+  //                     transition: "all .3s ease-in-out"
+  //                   }
+  //                 }}
+  //                 key={category}
+  //                 to={`#${category}`}
+  //               >
+  //                 <h2>{category}</h2>
+  //               </NavHashLink>
+  //             );
+  //           })}
+  //         </nav>
+
+  // {categories.map(category => {
+  //   return (
+  //     <section
+  //       key={category}
+  //       css={{
+  //         padding: "2rem 1rem",
+  //         borderBottom: "1px solid lightgrey"
+  //       }}
+  //       id={category}
+  //     >
+  //       <h3
+  //         css={{
+  //           textTransform: "capitalize"
+  //         }}
+  //       >
+  //         {category}
+  //       </h3>
+  //       <div
+  //         css={{
+  //           display: "flex",
+  //           width: "100%",
+  //           overflowX: "scroll",
+  //           padding: "1rem 0"
+  //         }}
+  //       >
+  //         {food_items.map(item => {
+  //           return item.category === category ? (
+  //             <Card key={item._id} item={item} />
+  //           ) : null;
+  //         })}
+  //       </div>
+  //     </section>
+  //   );
+  // })}
+  //       </main>
+  //       <aside
+  //         css={{
+  //           width: "25%"
+  //         }}
+  //       >
+  //         <div
+  //           css={{
+  //             display: "flex",
+  //             flexDirection: "column",
+  //             height: "100%"
+  //           }}
+  //         >
+  //           <div css={{ overflowY: "scroll" }}>
+  //             {cart.length === 0 ? (
+  //               <div css={{ padding: "1rem", textAlign: "center" }}>
+  //                 <p>What are you craving?</p>
+  //               </div>
+  //             ) : (
+  //               cart.map(i => {
+  //                 return (
+  //                   <FoodItem
+  //                     key={i._id}
+  //                     _id={i._id}
+  //                     title={i.title}
+  //                     price={i.price}
+  //                     count={i.count}
+  //                   />
+  //                 );
+  //               })
+  //             )}
+  //           </div>
+  //           <Button type="button" css={{ marginTop: "auto" }}>
+  //             <Link
+  //               css={{ color: "black", textDecoration: "none" }}
+  //               to={{
+  //                 pathname: cart.length !== 0 ? `${url}/checkout` : `${url}`
+  //               }}
+  //             >
+  //               Confirm & Checkout
+  //             </Link>
+  //           </Button>
+  //         </div>
+  //       </aside>
+  //     </div>
+  //   </div>
+  // );
 };
 
 export default OrderMenu;
