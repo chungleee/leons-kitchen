@@ -5,7 +5,6 @@ import { NavHashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { handleFetchFoodItems } from "../../../redux/actions/foodActions";
-import CheckAuth from "../../HOC/CheckAuth";
 import Button from "../../common/Button";
 import Card from "../../common/Card";
 import Spinner from "../../common/Spinner/Spinner";
