@@ -35,22 +35,25 @@ const OrderMenu = ({ match }) => {
   }
 
   return (
-    <div className="w-90 center vh-100">
+    <div className="w-90 center">
       <h2 className="mt3">Menu</h2>
-      <nav className="mt3 flex justify-between">
-        {categories.map(category => {
-          return (
-            <NavHashLink smooth key={category} to={`#${category}`}>
-              <p className="link black">{category}</p>
-            </NavHashLink>
-          );
-        })}
-      </nav>
+      <div className="fixed w-90" css={{ zIndex: "1" }}>
+        <nav className="mt3 flex justify-between">
+          {categories.map(category => {
+            return (
+              <NavHashLink smooth key={category} to={`#${category}`}>
+                <p className="link black">{category}</p>
+              </NavHashLink>
+            );
+          })}
+        </nav>
+      </div>
       <main
         css={{
           overflowY: "scroll",
           height: "100%"
         }}
+        className="mt4"
       >
         {categories.map(category => {
           return (
