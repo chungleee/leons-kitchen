@@ -36,31 +36,52 @@ const OrderMenu = ({ match }) => {
 
   return (
     <div className="w-90 center">
-      <h2 className="mt3">Menu</h2>
-      <div className="fixed w-90" css={{ zIndex: "1" }}>
+      <div className="flex items-center justify-between mt3">
+        <h2>Menu</h2>
+        <i className="fas fa-shopping-cart"></i>
+      </div>
+      <div className="w-90">
         <nav className="mt3 flex justify-between">
           {categories.map(category => {
             return (
-              <NavHashLink smooth key={category} to={`#${category}`}>
-                <p className="link black">{category}</p>
+              <NavHashLink
+                css={{
+                  textTransform: "capitalize",
+                  color: "black",
+                  textDecoration: "none",
+                  "&:focus": {
+                    color: "red",
+                    textDecoration: "underline"
+                  },
+                  "&:hover": {
+                    color: "red",
+                    transform: "scale(1.2)",
+                    transition: "all .3s ease-in-out"
+                  }
+                }}
+                smooth
+                key={category}
+                to={`#${category}`}
+              >
+                <p>{category}</p>
               </NavHashLink>
             );
           })}
         </nav>
       </div>
-      <main
+
+      <div
         css={{
           overflowY: "scroll",
           height: "100%"
         }}
-        className="mt4"
+        // className="mt4"
       >
         {categories.map(category => {
           return (
             <section
               key={category}
               css={{
-                // padding: "2rem 1rem",
                 paddingTop: "2rem",
                 paddingBottom: "2rem",
                 borderBottom: "1px solid lightgrey"
@@ -91,7 +112,7 @@ const OrderMenu = ({ match }) => {
             </section>
           );
         })}
-      </main>
+      </div>
     </div>
   );
 
