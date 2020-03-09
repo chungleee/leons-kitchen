@@ -15,6 +15,7 @@ const categories = ["starter", "platter", "beverage", "dessert"];
 const OrderMenu = ({ match }) => {
   const { url } = match;
   const [loading, setLoading] = useState(true);
+  const [showCart, setShowCart] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,7 +39,12 @@ const OrderMenu = ({ match }) => {
     <div className="w-90 center">
       <div className="flex items-center justify-between mt3">
         <h2>Menu</h2>
-        <i className="fas fa-shopping-cart"></i>
+        <i
+          onClick={() => {
+            setShowCart(!showCart);
+          }}
+          className="fas fa-shopping-cart"
+        ></i>
       </div>
       <div className="w-90">
         <nav className="mt3 flex justify-between">
@@ -70,12 +76,11 @@ const OrderMenu = ({ match }) => {
         </nav>
       </div>
 
-      <div
+      <main
         css={{
           overflowY: "scroll",
           height: "100%"
         }}
-        // className="mt4"
       >
         {categories.map(category => {
           return (
@@ -112,7 +117,57 @@ const OrderMenu = ({ match }) => {
             </section>
           );
         })}
-      </div>
+      </main>
+      {showCart ? (
+        <aside
+          onKeyPress={event => {
+            if (event.keyCode === 27) {
+              console.log("key pressed");
+              setShowCart(!showCart);
+            }
+          }}
+          className="h-100 w-100 bg-near-white fixed"
+          css={{ zIndex: "100", top: "0", left: "0" }}
+        >
+          <div
+            css={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100%"
+            }}
+          >
+            <div css={{ overflowY: "scroll" }}>
+              {cart.length === 0 ? (
+                <div css={{ padding: "1rem", textAlign: "center" }}>
+                  <p>What are you craving?</p>
+                </div>
+              ) : (
+                cart.map(i => {
+                  return (
+                    <FoodItem
+                      key={i._id}
+                      _id={i._id}
+                      title={i.title}
+                      price={i.price}
+                      count={i.count}
+                    />
+                  );
+                })
+              )}
+            </div>
+            <Button type="button" css={{ marginTop: "auto" }}>
+              <Link
+                css={{ color: "black", textDecoration: "none" }}
+                to={{
+                  pathname: cart.length !== 0 ? `${url}/checkout` : `${url}`
+                }}
+              >
+                Confirm & Checkout
+              </Link>
+            </Button>
+          </div>
+        </aside>
+      ) : null}
     </div>
   );
 
