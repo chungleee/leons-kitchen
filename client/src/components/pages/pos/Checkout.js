@@ -42,7 +42,6 @@ const Checkout = ({ history }) => {
       const { paymentIntent } = await stripe.confirmCardPayment(client_secret, {
         payment_method: { card: card }
       });
-      console.log("handle pay paymentIntent", paymentIntent);
 
       if (paymentIntent.status === "succeeded") {
         const food_items_ids = cart.reduce((acc, current) => {
