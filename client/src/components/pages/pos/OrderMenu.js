@@ -120,15 +120,27 @@ const OrderMenu = ({ match }) => {
       </main>
       {showCart ? (
         <aside
-          onKeyPress={event => {
-            if (event.keyCode === 27) {
-              console.log("key pressed");
-              setShowCart(!showCart);
-            }
-          }}
           className="h-100 w-100 bg-near-white fixed"
           css={{ zIndex: "100", top: "0", left: "0" }}
         >
+          <span
+            onClick={() => {
+              setShowCart(false);
+            }}
+            css={{
+              position: "absolute",
+              right: "10px",
+              top: "10px",
+              height: "25px",
+              width: "25px",
+              borderRadius: "100193px",
+              border: "1px solid black",
+              textAlign: "center",
+              cursor: "pointer"
+            }}
+          >
+            x
+          </span>
           <div
             css={{
               display: "flex",
