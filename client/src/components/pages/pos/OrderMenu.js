@@ -121,32 +121,32 @@ const OrderMenu = ({ match }) => {
       </main>
       {showCart ? (
         <aside
-          className="h-100 w-100 bg-near-white fixed"
-          css={{ zIndex: "100", top: "0", left: "0" }}
+          className="flex flex-column h-100 w-100 bg-near-white fixed w-40-ns w-30-l"
+          css={{ zIndex: "100", top: "0", right: "0" }}
         >
-          <span
-            onClick={() => {
-              setShowCart(false);
-            }}
-            css={{
-              position: "absolute",
-              right: "10px",
-              top: "10px",
-              height: "25px",
-              width: "25px",
-              borderRadius: "100193px",
-              border: "1px solid black",
-              textAlign: "center",
-              cursor: "pointer"
-            }}
-          >
-            x
-          </span>
+          <div className="flex justify-between mt3">
+            <h2 className="center">Cart</h2>
+            <span
+              onClick={() => {
+                setShowCart(false);
+              }}
+              css={{
+                height: "25px",
+                width: "25px",
+                borderRadius: "100193px",
+                border: "1px solid black",
+                textAlign: "center",
+                cursor: "pointer"
+              }}
+            >
+              x
+            </span>
+          </div>
           <div
             css={{
               display: "flex",
               flexDirection: "column",
-              height: "100%"
+              height: "85%"
             }}
           >
             <div css={{ overflowY: "scroll" }}>
@@ -168,17 +168,21 @@ const OrderMenu = ({ match }) => {
                 })
               )}
             </div>
-            <Button type="button" css={{ marginTop: "auto" }}>
-              <Link
-                css={{ color: "black", textDecoration: "none" }}
-                to={{
-                  pathname: cart.length !== 0 ? `${url}/checkout` : `${url}`
-                }}
-              >
-                Confirm & Checkout
-              </Link>
-            </Button>
           </div>
+          <Button
+            type="button"
+            css={{ marginTop: "auto" }}
+            // css={{ position: "absolute", bottom: "0", width: "100%" }}
+          >
+            <Link
+              css={{ color: "black", textDecoration: "none" }}
+              to={{
+                pathname: cart.length !== 0 ? `${url}/checkout` : `${url}`
+              }}
+            >
+              Confirm & Checkout
+            </Link>
+          </Button>
         </aside>
       ) : null}
     </div>
