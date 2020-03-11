@@ -44,6 +44,7 @@ const OrderMenu = ({ match }) => {
             setShowCart(!showCart);
           }}
           className="fas fa-shopping-cart"
+          css={{ cursor: "pointer" }}
         ></i>
       </div>
       <div className="w-90">
