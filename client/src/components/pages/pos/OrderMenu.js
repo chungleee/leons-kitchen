@@ -1,11 +1,10 @@
 /**@jsx jsx */
 import { jsx } from "@emotion/core";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavHashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { handleFetchFoodItems } from "../../../redux/actions/foodActions";
-import CheckAuth from "../../HOC/CheckAuth";
 import Button from "../../common/Button";
 import Card from "../../common/Card";
 import Spinner from "../../common/Spinner/Spinner";
@@ -16,6 +15,7 @@ const categories = ["starter", "platter", "beverage", "dessert"];
 const OrderMenu = ({ match }) => {
   const { url } = match;
   const [loading, setLoading] = useState(true);
+  const [showCart, setShowCart] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,102 +36,117 @@ const OrderMenu = ({ match }) => {
   }
 
   return (
-    <div>
-      <div
-        css={{
-          display: "flex",
-          height: "100vh"
-        }}
-      >
-        <main
-          css={{
-            width: "75%",
-            overflowY: "scroll",
-            height: "100%",
-            borderRight: "0.5px solid lightgrey"
+    <div className="w-90 center">
+      <div className="flex items-center justify-between mt3">
+        <h2>Menu</h2>
+        <i
+          onClick={() => {
+            setShowCart(!showCart);
           }}
-        >
-          <nav
-            css={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "1rem"
-            }}
-          >
-            {categories.map(category => {
-              return (
-                <NavHashLink
-                  smooth
-                  css={{
-                    textTransform: "capitalize",
-                    margin: "0 1rem",
-                    color: "black",
-                    textDecoration: "none",
-                    "&:focus": {
-                      color: "red",
-                      textDecoration: "underline"
-                    },
-                    "&:hover": {
-                      color: "red",
-                      textDecoration: "underline",
-                      transform: "scale(1.2)",
-                      transition: "all .3s ease-in-out"
-                    }
-                  }}
-                  key={category}
-                  to={`#${category}`}
-                >
-                  <h2>{category}</h2>
-                </NavHashLink>
-              );
-            })}
-          </nav>
-
+          className="fas fa-shopping-cart"
+          css={{ cursor: "pointer" }}
+        ></i>
+      </div>
+      <div className="w-90">
+        <nav className="mt3 flex justify-between">
           {categories.map(category => {
             return (
-              <section
-                key={category}
+              <NavHashLink
                 css={{
-                  padding: "2rem 1rem",
-                  borderBottom: "1px solid lightgrey"
+                  textTransform: "capitalize",
+                  color: "black",
+                  textDecoration: "none",
+                  "&:focus": {
+                    color: "red",
+                    textDecoration: "underline"
+                  },
+                  "&:hover": {
+                    color: "red",
+                    transform: "scale(1.2)",
+                    transition: "all .3s ease-in-out"
+                  }
                 }}
-                id={category}
+                smooth
+                key={category}
+                to={`#${category}`}
               >
-                <h3
-                  css={{
-                    textTransform: "capitalize"
-                  }}
-                >
-                  {category}
-                </h3>
-                <div
-                  css={{
-                    display: "flex",
-                    width: "100%",
-                    overflowX: "scroll",
-                    padding: "1rem 0"
-                  }}
-                >
-                  {food_items.map(item => {
-                    return item.category === category ? (
-                      <Card key={item._id} item={item} />
-                    ) : null;
-                  })}
-                </div>
-              </section>
+                <p>{category}</p>
+              </NavHashLink>
             );
           })}
-        </main>
+        </nav>
+      </div>
+
+      <main
+        css={{
+          overflowY: "scroll",
+          height: "100%"
+        }}
+      >
+        {categories.map(category => {
+          return (
+            <section
+              key={category}
+              css={{
+                paddingTop: "2rem",
+                paddingBottom: "2rem",
+                borderBottom: "1px solid lightgrey"
+              }}
+              id={category}
+            >
+              <h3
+                css={{
+                  textTransform: "capitalize"
+                }}
+              >
+                {category}
+              </h3>
+              <div
+                css={{
+                  display: "flex",
+                  width: "100%",
+                  overflowX: "scroll",
+                  padding: "1rem 0"
+                }}
+              >
+                {food_items.map(item => {
+                  return item.category === category ? (
+                    <Card key={item._id} item={item} />
+                  ) : null;
+                })}
+              </div>
+            </section>
+          );
+        })}
+      </main>
+      {showCart ? (
         <aside
-          css={{
-            width: "25%"
-          }}
+          className="flex flex-column h-100 w-100 bg-near-white fixed w-40-ns w-30-l"
+          css={{ zIndex: "100", top: "0", right: "0" }}
         >
+          <div className="flex justify-between mt3">
+            <h2 className="center">Cart</h2>
+            <span
+              onClick={() => {
+                setShowCart(false);
+              }}
+              css={{
+                height: "25px",
+                width: "25px",
+                borderRadius: "100193px",
+                border: "1px solid black",
+                textAlign: "center",
+                cursor: "pointer"
+              }}
+            >
+              x
+            </span>
+          </div>
           <div
             css={{
               display: "flex",
               flexDirection: "column",
-              height: "100%"
+              height: "85%"
             }}
           >
             <div css={{ overflowY: "scroll" }}>
@@ -153,19 +168,19 @@ const OrderMenu = ({ match }) => {
                 })
               )}
             </div>
-            <Button type="button" css={{ marginTop: "auto" }}>
-              <Link
-                css={{ color: "black", textDecoration: "none" }}
-                to={{
-                  pathname: cart.length !== 0 ? `${url}/checkout` : `${url}`
-                }}
-              >
-                Confirm & Checkout
-              </Link>
-            </Button>
           </div>
+          <Button type="button" css={{ marginTop: "auto" }}>
+            <Link
+              css={{ color: "black", textDecoration: "none" }}
+              to={{
+                pathname: cart.length !== 0 ? `${url}/checkout` : `${url}`
+              }}
+            >
+              Confirm & Checkout
+            </Link>
+          </Button>
         </aside>
-      </div>
+      ) : null}
     </div>
   );
 };

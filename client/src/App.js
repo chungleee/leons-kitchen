@@ -7,8 +7,8 @@ import {
   handleUserLogout
 } from "./redux/actions/authActions";
 import Login from "./components/pages/Login";
-import AdminDashboard from "./components/pages/admin/AdminDashboard";
-import POS from "./components/pages/pos/POS";
+import AdminDashboard from "./components/pages/admin";
+import POS from "./components/pages/pos/";
 import Kitchen from "./components/pages/kitchen";
 
 function App() {

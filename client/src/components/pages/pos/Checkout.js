@@ -42,7 +42,6 @@ const Checkout = ({ history }) => {
       const { paymentIntent } = await stripe.confirmCardPayment(client_secret, {
         payment_method: { card: card }
       });
-      console.log("handle pay paymentIntent", paymentIntent);
 
       if (paymentIntent.status === "succeeded") {
         const food_items_ids = cart.reduce((acc, current) => {
@@ -78,10 +77,13 @@ const Checkout = ({ history }) => {
 
   return (
     <div className="flex vh-100">
-      <aside className="w-70 br b--light-gray">
+      <aside className="dn db-ns w-50-ns w-70-l br b--light-gray">
         <Preview />
       </aside>
-      <div className="w-30" style={{ marginTop: "auto", marginBottom: "auto" }}>
+      <div
+        className="w-100 w-50-ns w-30-l"
+        style={{ marginTop: "auto", marginBottom: "auto" }}
+      >
         <Formik
           initialValues={{ name: "", email: "", number: "" }}
           validationSchema={CheckoutFormSchema}
