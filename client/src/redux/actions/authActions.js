@@ -3,17 +3,15 @@ import {
   CURRENT_USER,
   USER_LOGOUT,
   AUTH_ERROR,
-  JWT
+  JWT,
+  endpoint
 } from "./types";
 import axios from "axios";
 
 export const handleUserLogin = credentials => {
   return async dispatch => {
     try {
-      const res = await axios.post(
-        "https://leons-kitchen.appspot.com/api/users/login",
-        credentials
-      );
+      const res = await axios.post(`${endpoint}/api/users/login`, credentials);
 
       if (window.localStorage) {
         localStorage.setItem(JWT, res.data.token);

@@ -6,15 +6,13 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   INCREMENT_ITEM,
-  DECREMENT_ITEM
+  DECREMENT_ITEM,
+  endpoint
 } from "./types";
 
 export const handleCreateFoodItem = formData => {
   return async dispatch => {
-    const res = await axios.post(
-      "https://leons-kitchen.appspot.com/api/foods/create",
-      formData
-    );
+    const res = await axios.post(`${endpoint}/api/foods/create`, formData);
     dispatch({
       type: CREATE_FOOD_ITEM,
       payload: res.data.newFood
@@ -24,7 +22,8 @@ export const handleCreateFoodItem = formData => {
 
 export const handleFetchFoodItems = () => {
   return async dispatch => {
-    const res = await axios.get("https://leons-kitchen.appspot.com/api/foods/");
+    const res = await axios.get(`${endpoint}/api/foods/`);
+    // const res = await axios.get("https://leons-kitchen.appspot.com/api/foods/");
     dispatch({
       type: FETCH_FOOD_ITEMS,
       payload: res.data.foods
@@ -34,9 +33,7 @@ export const handleFetchFoodItems = () => {
 
 export const handleDeleteFoodItem = id => {
   return async dispatch => {
-    const res = await axios.delete(
-      `https://leons-kitchen.appspot.com/api/foods/${id}`
-    );
+    const res = await axios.delete(`${endpoint}/api/foods/${id}`);
     dispatch({
       type: DELETE_FOOD_ITEM,
       payload: res.data.food

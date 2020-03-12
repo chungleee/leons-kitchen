@@ -1,3 +1,10 @@
+export let endpoint;
+if (process.env.NODE_ENV !== "production") {
+  endpoint = "http://localhost:3010";
+} else {
+  endpoint = "https://leons-kitchen.appspot.com";
+}
+
 export const JWT = "leon's kitchen jwtToken";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const USER_LOGIN = "USER_LOGIN";

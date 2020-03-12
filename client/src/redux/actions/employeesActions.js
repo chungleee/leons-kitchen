@@ -1,13 +1,10 @@
-import { FETCH_EMPLOYEES, CREATE_USER, DELETE_USER } from "./types";
+import { FETCH_EMPLOYEES, CREATE_USER, DELETE_USER, endpoint } from "./types";
 import axios from "axios";
 
 export const handleCreateEmployee = data => {
   return async dispatch => {
     try {
-      const res = await axios.post(
-        "https://leons-kitchen.appspot.com/api/users/create",
-        data
-      );
+      const res = await axios.post(`${endpoint}/api/users/create`, data);
       dispatch({
         type: CREATE_USER,
         payload: res.data.newUser
@@ -21,9 +18,7 @@ export const handleCreateEmployee = data => {
 export const handleFetchEmployees = () => {
   return async dispatch => {
     try {
-      const res = await axios.get(
-        "https://leons-kitchen.appspot.com/api/users/"
-      );
+      const res = await axios.get(`${endpoint}/api/users/`);
       dispatch({
         type: FETCH_EMPLOYEES,
         payload: res.data.users
@@ -37,9 +32,7 @@ export const handleFetchEmployees = () => {
 export const handleDeleteEmployee = employeeId => {
   return async dispatch => {
     try {
-      const res = await axios.delete(
-        `https://leons-kitchen.appspot.com/api/users/${employeeId}`
-      );
+      const res = await axios.delete(`${endpoint}/api/users/${employeeId}`);
       dispatch({
         type: DELETE_USER,
         payload: res.data.deletedUser
