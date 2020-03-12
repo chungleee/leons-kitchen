@@ -77,6 +77,7 @@ const CreateFoodItem = ({ history }) => {
       <Formik
         initialValues={initialValues}
         validationSchema={CreateFoodSchema}
+        validateOnChange={false}
         onSubmit={values => {
           let formData = new FormData();
 
